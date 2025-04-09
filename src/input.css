@@ -1,0 +1,22 @@
+
+/*start import fonts  */
+
+@font-face {
+    font-family: iran-yekan;
+    src: url(../fonts/ttf/iranyekanwebmedium.ttf) format(ttf),
+    url(../fonts/woff/iranyekanwebmedium.woff) format(ttf);
+}
+@font-face {
+    font-family: iran-bold;
+    src: url(../fonts/ttf/iranyekanwebbold.ttf) format(ttf),
+    url(../fonts/woff/iranyekanwebbold.woff) format(woff);
+}
+
+/*finish import fonts  */
+
+@theme {
+    --font-iran-yekan: "iran-yekan";
+    --font-iran-bold: "iran-bold";
+
+  }
+  @import "tailwindcss";
