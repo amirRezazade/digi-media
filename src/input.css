@@ -1,10 +1,13 @@
-
+.scroll-hide::-webkit-scrollbar{
+    display: none;
+    width: 0;
+}
 /*start import fonts  */
 
 @font-face {
-    font-family: iran-yekan;
-    src: url(../fonts/ttf/iranyekanwebmedium.ttf) format(ttf),
-    url(../fonts/woff/iranyekanwebmedium.woff) format(ttf);
+    font-family: iran-sans;
+    src: url(../fonts/woff/IRANSansX-Medium.woff) format(woff),
+    url(../fonts/woff/IRANSansX-Medium.woff2) format(woff2);
 }
 @font-face {
     font-family: iran-bold;
@@ -15,7 +18,7 @@
 /*finish import fonts  */
 
 @theme {
-    --font-iran-yekan: "iran-yekan";
+    --font-iran-sans: "iran-sans";
     --font-iran-bold: "iran-bold";
 
   }
