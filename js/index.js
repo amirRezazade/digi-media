@@ -1,3 +1,4 @@
+
 let menu = document.querySelector("#nav-menu");
 menu.addEventListener("click", (e) => {
   if (e.target.id == "nav-menu") {
@@ -49,9 +50,67 @@ function switchTheme(text) {
 function applyTheme(text) {
   if (text == "dark") {
     document.documentElement.classList.add('dark')
-    console.log(text);
   } else {
     document.documentElement.classList.remove('dark')
-    console.log(text);
   }
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // مقداردهی اولیه Swiper
+  const mySwiper = new Swiper('.mySwiper', {
+    // پارامترهای اصلی
+    direction: 'horizontal',
+    loop: true,
+    speed: 800,
+    effect: 'slide', // یا 'fade', 'cube', 'coverflow' و...
+    grabCursor: true,
+    slidesPerView: 2,
+    
+    // ماژول‌های فعال
+    // modules: [Navigation, Pagination],
+    
+    // تنظیمات ناوبری
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    // تنظیمات pagination
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    //   dynamicBullets: true,
+    // },
+    
+    // تنظیمات واکنش‌گرایی
+    breakpoints: {
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 40,
+        
+      },
+    },
+    
+    // رویدادها
+    on: {
+      init: function() {
+        console.log('Swiper initialized');
+      },
+      slideChange: function() {
+        console.log('Slide changed to: ', this.activeIndex);
+      },
+    },
+  });
+  
+  // دسترسی به نمونه Swiper در کنسول برای دیباگ
+  window.mySwiper = mySwiper;
+});
