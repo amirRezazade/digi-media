@@ -7,7 +7,7 @@ menu.addEventListener("click", (e) => {
 
 window.addEventListener("DOMContentLoaded", () => {
   let theme = window.localStorage.getItem("theme");
-  switchTheme(theme);
+  theme ? switchTheme(theme) : switchTheme('dark');
 });
 function manageMenu() {
   if (menu.style.right == "0px") {
@@ -48,8 +48,10 @@ function switchTheme(text) {
 }
 function applyTheme(text) {
   if (text == "dark") {
+    document.documentElement.classList.add('dark')
     console.log(text);
   } else {
+    document.documentElement.classList.remove('dark')
     console.log(text);
   }
 }

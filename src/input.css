@@ -20,6 +20,10 @@
 @theme {
     --font-iran-sans: "iran-sans";
     --font-iran-bold: "iran-bold";
-
+    --breakpoint-cs: 1000px;
+   
   }
+
+  @custom-variant dark (&:where(.dark, .dark *));
+
   @import "tailwindcss";
