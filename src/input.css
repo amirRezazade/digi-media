@@ -1,28 +1,75 @@
-.scroll-hide::-webkit-scrollbar{
-    display: none;
-    width: 0;
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+  width: 0;
 }
 /*start import fonts  */
 
 @font-face {
-    font-family: iran-sans;
-    src: url(../fonts/woff/IRANSansX-Medium.woff) format(woff),
+  font-family: iran-sans;
+  src: url(../fonts/woff/IRANSansX-Medium.woff) format(woff),
     url(../fonts/woff/IRANSansX-Medium.woff2) format(woff2);
 }
 @font-face {
-    font-family: iran-bold;
-    src: url(../fonts/ttf/iranyekanwebbold.ttf) format(ttf),
+  font-family: iran-bold;
+  src: url(../fonts/ttf/iranyekanwebbold.ttf) format(ttf),
     url(../fonts/woff/iranyekanwebbold.woff) format(woff);
 }
 
 /*finish import fonts  */
 
 @theme {
-    --font-iran-sans: "iran-sans";
-    --font-iran-bold: "iran-bold";   
+  --font-iran-sans: "iran-sans";
+  --font-iran-bold: "iran-bold";
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "tailwindcss";
+
+@media screen and (max-width: 529px) {
+  .swiper-slide-active {
+    transform: scale(1) rotate(0deg) !important;
   }
 
-  @custom-variant dark (&:where(.dark, .dark *));
+  .swiper-slide {
+    width: 50%;
+  }
+  .swiper-slide-prev {
+    transform: scale(0.8) rotate(10deg) !important;
+  }
 
-  @import "tailwindcss";
+  .swiper-slide-next {
+    transform: scale(0.8) rotate(-10deg) !important;
+  }
+}
+@media screen and (min-width: 530px) {
+  #swiper-nav {
+    display: flex;
+  }
 
+  .swiper-slide-active div .custom {
+    border: 2px solid #ff9800;
+    position: relative;
+    transform: translateY(-17px);
+  }
+  .swiper-slide-active div .custom::before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 15px;
+    height: 15px;
+    z-index: -10;
+    background-color: #ff9800;
+  }
+
+  .swiper-slide {
+    width: 28%;
+  }
+  .swiper-slide-prev {
+  }
+
+  .swiper-slide-next {
+  }
+}

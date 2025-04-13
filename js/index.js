@@ -1,4 +1,3 @@
-
 let menu = document.querySelector("#nav-menu");
 menu.addEventListener("click", (e) => {
   if (e.target.id == "nav-menu") {
@@ -8,7 +7,7 @@ menu.addEventListener("click", (e) => {
 
 window.addEventListener("DOMContentLoaded", () => {
   let theme = window.localStorage.getItem("theme");
-  theme ? switchTheme(theme) : switchTheme('dark');
+  theme ? switchTheme(theme) : switchTheme("dark");
 });
 function manageMenu() {
   if (menu.style.right == "0px") {
@@ -49,68 +48,78 @@ function switchTheme(text) {
 }
 function applyTheme(text) {
   if (text == "dark") {
-    document.documentElement.classList.add('dark')
+    document.documentElement.classList.add("dark");
   } else {
-    document.documentElement.classList.remove('dark')
+    document.documentElement.classList.remove("dark");
   }
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener("DOMContentLoaded", function () {
   // مقداردهی اولیه Swiper
-  const mySwiper = new Swiper('.mySwiper', {
+  const mySwiper = new Swiper(".mySwiper", {
     // پارامترهای اصلی
-    direction: 'horizontal',
+    direction: "horizontal",
+    slidesPerView: "auto",
     loop: true,
-    speed: 800,
-    effect: 'slide', // یا 'fade', 'cube', 'coverflow' و...
-    grabCursor: true,
-    slidesPerView: 2,
-    
-    // ماژول‌های فعال
-    // modules: [Navigation, Pagination],
-    
-    // تنظیمات ناوبری
+    centeredSlides: true,
+    initialSlide: 0,
+    speed: 500,
+    spaceBetween: 30,
+    effect: "coverflow",
+    coverflowEffect: {
+      rotate: 45,
+      stretch: 50,
+      depth: 20,
+      modifier: 1,
+      useTransform: true,
+      slideShadows: false,
+    },
+    grabCursor: false,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.custom-next',
+      prevEl: '.custom-prev',
     },
-    
-    // تنظیمات pagination
-    // pagination: {
-    //   el: '.swiper-pagination',
-    //   clickable: true,
-    //   dynamicBullets: true,
-    // },
-    
-    // تنظیمات واکنش‌گرایی
-    breakpoints: {
-      640: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 30,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 40,
-        
-      },
-    },
-    
-    // رویدادها
     on: {
-      init: function() {
-        console.log('Swiper initialized');
+      resize: function() {
+        this.updateSlides();
+        this.updateSlidesClasses();
+        this.slideTo(this.activeIndex, 0);
+      }
+    },
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true,
+    on: {
+      resize: function() {
+        this.update();
+        this.slideTo(this.activeIndex, 0); // بازگشت به اسلاید فعلی بدون انیمیشن
+      }
+    },
+    breakpoints: {
+      530: {
+        effect: "slide",
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        initialSlide: 0,
+        on: {
+          resize: function() {
+            this.slideTo(this.activeIndex, 0);
+          }
+        }
       },
-      slideChange: function() {
-        console.log('Slide changed to: ', this.activeIndex);
-      },
+      on: {
+        breakpoint: function() {
+          this.update();
+        }
+      }
+   
     },
   });
+
+
+  const resizeObserver = new ResizeObserver(() => {
+    swiper.update();
+    setTimeout(() => swiper.slideTo(swiper.activeIndex, 0), 100);
+  });
   
-  // دسترسی به نمونه Swiper در کنسول برای دیباگ
-  window.mySwiper = mySwiper;
-});
+  resizeObserver.observe(document.querySelector('.swiper'));
