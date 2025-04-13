@@ -33,6 +33,7 @@
 
   .swiper-slide {
     width: 50%;
+    /* transition: all .5s ease; */
   }
   .swiper-slide-prev {
     transform: scale(0.8) rotate(10deg) !important;
@@ -71,5 +72,15 @@
   }
 
   .swiper-slide-next {
+  }
+}
+@media screen and (min-width: 650px) {
+  .swiper-slide {
+    width: 23%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .swiper-slide {
+    width: 40%;
   }
 }

@@ -53,10 +53,9 @@ function applyTheme(text) {
     document.documentElement.classList.remove("dark");
   }
 }
-
-// document.addEventListener("DOMContentLoaded", function () {
-  // مقداردهی اولیه Swiper
-  const mySwiper = new Swiper(".mySwiper", {
+window.addEventListener('resize', ()=>{
+})
+  const swiper = new Swiper(".mySwiper", {
     // پارامترهای اصلی
     direction: "horizontal",
     slidesPerView: "auto",
@@ -65,61 +64,34 @@ function applyTheme(text) {
     initialSlide: 0,
     speed: 500,
     spaceBetween: 30,
-    effect: "coverflow",
-    coverflowEffect: {
-      rotate: 45,
-      stretch: 50,
-      depth: 20,
-      modifier: 1,
-      useTransform: true,
-      slideShadows: false,
+    effect: "slide",
+    autoplay: {
+      delay: 6000,
     },
-    grabCursor: false,
+    // grabCursor: false,
     navigation: {
       nextEl: '.custom-next',
       prevEl: '.custom-prev',
     },
-    on: {
-      resize: function() {
-        this.updateSlides();
-        this.updateSlidesClasses();
-        this.slideTo(this.activeIndex, 0);
-      }
-    },
-    observer: true,
-    observeParents: true,
-    observeSlideChildren: true,
-    on: {
-      resize: function() {
-        this.update();
-        this.slideTo(this.activeIndex, 0); // بازگشت به اسلاید فعلی بدون انیمیشن
-      }
-    },
+    // ..................................
     breakpoints: {
       530: {
-        effect: "slide",
         slidesPerView: 'auto',
         spaceBetween: 10,
-        initialSlide: 0,
-        on: {
-          resize: function() {
-            this.slideTo(this.activeIndex, 0);
-          }
-        }
+        initialSlide: 0,     
       },
-      on: {
-        breakpoint: function() {
-          this.update();
-        }
+      650:{
+        spaceBetween: 20,
+        
+      },
+      768:{
+        centeredSlides: true,
+        
       }
+    
    
     },
-  });
+    
 
-
-  const resizeObserver = new ResizeObserver(() => {
-    swiper.update();
-    setTimeout(() => swiper.slideTo(swiper.activeIndex, 0), 100);
-  });
   
-  resizeObserver.observe(document.querySelector('.swiper'));
+  });
