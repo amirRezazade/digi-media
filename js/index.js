@@ -58,40 +58,60 @@ window.addEventListener('resize', ()=>{
   const swiper = new Swiper(".mySwiper", {
     // پارامترهای اصلی
     direction: "horizontal",
-    slidesPerView: "auto",
+    slidesPerView: 'auto',
     loop: true,
     centeredSlides: true,
     initialSlide: 0,
     speed: 500,
     spaceBetween: 30,
     effect: "slide",
+    
     autoplay: {
       delay: 6000,
     },
-    // grabCursor: false,
     navigation: {
       nextEl: '.custom-next',
       prevEl: '.custom-prev',
     },
+    on: { 
+      realIndexChange: (swiper) => changeHeaderBg(swiper.realIndex) 
+    } ,
+   
     // ..................................
     breakpoints: {
       530: {
-        slidesPerView: 'auto',
+        speed: 300,
         spaceBetween: 10,
-        initialSlide: 0,     
       },
       650:{
         spaceBetween: 20,
-        
       },
       768:{
         centeredSlides: true,
-        
-      }
-    
+       
+      },
+      1024:{
+        spaceBetween: 10,
+      },
+
    
     },
     
 
   
   });
+  swiper.on('resize',  ()=> {
+    changeHeaderBg(swiper.realIndex);
+  });
+  let headerPosters=[1,2,3,4,5,6,7,8,9]
+function changeHeaderBg(index){
+  console.log(index);
+  if(window.innerWidth>768){
+    document.querySelector('#header-bg').style.backgroundImage= `url('../images/header/posters/${headerPosters[index]}.jpg')`
+  }else{
+    document.querySelector('#header-bg').style.backgroundImage= `url('')`
+  }
+
+}
+
+

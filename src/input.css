@@ -84,3 +84,19 @@
     width: 40%;
   }
 }
+@media screen and (min-width: 1024px) {
+  .swiper-slide {
+    width: 28%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .swiper-slide {
+    width: 22%;
+    /* background-image: ; */
+  }
+}
+@media screen and (min-width: 1536px) {
+  .swiper-slide {
+    width: 20%;
+  }
+}
