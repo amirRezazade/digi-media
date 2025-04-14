@@ -1,4 +1,14 @@
 let menu = document.querySelector("#nav-menu");
+const searchBoxSelection = document.querySelectorAll("#selection span");
+
+searchBoxSelection.forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    searchBoxSelection.forEach((el) => {
+      el.classList.remove("bg-orange-400", "text-white");
+    });
+    e.target.classList.add("bg-orange-400", "text-white");
+  });
+});
 menu.addEventListener("click", (e) => {
   if (e.target.id == "nav-menu") {
     manageMenu();
@@ -9,6 +19,60 @@ window.addEventListener("DOMContentLoaded", () => {
   let theme = window.localStorage.getItem("theme");
   theme ? switchTheme(theme) : switchTheme("dark");
 });
+
+window.addEventListener("resize", () => {});
+const swiper = new Swiper(".mySwiper", {
+  // پارامترهای اصلی
+  direction: "horizontal",
+  slidesPerView: "auto",
+  loop: true,
+  centeredSlides: true,
+  initialSlide: 0,
+  speed: 500,
+  spaceBetween: 30,
+  effect: "slide",
+
+  autoplay: {
+    delay: 6000,
+  },
+  navigation: {
+    nextEl: ".custom-next",
+    prevEl: ".custom-prev",
+  },
+  on: {
+    realIndexChange: (swiper) => changeHeaderBg(swiper.realIndex),
+  },
+
+  // ..................................
+  breakpoints: {
+    530: {
+      speed: 300,
+      spaceBetween: 10,
+    },
+    650: {
+      spaceBetween: 20,
+    },
+    768: {
+      centeredSlides: true,
+    },
+    1024: {
+      spaceBetween: 10,
+    },
+  },
+});
+swiper.on("resize", () => {
+  changeHeaderBg(swiper.realIndex);
+});
+let headerPosters = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function changeHeaderBg(index) {
+  if (window.innerWidth > 768) {
+    document.querySelector(
+      "#header-bg"
+    ).style.backgroundImage = `url('../images/header/posters/${headerPosters[index]}.jpg')`;
+  } else {
+    document.querySelector("#header-bg").style.backgroundImage = `url('')`;
+  }
+}
 function manageMenu() {
   if (menu.style.right == "0px") {
     closeMenu();
@@ -53,65 +117,3 @@ function applyTheme(text) {
     document.documentElement.classList.remove("dark");
   }
 }
-window.addEventListener('resize', ()=>{
-})
-  const swiper = new Swiper(".mySwiper", {
-    // پارامترهای اصلی
-    direction: "horizontal",
-    slidesPerView: 'auto',
-    loop: true,
-    centeredSlides: true,
-    initialSlide: 0,
-    speed: 500,
-    spaceBetween: 30,
-    effect: "slide",
-    
-    autoplay: {
-      delay: 6000,
-    },
-    navigation: {
-      nextEl: '.custom-next',
-      prevEl: '.custom-prev',
-    },
-    on: { 
-      realIndexChange: (swiper) => changeHeaderBg(swiper.realIndex) 
-    } ,
-   
-    // ..................................
-    breakpoints: {
-      530: {
-        speed: 300,
-        spaceBetween: 10,
-      },
-      650:{
-        spaceBetween: 20,
-      },
-      768:{
-        centeredSlides: true,
-       
-      },
-      1024:{
-        spaceBetween: 10,
-      },
-
-   
-    },
-    
-
-  
-  });
-  swiper.on('resize',  ()=> {
-    changeHeaderBg(swiper.realIndex);
-  });
-  let headerPosters=[1,2,3,4,5,6,7,8,9]
-function changeHeaderBg(index){
-  console.log(index);
-  if(window.innerWidth>768){
-    document.querySelector('#header-bg').style.backgroundImage= `url('../images/header/posters/${headerPosters[index]}.jpg')`
-  }else{
-    document.querySelector('#header-bg').style.backgroundImage= `url('')`
-  }
-
-}
-
-
