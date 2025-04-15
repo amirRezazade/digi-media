@@ -117,3 +117,13 @@ function applyTheme(text) {
     document.documentElement.classList.remove("dark");
   }
 }
+
+function moreFiltersToggle(){
+  let elm = document.querySelector('#more-filters')
+  if(elm.offsetHeight== elm.firstElementChild.nextElementSibling.offsetHeight){
+    elm.style.height=elm.scrollHeight+'px'
+  }else {    
+    elm.style.height=elm.firstElementChild.nextElementSibling.offsetHeight+'px'
+
+  } 
+}
