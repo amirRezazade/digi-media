@@ -36,6 +36,7 @@
 
   .swiper-slide {
     width: 50%;
+    /* background-image: url(); */
     /* transition: all .5s ease; */
   }
   .swiper-slide-prev {
