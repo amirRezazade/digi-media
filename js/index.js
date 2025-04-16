@@ -16,67 +16,14 @@ menu.addEventListener("click", (e) => {
   }
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-  console.log('dom');
-  const swiper = new Swiper(".mySwiper", {
-    direction: "horizontal",
-    slidesPerView: "auto",
-    loop: true,
-    centeredSlides: true,
-    initialSlide: 0,
-    speed: 500,
-    spaceBetween: 30,
-    effect: "slide",
-  
-    autoplay: {
-      delay: 6000,
-    },
-    navigation: {
-      nextEl: ".custom-next",
-      prevEl: ".custom-prev",
-    },
-    on: {
-      realIndexChange: () => changeHeaderInfo(),
-      activeIndexChange: () => changeHeaderInfo(),
-      slideChange: () => changeHeaderInfo(),
-    },
-  
-    // ..................................
-    breakpoints: {
-      530: {
-        speed: 300,
-        spaceBetween: 10,
-      },
-      650: {
-        spaceBetween: 20,
-      },
-      768: {
-        centeredSlides: true,
-      },
-      1024: {
-        spaceBetween: 10,
-      },
-    },
-  });
+window.addEventListener("DOMContentLoaded", () => {  
   let result = getHeaderInfos()
   result.catch(error=>{
     console.log(error);
   })
-
-
-  
   let theme = window.localStorage.getItem("theme");
   theme ? switchTheme(theme) : switchTheme("dark");
 });
-
-window.addEventListener("resize", () => {
-  // changeHeaderInfo();
-});
-
-
-// swiper.on("resize", () => {
-  
-// });
 function manageMenu() {
   if (menu.style.right == "0px") {
     closeMenu();
@@ -132,8 +79,6 @@ function moreFiltersToggle(){
   } 
 }
 let res ;
-// window.onload = function() {
-  console.log('on');
 
   async function getHeaderInfos(){
     let response = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`)
@@ -147,13 +92,13 @@ let res ;
       `
         <a 
                       href="#"
-                      class="swiper-slide rounded-md group transition-all duration-500 min-h-[345px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px]"  data-index="${index}" data-id="${elem.id}"
+                      class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[345px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${elem.id}"
                     >
                       <div
-                        class="w-full flex flex-col justify-between "
+                        class="w-full flex flex-col  justify-between gap-2  min-h-[345px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
                       >
                         <div
-                          class="relative h-9/10 grow rounded-md transition-all duration-300 custom"
+                          class="relative  grow  rounded-md transition-all duration-300 custom"
                         >
                           <img
                             src="https://image.tmdb.org/t/p/original${elem.poster_path}"
@@ -295,23 +240,89 @@ let res ;
                     </a>
       `
     }
-  
-  
   })
+  const swiper = new Swiper(".mySwiper", {
+    direction: "horizontal",
+    slidesPerView: "auto",
+    loop: true,
+    centeredSlides: true,
+    initialSlide: 0,
+    speed: 500,
+    spaceBetween: 30,
+    effect: "slide",
   
+    autoplay: {
+      delay: 6000,
+    },
+    navigation: {
+      nextEl: ".custom-next",
+      prevEl: ".custom-prev",
+    },
+    on: {
+      transitionEnd: () => changeHeaderInfo(),
+    },
+  
+    // ..................................
+    breakpoints: {
+      530: {
+        speed: 300,
+        spaceBetween: 10,
+      },
+      650: {
+        spaceBetween: 20,
+      },
+      768: {
+        centeredSlides: true,
+      },
+      1024: {
+        spaceBetween: 10,
+      },
+    },
+  });
   }
 
-// };
 
-
-async function changeHeaderInfo() {
-  let activeIndex = await document.querySelector('.swiper-slide-active').dataset.index;
-  
+ function changeHeaderInfo() {
+  let activeIndex =  document.querySelector('.swiper-slide-active').dataset.index;
   if (window.innerWidth > 768) {
-    // document.querySelector("#header-bg").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path})`;
+    document.querySelector("#header-bg").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path})`;
   document.querySelector('#header-name').textContent=res.results[activeIndex].name ? res.results[activeIndex].name : res.results[activeIndex].title
+  document.querySelector('#header-type').textContent=res.results[activeIndex].media_type
   document.querySelector('#header-point').textContent=res.results[activeIndex].vote_average.toFixed(1)
+  document.querySelector('#movie-play-btn').dataset.id=res.results[activeIndex].id
   } else {
-    // document.querySelector("#header-bg").style.backgroundImage= 'url(https://image.tmdb.org/t/p/original/sNx1A3822kEbqeUxvo5A08o4N7o.jpg)'
+    document.querySelector("#header-bg").style.backgroundImage= 'url()'
   }
  }
+
+
+
+
+     // متغیر global برای Swiper
+    //  let movieSwiper;
+
+    //  function initOrDestroySwiper() {
+      //  if (window.innerWidth <= 800) {
+        //  if (!movieSwiper) {
+          const testSwiper = new Swiper(".swiper", {
+            direction: "horizontal",
+            lang:'ltr',
+            slidesPerView: "auto",
+            loop: true,
+            // centeredSlides: true,
+            initialSlide: 0,
+            speed: 500,
+            spaceBetween: 30,
+      
+           });
+        //  }
+      //  } else {
+      //    if (movieSwiper) {
+      //     movieSwiper.destroy(true, true);
+      //     movieSwiper = null;
+      //    }
+      //  }
+    //  }
+ 
+    //  window.addEventListener('load', initOrDestroySwiper);
+    //  window.addEventListener('resize', initOrDestroySwiper);
