@@ -298,31 +298,41 @@ let res ;
 
 
 
-     // متغیر global برای Swiper
-    //  let movieSwiper;
+    //  متغیر global برای Swiper
+     let movieSwiper;
 
-    //  function initOrDestroySwiper() {
-      //  if (window.innerWidth <= 800) {
-        //  if (!movieSwiper) {
-          const testSwiper = new Swiper(".swiper", {
+     function initOrDestroySwiper() {
+       if (window.innerWidth <= 1024) {
+         if (!movieSwiper) {
+           movieSwiper = new Swiper(".movieSwiper", {
             direction: "horizontal",
             lang:'ltr',
-            slidesPerView: "auto",
-            loop: true,
+            slidesPerView: 3,
+            // loop: true,
+            autoplay: {
+              delay: 4000,
+            },
             // centeredSlides: true,
             initialSlide: 0,
             speed: 500,
-            spaceBetween: 30,
-      
+            grabCursor:true,
+            spaceBetween: 10,
+        
            });
+         }
+       } else {
+        //  if (movieSwiper) {
+          movieSwiper.destroy(true, true);
+          movieSwiper = null;
         //  }
-      //  } else {
-      //    if (movieSwiper) {
-      //     movieSwiper.destroy(true, true);
-      //     movieSwiper = null;
-      //    }
-      //  }
-    //  }
+       }
+       
+     }
  
-    //  window.addEventListener('load', initOrDestroySwiper);
+     window.addEventListener('load', initOrDestroySwiper);
     //  window.addEventListener('resize', initOrDestroySwiper);
+     window.addEventListener('resize', ()=>{
+      if(window.innerWidth < 800){
+        document.querySelector('#test').className='test'
+      }
+     });
