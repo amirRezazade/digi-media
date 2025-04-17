@@ -88,24 +88,32 @@
   .mySwiper .swiper-slide {
     width: 28%;
   }
+  .action-movie a:last-child{
+    display: none;
+  }
   .action-movie a:hover {
-    opacity: 1;
-    flex-grow: 5;
+    flex-grow: 2;
   }
   .action-movie:hover   a:not(:hover){
-    opacity: .8;
-    flex-shrink: 4;
+    flex-grow: 0;
   }
 }
+@media screen and (min-width: 1150px) {
+
+ 
+}
+
 @media screen and (min-width: 1280px) {
   .mySwiper .swiper-slide {
     width: 22%;
-    /* background-image: ; */
   }
 }
 @media screen and (min-width: 1536px) {
   .mySwiper .swiper-slide {
     width: 20%;
+  }
+  .action-movie a:last-child{
+    display: flex;
   }
 }
 
