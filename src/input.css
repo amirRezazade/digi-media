@@ -88,13 +88,13 @@
   .mySwiper .swiper-slide {
     width: 28%;
   }
-  .action-movie a:last-child{
+  .custom a:last-child{
     display: none;
   }
-  .action-movie a:hover {
+  .custom a:hover {
     flex-grow: 2;
   }
-  .action-movie:hover   a:not(:hover){
+  .custom:hover   a:not(:hover){
     flex-grow: 0;
   }
 }
@@ -112,7 +112,7 @@
   .mySwiper .swiper-slide {
     width: 20%;
   }
-  .action-movie a:last-child{
+  .custom a:last-child{
     display: flex;
   }
 }
