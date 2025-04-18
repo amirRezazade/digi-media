@@ -48,6 +48,7 @@ window.addEventListener("load", () => {});
 window.addEventListener("resize", () => {
   toggleMovieSwiper();
   toggleTvSwiper();
+  togglePersianSwiper();
 });
 window.addEventListener("DOMContentLoaded", () => {
   let result = getHeaderInfos();
@@ -58,6 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
   theme ? switchTheme(theme) : switchTheme("dark");
   getActionMovie();
   getTv();
+  getPersianMovie();
 });
 function manageMenu() {
   if (menu.style.right == "0px") {
@@ -397,6 +399,33 @@ function generateTvSwiper() {
     });
   }
 }
+let persianSwiper;
+function generatePersianSwiper() {
+  if (!persianSwiper) {
+    persianSwiper = new Swiper(".persianSwiper", {
+      direction: "horizontal",
+      lang: "ltr",
+      slidesPerView: 3,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+      },
+      centeredSlides: true,
+      initialSlide: 0,
+      speed: 500,
+      grabCursor: true,
+      spaceBetween: 10,
+      breakpoints: {
+        650: {
+          slidesPerView: 4,
+        },
+        850: {
+          slidesPerView: 5,
+        },
+      },
+    });
+  }
+}
 function toggleMovieSwiper() {
   if (window.innerWidth < 1024) {
     document.querySelectorAll(".action-movie a").forEach((elem) => {
@@ -426,6 +455,22 @@ function toggleTvSwiper() {
     if (tvSwiper) {
       tvSwiper.destroy(true, true);
       tvSwiper = null;
+    }
+  }
+}
+function togglePersianSwiper() {
+  if (window.innerWidth < 1024) {
+    document.querySelectorAll(".persian-movie a").forEach((elem) => {
+      elem.classList.add("swiper-slide");
+    });
+    generatePersianSwiper();
+  } else {
+    document.querySelectorAll(".persian-movie a").forEach((elem) => {
+      elem.classList.remove("swiper-slide");
+    });
+    if (persianSwiper) {
+      persianSwiper.destroy(true, true);
+      persianSwiper = null;
     }
   }
 }
@@ -506,11 +551,10 @@ async function getActionMovie() {
 }
 async function getTv() {
   let response = await fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=10759&without_genres=16&sort_by=vote_average.desc&vote_count.gte=1000`
+    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=18&without_genres=16&sort_by=vote_average.desc&vote_count.gte=1000`
   );
   let t = await response.json();
   let list = t.results;
-  console.log(t);
   const randomFive = list.slice(0, 6);
 
   randomFive.forEach((elem) => {
@@ -578,6 +622,60 @@ async function getTv() {
     }
   });
   toggleTvSwiper();
+}
+async function getPersianMovie() {
+  let response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_original_language=fa&with_production_countries=IR&sort_by=vote_average.desc`
+  );
+  let t = await response.json();
+  let list = t.results;
+  console.log(t);
+  const randomFive = list.slice(0, 6);
+
+  randomFive.forEach((elem) => {
+    if (elem.poster_path ) {
+      document.querySelector(".persian-movie").innerHTML += `
+         <a id="${
+           elem.id
+         }" href="#" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
+         <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
+           <div class="w-full h-full overflow-hidden">
+             <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
+               elem.poster_path
+             }" alt="${elem.original_title ? elem.original_title : elem.name}"">
+           </div>
+           <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${elem.backdrop_path ? elem.backdrop_path : elem.poster_path});">
+             <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
+                 <div class=" flex justify-between items-center">
+               
+                   <span class="flex items-center gap-0.5 text-gray-300"><span class="text-xs">10/</span>
+                     <span class="text-base text-amber-400 font-bold">${elem.vote_average.toFixed(
+                       1
+                     )}</span></span>
+                     <span class="text-amber-400 flex gap-1.5 items-start lg:gap-0.5">${
+                       elem.original_language
+                     }</span>
+                 </div>
+                 <div class="flex text-gray-300 flex-col items-start gap-3">
+                   <div class="flex flex-col items-start gap-1">
+                     <span class=" ">${elem.release_date.slice(0,4)}</span>
+                   </div>
+                   <div class="genres hidden  lg:flex gap-2 flex-wrap items-center ">
+
+                   </div>
+                 </div>
+             </div>
+ 
+           
+         </div>
+         </div>
+         <p dir="ltr" class="mt-2 lg:mt-0 h-auto w-full text-center truncate  text-ellipsis transition-all duration-300 group-hover:text-orange-400 text-black dark:text-white text-sm "><span class="">${elem.original_title ? elem.original_title : elem.name}</span></p>
+        </a>
+        `;
+      getGenres(elem);
+    }
+  });
+  togglePersianSwiper();
 }
 function getGenres(el) {
   let slide = document.getElementById(el.id);
