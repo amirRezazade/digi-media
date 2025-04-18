@@ -47,16 +47,8 @@ menu.addEventListener("click", (e) => {
 });
 
 window.addEventListener('scroll' ,()=>{
-  console.log(window.scrollY);
-  if(window.scrollY> 500){
-    nav.style.transform='translateY(-50%)'
-    // nav.style.top='0px'
-  }
-  else{
-    nav.style.transform=''
-    // nav.style.position='static'
+  navControl()
 
-  }
 })
 window.addEventListener("load", () => {});
 window.addEventListener("resize", () => {
@@ -67,7 +59,7 @@ window.addEventListener("resize", () => {
 window.addEventListener("DOMContentLoaded", () => {
   let result = getHeaderInfos();
   result.catch((error) => {
-    console.log(error);
+    // console.log(error);
   });
   let theme = window.localStorage.getItem("theme");
   theme ? switchTheme(theme) : switchTheme("dark");
@@ -142,7 +134,7 @@ async function getHeaderInfos() {
     if (elem.poster_path && elem.backdrop_path) {
       document.querySelector("#header-swiper-wrapper").innerHTML += `
         <a 
-                      href="#"
+                      href="src/movie.html"
                       class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[300px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${
         elem.id
       }"
@@ -698,4 +690,13 @@ function getGenres(el) {
     slide.querySelector(".genres").innerHTML += span;
   });
 }
+function navControl(){
+  if(window.scrollY> 600){
+    nav.style.transform='translateY(-50%)'
+  }
+  else{
+    nav.style.transform=''
+  }
+}
 
+export {nav ,genres ,apiKey,menu }

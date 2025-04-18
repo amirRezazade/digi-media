@@ -98,11 +98,6 @@
     flex-grow: 0;
   }
 }
-@media screen and (min-width: 1150px) {
-
- 
-}
-
 @media screen and (min-width: 1280px) {
   .mySwiper .swiper-slide {
     width: 22%;
