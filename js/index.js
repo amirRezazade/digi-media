@@ -30,6 +30,7 @@ const genres = {
   10767: "تاک شو",
   10768: "جنگی و سیاسی"
 };
+let nav = document.querySelector('nav')
 
 searchBoxSelection.forEach((elem) => {
   elem.addEventListener("click", (e) => {
@@ -44,6 +45,19 @@ menu.addEventListener("click", (e) => {
     manageMenu();
   }
 });
+
+window.addEventListener('scroll' ,()=>{
+  console.log(window.scrollY);
+  if(window.scrollY> 500){
+    nav.style.transform='translateY(-50%)'
+    // nav.style.top='0px'
+  }
+  else{
+    nav.style.transform=''
+    // nav.style.position='static'
+
+  }
+})
 window.addEventListener("load", () => {});
 window.addEventListener("resize", () => {
   toggleMovieSwiper();
@@ -129,15 +143,15 @@ async function getHeaderInfos() {
       document.querySelector("#header-swiper-wrapper").innerHTML += `
         <a 
                       href="#"
-                      class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[345px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${
+                      class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[300px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${
         elem.id
       }"
                     >
                       <div
-                        class="w-full flex flex-col  justify-between gap-2  min-h-[345px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
+                        class="w-full flex flex-col  justify-between gap-2   h-auto sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
                       >
                         <div
-                          class="relative  grow  rounded-md transition-all duration-300 custom"
+                          class="relative  grow  rounded-md transition-all duration-300 active"
                         >
                           <img
                             src="https://image.tmdb.org/t/p/original${
@@ -273,9 +287,10 @@ async function getHeaderInfos() {
                           </div>
                         </div>
                         <div
-                          class="text-center h-5 text-sm text-white group-hover:text-orange-400 transition-all duration-600"
+                        dir="ltr"
+                          class="text-center h-5 text-sm text-white truncate group-hover:text-orange-400 transition-all duration-600"
                         >
-                          <span>${elem.name ? elem.name : elem.title}</span>
+                          <span class="truncate">${elem.name ? elem.name : elem.title}</span>
                         </div>
                       </div>
                     </a>
@@ -477,7 +492,7 @@ function togglePersianSwiper() {
 
 async function getActionMovie() {
   let response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&vote_count.gte=2000`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`
   );
   let t = await response.json();
   let list = t.results;
@@ -551,7 +566,7 @@ async function getActionMovie() {
 }
 async function getTv() {
   let response = await fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=18&without_genres=16&sort_by=vote_average.desc&vote_count.gte=1000`
+    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=18&without_genres=16,10751&sort_by=vote_average.desc&vote_count.gte=1000`
   );
   let t = await response.json();
   let list = t.results;
@@ -629,7 +644,6 @@ async function getPersianMovie() {
   );
   let t = await response.json();
   let list = t.results;
-  console.log(t);
   const randomFive = list.slice(0, 6);
 
   randomFive.forEach((elem) => {
@@ -684,3 +698,4 @@ function getGenres(el) {
     slide.querySelector(".genres").innerHTML += span;
   });
 }
+

@@ -52,12 +52,12 @@
     display: flex;
   }
 
-  .mySwiper .swiper-slide-active div .custom {
+  .mySwiper .swiper-slide-active div .active {
     border: 2px solid #ff9800;
     position: relative;
     transform: translateY(-17px);
   }
-  .swiper-slide-active div .custom::before {
+  .swiper-slide-active div .active::before {
     content: "";
     position: absolute;
     bottom: -6px;
