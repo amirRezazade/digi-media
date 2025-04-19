@@ -66,7 +66,7 @@ async function getHeaderInfos() {
       }"
                     >
                       <div
-                        class="w-full flex flex-col  justify-between gap-2   h-auto sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
+                        class="w-full flex flex-col  justify-between gap-2 h-full sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
                       >
                         <div
                           class="relative  grow  rounded-md transition-all duration-300 active"

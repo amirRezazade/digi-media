@@ -47,9 +47,11 @@ function manageMenu() {
   }
   function closeMenu() {
     menu.style.right = "-120%";
+    document.querySelector('#menu-text').innerHTML='منو'
   }
   function openMenu() {
     menu.style.right = "0";
+    document.querySelector('#menu-text').innerHTML='<span  class="bg-orange-400 my-1.5 w-1.5 h-1.5 rounded-full"></span>'
   }
   function switchTheme(text) {
     let circle = document.querySelector("#switch-theme-circle");
