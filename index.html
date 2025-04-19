@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl" class="dark scroll-smooth">
   <head>
+    <title>digi media</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="node_modules/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./src/output.css" />
-    <title>digi media</title>
   </head>
   <body id="top" class=" font-[iran-sans] overflow-x-hidden theme">
     <!-- start navbar section  -->
@@ -50,7 +50,6 @@
       <div
         id="switch-theme"
         class="flex items-center justify-around rounded-full w-16 bg-orange-400 dark:bg-gray-800 relative p-1 py-1.5 cursor-pointer"
-        onclick="switchTheme()"
       >
         <span
           ><svg
@@ -181,7 +180,7 @@
                     alt=""
                   />
                 </a>
-                <span class="cursor-pointer" onclick="manageMenu()"
+                <span id="manage-menu"  class="cursor-pointer"
                   ><svg
                     width="30px"
                     height="30px"
@@ -292,31 +291,10 @@
                     </span>
                   </div>
                   <span
-                    class="transition-all duration-300 lg:hidden"
-                    onclick="toggleMenu(this)"
-                    ><svg
-                      class="fill-[#888888] dark:fill-[#c5c5c5]"
-                      width="22px"
-                      height="22px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                  id="toggle-menu"
+                    class=" ml-2 w-8 h-10 transition-all duration-300 lg:hidden hover:-rotate-90 relative before:content-[''] before:absolute before:w-3 before:h-3   before:border-b-2 before:border-l-2 before:top-1/2 before:left-1/2 before:rotate-45 before:-translate-1/2 before:border-gray-500 dark:before:border-white  "
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <path
-                          class=""
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z"
-                        ></path>
-                      </g></svg
-                  ></span>
+                   </span>
                 </a>
                 <ul
                   class="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-25 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs"
@@ -446,31 +424,10 @@
                     </span>
                   </div>
                   <span
-                    class="transition-all duration-300 lg:hidden"
-                    onclick="toggleMenu(this)"
-                    ><svg
-                      class="fill-[#888888] dark:fill-[#c5c5c5]"
-                      width="22px"
-                      height="22px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                  id="toggle-menu"
+                    class=" ml-2 w-8 h-10 transition-all duration-300 lg:hidden hover:-rotate-90 relative before:content-[''] before:absolute before:w-3 before:h-3   before:border-b-2 before:border-l-2 before:top-1/2 before:left-1/2 before:rotate-45 before:-translate-1/2 before:border-gray-500 dark:before:border-white  "
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <path
-                          class=""
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z"
-                        ></path>
-                      </g></svg
-                  ></span>
+                   </span>
                 </a>
                 <ul
                   class="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:pb-30 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-60 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs"
@@ -552,31 +509,10 @@
                     </span>
                   </div>
                   <span
-                    class="transition-all duration-300 lg:hidden"
-                    onclick="toggleMenu(this)"
-                    ><svg
-                      class="fill-[#888888] dark:fill-[#c5c5c5]"
-                      width="22px"
-                      height="22px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                  id="toggle-menu"
+                    class=" ml-2 w-8 h-10 transition-all duration-300 lg:hidden hover:-rotate-90 relative before:content-[''] before:absolute before:w-3 before:h-3   before:border-b-2 before:border-l-2 before:top-1/2 before:left-1/2 before:rotate-45 before:-translate-1/2 before:border-gray-500 dark:before:border-white  "
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <path
-                          class=""
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z"
-                        ></path>
-                      </g></svg
-                  ></span>
+                   </span>
                 </a>
                 <ul
                   class="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-45 lg:flex-row lg:top-20 lg:-right-80 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs"
@@ -889,16 +825,15 @@
         </div>
       </div>
     </header>
-
     <!-- finish header section  -->
-         <!-- start mobile navigation section  -->
+    <!-- start mobile navigation section  -->
     <section
     class="theme text-[#888888] z-10 dark:text-[#c5c5c5] text-sm fixed py-1 bottom-0 w-screen flex items-center justify-around shadow-2xl shadow-black dark:shadow-white lg:hidden "
   >
     <a
+    id="manage-menu"
       href="#"
       class="flex flex-col justify-center items-center gap-1"
-      onclick="manageMenu()"
     >
       <span
         ><svg
@@ -1077,7 +1012,7 @@
               </label>
             </div>
           </div>
-          <div class="flex items-center gap-2 theme self-stretch px-3 xl:px-5 text-xs xl:text-sm cursor-pointer rounded-full" onclick="moreFiltersToggle()">
+          <div id="more-filters-toggle" class="flex items-center gap-2 theme self-stretch px-3 xl:px-5 text-xs xl:text-sm cursor-pointer rounded-full" >
             <span>فیلتر های بیشتر</span>
             <span class="flex justify-center items-center rounded-full w-8 h-8 bg-white dark:bg-gray-800">
               <svg class="stroke-[#6a7282] dark:stroke-[#e5e7eb]" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7H20"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7 12L17 12"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 17H13"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
@@ -1317,8 +1252,7 @@
 </div>
 </footer >
     <script src="node_modules/swiper/swiper-bundle.min.js"></script>
-    <!-- <script type="module" src="js/index.js"></script> -->
-    <script type="module" src="js/movie.js"></script>
+    <script type="module" src="js/index.js"></script>
   </body>
 </html>
 

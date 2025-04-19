@@ -1,37 +1,17 @@
-let menu = document.querySelector("#nav-menu");
-const searchBoxSelection = document.querySelectorAll("#selection span");
-const apiKey = "cf30b054d9d7ec861b2a498d97eccdad&query";
-const genres = {
-  28: "اکشن",
-  12: "ماجراجویی",
-  16: "انیمیشن",
-  35: "کمدی",
-  80: "جنایی",
-  99: "مستند",
-  18: "درام",
-  10751: "خانوادگی",
-  14: "فانتزی",
-  36: "تاریخی",
-  27: "ترسناک",
-  10402: "موزیکال",
-  9648: "معمایی",
-  10749: "عاشقانه",
-  878: "علمی تخیلی",
-  10770: "فیلم تلویزیونی",
-  53: "هیجان انگیز",
-  10752: "جنگی",
-  37: "وسترن",
-  10759: "اکشن و ماجراجویی",
-  10762: "کودکان",
-  10763: "اخبار",
-  10764: "ریالیتی",
-  10765: "علمی-تخیلی و فانتزی",
-  10766: "سریال روزانه",
-  10767: "تاک شو",
-  10768: "جنگی و سیاسی"
-};
-let nav = document.querySelector('nav')
+import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 
+document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
+document.querySelectorAll('#manage-menu').forEach(elem=>{
+  elem.addEventListener('click' , manageMenu)
+})
+document.querySelectorAll('#toggle-menu').forEach(elem=>{
+  elem.addEventListener('click' ,e=>{
+    toggleMenu(e.target)
+    
+  })
+})
+document.querySelector('#more-filters-toggle').addEventListener('click' ,  moreFiltersToggle)
+const searchBoxSelection = document.querySelectorAll("#selection span");
 searchBoxSelection.forEach((elem) => {
   elem.addEventListener("click", (e) => {
     searchBoxSelection.forEach((el) => {
@@ -50,7 +30,6 @@ window.addEventListener('scroll' ,()=>{
   navControl()
 
 })
-window.addEventListener("load", () => {});
 window.addEventListener("resize", () => {
   toggleMovieSwiper();
   toggleTvSwiper();
@@ -59,7 +38,7 @@ window.addEventListener("resize", () => {
 window.addEventListener("DOMContentLoaded", () => {
   let result = getHeaderInfos();
   result.catch((error) => {
-    // console.log(error);
+    console.log(error);
   });
   let theme = window.localStorage.getItem("theme");
   theme ? switchTheme(theme) : switchTheme("dark");
@@ -67,60 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
   getTv();
   getPersianMovie();
 });
-function manageMenu() {
-  if (menu.style.right == "0px") {
-    closeMenu();
-  } else {
-    openMenu();
-  }
-}
-function closeMenu() {
-  menu.style.right = "-120%";
-}
-function openMenu() {
-  menu.style.right = "0";
-}
-function toggleMenu(el) {
-  let h = el.parentElement.parentElement.scrollHeight;
-  if (el.parentElement.parentElement.offsetHeight > 61) {
-    el.parentElement.parentElement.style.height = "60px";
-    el.style.transform = "rotate(0)";
-  } else {
-    el.parentElement.parentElement.style.height = h + "px";
-    el.style.transform = "rotate(-90deg)";
-  }
-}
-function switchTheme(text) {
-  let circle = document.querySelector("#switch-theme-circle");
-  if (circle.classList.contains("translate-x-7.5") || text == "dark") {
-    circle.classList.remove("translate-x-7.5");
-    applyTheme("dark");
-    window.localStorage.setItem("theme", "dark");
-  } else {
-    circle.classList.add("translate-x-7.5");
-    applyTheme("light");
-    window.localStorage.setItem("theme", "light");
-  }
-}
-function applyTheme(text) {
-  if (text == "dark") {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-}
 
-function moreFiltersToggle() {
-  let elm = document.querySelector("#more-filters");
-  if (
-    elm.offsetHeight == elm.firstElementChild.nextElementSibling.offsetHeight
-  ) {
-    elm.style.height = elm.scrollHeight + "px";
-  } else {
-    elm.style.height =
-      elm.firstElementChild.nextElementSibling.offsetHeight + "px";
-  }
-}
 let res;
 
 async function getHeaderInfos() {
@@ -134,7 +60,7 @@ async function getHeaderInfos() {
     if (elem.poster_path && elem.backdrop_path) {
       document.querySelector("#header-swiper-wrapper").innerHTML += `
         <a 
-                      href="src/movie.html"
+                      href="movie.html"
                       class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[300px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${
         elem.id
       }"
@@ -351,7 +277,6 @@ function changeHeaderInfo() {
     document.querySelector("#header-bg").style.backgroundImage = "url()";
   }
 }
-
 let movieSwiper;
 function generateMovieSwiper() {
   if (!movieSwiper) {
@@ -481,7 +406,6 @@ function togglePersianSwiper() {
     }
   }
 }
-
 async function getActionMovie() {
   let response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`
@@ -683,20 +607,3 @@ async function getPersianMovie() {
   });
   togglePersianSwiper();
 }
-function getGenres(el) {
-  let slide = document.getElementById(el.id);
-  el.genre_ids.forEach((e) => {
-    let span = `<span class="px-2.5 py-1 cursor-auto rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-all duration-300">${genres[e]}</span>`;
-    slide.querySelector(".genres").innerHTML += span;
-  });
-}
-function navControl(){
-  if(window.scrollY> 600){
-    nav.style.transform='translateY(-50%)'
-  }
-  else{
-    nav.style.transform=''
-  }
-}
-
-export {nav ,genres ,apiKey,menu }
