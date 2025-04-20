@@ -1,3 +1,4 @@
+
 let menu = document.querySelector("#nav-menu");
 const apiKey = "cf30b054d9d7ec861b2a498d97eccdad&query";
 const genres = {
@@ -30,12 +31,6 @@ const genres = {
   10768: "جنگی و سیاسی"
 };
 let nav = document.querySelector('nav')
-
-
-
-
-
-
 
 
 function manageMenu() {
@@ -106,6 +101,6 @@ function manageMenu() {
         elm.firstElementChild.nextElementSibling.offsetHeight + "px";
     }
   }
+
   
-  
-export { apiKey,menu , manageMenu  ,toggleMenu, switchTheme ,moreFiltersToggle, getGenres , navControl}
+export { apiKey,menu,genres , manageMenu  ,toggleMenu, switchTheme ,moreFiltersToggle, getGenres , navControl ,  }

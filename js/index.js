@@ -1,4 +1,10 @@
-import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
+import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl, } from './funcs.js'
+
+let headerPlayBtn = document.querySelector('#movie-play-btn');
+headerPlayBtn.addEventListener('click' ,  ()=>{
+  window.location.href = `movie.html?id=${headerPlayBtn.dataset.id}`;  
+  
+})
 
 document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
 document.querySelectorAll('#manage-menu').forEach(elem=>{
@@ -55,12 +61,17 @@ async function getHeaderInfos() {
   );
   res = await response.json();
   let list = res.results;
+console.log(list.slice(0, 10));
 
   list.slice(0, 10).forEach((elem, index) => {
     if (elem.poster_path && elem.backdrop_path) {
+      let type = elem.media_type=='movie';
+      console.log(type);
+      
+      
       document.querySelector("#header-swiper-wrapper").innerHTML += `
         <a 
-                      href="movie.html"
+                      href="${type ? 'movie' : 'series'}.html?id=${elem.id}"
                       class="swiper-slide rounded-md group flex transition-all duration-500 min-h-[300px] sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[260px] "  data-index="${index}" data-id="${
         elem.id
       }"
@@ -417,9 +428,11 @@ async function getActionMovie() {
   randomFive.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
       document.querySelector(".action-movie").innerHTML += `
-         <a id="${
+         <a
+         href="movie.html?id=${elem.id}"
+          id="${
            elem.id
-         }" href="#" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
+         }"  class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
          <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
@@ -490,10 +503,12 @@ async function getTv() {
 
   randomFive.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
+      
       document.querySelector(".tv-movie").innerHTML += `
-         <a id="${
+         <a href="series.html?id=${elem.id}"
+         id="${
            elem.id
-         }" href="#" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
+         }" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
          <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
@@ -565,9 +580,11 @@ async function getPersianMovie() {
   randomFive.forEach((elem) => {
     if (elem.poster_path ) {
       document.querySelector(".persian-movie").innerHTML += `
-         <a id="${
+         <a
+         href="movie.html?id=${elem.id}"
+         id="${
            elem.id
-         }" href="#" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
+         }" class=" swiper-slide lg:inline-flex flex-col items-center w-full  gap-3 lg:w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md transition-all duration-600 group">
          <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
