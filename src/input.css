@@ -24,7 +24,18 @@
 .theme {
   @apply bg-stone-200 dark:bg-gray-900;
 }
-
+.swiper-pagination-bullet{
+  width: 8px !important;
+  height: 8px !important;
+border: 1px solid rgb(195, 195, 195);
+}
+.swiper-pagination-bullet-active {
+  border: 0;
+  width: 25px  !important;
+  height: 8px !important;
+  border-radius: 30%;
+  background:#ff8904;
+}
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import "tailwindcss";

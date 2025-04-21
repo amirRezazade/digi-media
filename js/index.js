@@ -61,12 +61,9 @@ async function getHeaderInfos() {
   );
   res = await response.json();
   let list = res.results;
-console.log(list.slice(0, 10));
-
   list.slice(0, 10).forEach((elem, index) => {
     if (elem.poster_path && elem.backdrop_path) {
       let type = elem.media_type=='movie';
-      console.log(type);
       
       
       document.querySelector("#header-swiper-wrapper").innerHTML += `
@@ -85,8 +82,8 @@ console.log(list.slice(0, 10));
                           <img
                             src="https://image.tmdb.org/t/p/original${
                               elem.poster_path
-                            }"
-                            alt="${elem.name ? elem.name : elem.title}"
+                            }_medium"
+                            alt="${elem.name ? elem.name : elem.title}" loading="lazy"
                             class="w-full rounded-md"
                           />
                           <div
@@ -272,7 +269,7 @@ function changeHeaderInfo() {
   if (window.innerWidth > 768) {
     document.querySelector(
       "#header-bg"
-    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path})`;
+    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium)`;
     document.querySelector("#header-name").textContent = res.results[
       activeIndex
     ].name
@@ -437,11 +434,11 @@ async function getActionMovie() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }" alt="${elem.name ? elem.name : elem.title}"">
+             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy">
            </div>
            <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${
              elem.backdrop_path
-           });">
+           }_medium);">
              <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
                  <div class=" flex justify-between items-center">
                
@@ -513,11 +510,11 @@ async function getTv() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }" alt="${elem.name ? elem.name : elem.title}"">
+             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy">
            </div>
            <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${
              elem.backdrop_path
-           });">
+           }_medium);">
              <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
                  <div class=" flex justify-between items-center">
                
@@ -589,9 +586,9 @@ async function getPersianMovie() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }" alt="${elem.original_title ? elem.original_title : elem.name}"">
+             }_medium" alt="${elem.original_title ? elem.original_title : elem.name}"">
            </div>
-           <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${elem.backdrop_path ? elem.backdrop_path : elem.poster_path});">
+           <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${elem.backdrop_path ? elem.backdrop_path : elem.poster_path}_medium);">
              <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
                  <div class=" flex justify-between items-center">
                

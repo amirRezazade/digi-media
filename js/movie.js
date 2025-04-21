@@ -1,21 +1,24 @@
 import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
-console.log(movieId);
+
+
+window.addEventListener('DOMContentLoaded' , ()=>{
+  getRecommendationsMovie();
+})
 
 // async function getMovie(){
  fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
  .then(response=> response.json()).then(list=> {
-   console.log(list);
   if(list.status_code ==34){
-document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
+    document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
         <h1>اطلاعات بیشتری از این فیلم وجود ندارد</h1>
       </div>`
     } 
   else{
     document.querySelector('header').innerHTML=
        `
-    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image: url('https://image.tmdb.org/t/p/original${list.backdrop_path}');">
+    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image: url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium');" loading="lazy">
           <div class="px-4 py-6 md:py-10 lg:px-13 bg-gradient-to-r from-gray-950/10 to-gray-950 to-80%">
   
             <div class="flex items-center gap-1 text-[11px] text-gray-300">
@@ -27,7 +30,7 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
          <span class="transition-all duration-300 cursor-pointer hover:text-orange-400">${list.original_title}</span>
       
               </div>
-              <div class="flex gap-5 items-center lg:items-stretch sm:items-start justify-between my-5 xl:my-8 lg:gap-8">
+              <div class="flex gap-10 sm:gap-6 items-center lg:items-stretch sm:items-start justify-between my-5 xl:my-8 lg:gap-8">
                 <div class="flex flex-col items-center grow  gap-9 max-w-32 sm:max-w-37 md:max-w-45 lg:max-w-59 ">
                   <div class="flex items-center gap-1">
                   <span class="text-xs text-gray-400 ">10/</span>  
@@ -35,9 +38,9 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
                   <span class="text-black tracking-tighter font-extrabold text-xs  px-1.5 py-0.5 rounded-md bg-amber-300  mr-2 relative  before:content[''] before:absolute before:w-1.5 before:h-1.5 before:top-1/2 before:left-1/1 before:bg-amber-300 before:z-0 before:rotate-45 before:-translate-1/2 ">IMDB</span>
                   </div>
                   <div class="relative group z-1">
-                    <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-80 scale-x-80 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}');" ></div>
-                    <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-85 scale-x-90 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}');" ></div>
-                    <img class=" w-full h-full object-cover z-50 rounded-lg contrast-110" src="https://image.tmdb.org/t/p/original${list.poster_path}" alt="">
+                    <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-80 scale-x-80 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
+                    <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-85 scale-x-90 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
+                    <img class=" w-full h-full object-cover z-50 rounded-lg contrast-110" src="https://image.tmdb.org/t/p/original${list.poster_path}_medium" alt="${list.original_title}" loading="lazy">
                     <a href="#" class="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
                       <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.75 6L7.5 5.25H16.5L17.25 6V19.3162L12 16.2051L6.75 19.3162V6ZM8.25 6.75V16.6838L12 14.4615L15.75 16.6838V6.75H8.25Z" fill="#ffffff"></path> </g></svg>
                     </a>
@@ -57,7 +60,7 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
                     </span>
                   </div>
                 </div>
-                <div class="flex flex-col gap-4 grow w-7/10 sm:mt-8  md:gap-2 ">
+                <div class="flex flex-col  gap-6 sm:gap-4 grow w-7/10 sm:mt-8  md:gap-2 ">
                   <div class="flex items-start justify-between  ">
                     <p class="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">${ list.original_title}</p>
                    <div class="hidden sm:flex flex-col items-center ">
@@ -77,12 +80,12 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
                     </span>
                    </div>
                   </div>
-                  <div class="flex flex-col justify-between gap-4 grow sm:gap-8 md:flex-row  ">
-                   <div class="flex flex-col gap-4 sm:gap-5 md:w-6/10 xl:w-6/10 md:gap-8 md:py-5 ">
+                  <div class="flex flex-col  justify-between gap-4 grow sm:gap-8 md:flex-row  ">
+                   <div class="flex flex-col gap-6 sm:gap-5 md:w-6/10 xl:w-6/10 md:gap-8 md:py-5 ">
                     <div id="genres" class="flex items-center gap-2 md:gap-3.5 text-gray-300 text-[11px] lg:text-sm">
                    
                     </div>
-                    <p class="text-xs text-gray-300 leading-5 lg:text-sm xl:text-base lg:leading-8">${list.overview ? list.overview : list.original_title}</p>
+                    <p class="hidden sm:inline-block text-xs text-gray-300 leading-5 lg:text-sm xl:text-base lg:leading-8">${list.overview ? list.overview : list.original_title}</p>
                     <div class="flex items-center gap-5">
                       <div class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-5 h-5 flex items-center justify-center font-bold bg-black border-2 -rotate-30 border-amber-300 rounded-full text-white">m</span>
@@ -165,6 +168,59 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
           </div>
         </div>
     `    
+    document.querySelector('#sm-infos').innerHTML=
+    `
+        <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="15px" height="15px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cc [#ffad49]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -4039.000000)" fill="#ffad49"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M100,3892 L100,3892 C100,3892.552 99.552,3893 99,3893 L97,3893 C95.895,3893 95,3892.105 95,3891 L95,3887 C95,3885.895 95.895,3885 97,3885 L99,3885 C99.552,3885 100,3885.448 100,3886 C100,3886.552 99.552,3887 99,3887 L98,3887 C97.448,3887 97,3887.448 97,3888 L97,3890 C97,3890.552 97.448,3891 98,3891 L99,3891 C99.552,3891 100,3891.448 100,3892 M93,3892 L93,3892 C93,3892.552 92.552,3893 92,3893 L90,3893 C88.895,3893 88,3892.105 88,3891 L88,3887 C88,3885.895 88.895,3885 90,3885 L92,3885 C92.552,3885 93,3885.448 93,3886 C93,3886.552 92.552,3887 92,3887 L91,3887 C90.448,3887 90,3887.448 90,3888 L90,3890 C90,3890.552 90.448,3891 91,3891 L92,3891 C92.552,3891 93,3891.448 93,3892 M101,3897 L87,3897 C86.448,3897 86,3896.552 86,3896 L86,3882 C86,3881.448 86.448,3881 87,3881 L101,3881 C101.552,3881 102,3881.448 102,3882 L102,3896 C102,3896.552 101.552,3897 101,3897 M84,3881 L84,3897 C84,3898.105 84.895,3899 86,3899 L102,3899 C103.105,3899 104,3898.105 104,3897 L104,3881 C104,3879.895 103.105,3879 102,3879 L86,3879 C84.895,3879 84,3879.895 84,3881" id="cc-[#ffad49]"> </path> </g> </g> </g> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">زیرنویس:</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">ندارد</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="17px" height="17px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 3C5 1.34315 6.34315 0 8 0C9.65685 0 11 1.34315 11 3V7C11 8.65685 9.65685 10 8 10C6.34315 10 5 8.65685 5 7V3Z" fill="#ffad49"></path> <path d="M9 13.9291V16H7V13.9291C3.60771 13.4439 1 10.5265 1 7V6H3V7C3 9.76142 5.23858 12 8 12C10.7614 12 13 9.76142 13 7V6H15V7C15 10.5265 12.3923 13.4439 9 13.9291Z" fill="#ffad49"></path> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">دوبله:</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">ندارد</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffad49;} </style> <g> <path class="st0" d="M461.04,280.543c-0.016-108.556-84.38-197.136-191.12-204.324V47.096h-27.848v29.124 C135.349,83.416,50.981,172.002,50.965,280.543c0.016,65.74,31.039,124.076,79.137,161.606l-27.388,46.502L137.487,512 l34.033-44.783c25.776,11.696,54.332,18.374,84.484,18.374c29.362,0,57.227-6.284,82.477-17.403L371.757,512l34.823-23.349 l-26.598-45.071C429.161,406.117,461.024,347.138,461.04,280.543z M261.663,419.506h-10.298h-4.836v17.856 c-37.15-2.212-70.621-17.206-96.446-40.786l13.148-13.143l-7.288-7.286l-13.278,13.282c-24.23-25.242-40.07-58.312-43.254-95.2 h19.735v-21.055H99.091c1.768-37.989,16.865-72.245,40.884-98.548l15.253,15.257l7.287-7.288l-15.392-15.388 c25.718-24.682,59.575-40.605,97.301-43.352v21.935h5.921h10.298h4.836v-22.042c38.203,2.278,72.553,18.036,98.658,42.768 l-15.368,15.364l7.288,7.287l15.298-15.298c23.962,25.916,39.215,59.686,41.456,97.198h-19.948v21.055h19.842 c-2.726,37.373-18.39,70.929-42.669,96.557l-13.254-13.258l-7.286,7.279l13.192,13.192c-25.438,23.53-58.428,38.688-95.101,41.362 v-17.749H261.663z"></path> <path class="st0" d="M81.396,11.401c-40.4,23.39-54.184,75.099-30.776,115.506l146.283-84.722 C173.527,1.786,121.811-12.007,81.396,11.401z"></path> <path class="st0" d="M430.593,11.401c-40.395-23.408-92.112-9.615-115.503,30.784l146.295,84.722 C484.793,86.5,470.991,34.791,430.593,11.401z"></path> <polygon class="st0" points="283.943,190.245 251.719,269.859 199.501,250.803 192.214,270.78 259.499,295.323 259.717,294.731 260.791,295.166 300.541,196.964 "></polygon> </g> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">زمان :</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.runtime}دقیقه</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="20px" height="20px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.516 0c-4.687 0-8.5 3.813-8.5 8.5s3.813 8.5 8.5 8.5 8.5-3.813 8.5-8.5-3.814-8.5-8.5-8.5zM1.041 9h2.937c0.044 1.024 0.211 2.031 0.513 3h-2.603c-0.481-0.906-0.776-1.923-0.847-3zM3.978 8h-2.937c0.071-1.077 0.366-2.094 0.847-3h2.6c-0.301 0.969-0.467 1.976-0.51 3zM5.547 5h5.896c0.33 0.965 0.522 1.972 0.569 3h-7.034c0.046-1.028 0.239-2.035 0.569-3zM4.978 9h7.035c-0.049 1.028-0.241 2.035-0.572 3h-5.891c-0.331-0.965-0.524-1.972-0.572-3zM13.013 9h2.978c-0.071 1.077-0.366 2.094-0.847 3h-2.644c0.302-0.969 0.469-1.976 0.513-3zM13.013 8c-0.043-1.024-0.209-2.031-0.51-3h2.641c0.48 0.906 0.775 1.923 0.847 3h-2.978zM14.502 4h-2.354c-0.392-0.955-0.916-1.858-1.55-2.7 1.578 0.457 2.938 1.42 3.904 2.7zM9.074 1.028c0.824 0.897 1.484 1.9 1.972 2.972h-5.102c0.487-1.071 1.146-2.073 1.97-2.97 0.199-0.015 0.398-0.030 0.602-0.030 0.188 0 0.373 0.015 0.558 0.028zM6.383 1.313c-0.629 0.838-1.151 1.737-1.54 2.687h-2.314c0.955-1.267 2.297-2.224 3.854-2.687zM2.529 13h2.317c0.391 0.951 0.915 1.851 1.547 2.689-1.561-0.461-2.907-1.419-3.864-2.689zM7.926 15.97c-0.826-0.897-1.488-1.899-1.978-2.97h5.094c-0.49 1.072-1.152 2.075-1.979 2.972-0.181 0.013-0.363 0.028-0.547 0.028-0.2 0-0.395-0.015-0.59-0.030zM10.587 15.703c0.636-0.842 1.164-1.747 1.557-2.703h2.358c-0.968 1.283-2.332 2.247-3.915 2.703z" fill="#ffad49"></path> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">محصول :</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.origin_country}</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.15" d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#ffad49"></path> <path d="M20 8.5V13.5M17.5 11H22.5M8 15H16C18.2091 15 20 16.7909 20 19V21H4V19C4 16.7909 5.79086 15 8 15ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffad49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">رده سنی:</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">ندارد</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffad49" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">سال تولید :</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.release_date}</span>
+    </div>
+    <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
+      <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
+        <svg width="15px" height="15px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H6V2H10V4H8.86807C8.57073 5.66996 7.78574 7.17117 6.6656 8.35112C7.46567 8.73941 8.35737 8.96842 9.29948 8.99697L10.2735 6H12.7265L15.9765 16H13.8735L13.2235 14H9.77647L9.12647 16H7.0235L8.66176 10.9592C7.32639 10.8285 6.08165 10.3888 4.99999 9.71246C3.69496 10.5284 2.15255 11 0.5 11H0V9H0.5C1.5161 9 2.47775 8.76685 3.33437 8.35112C2.68381 7.66582 2.14629 6.87215 1.75171 6H4.02179C4.30023 6.43491 4.62904 6.83446 4.99999 7.19044C5.88743 6.33881 6.53369 5.23777 6.82607 4H0V2H4V0ZM12.5735 12L11.5 8.69688L10.4265 12H12.5735Z" fill="#ffad49"></path> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">زبان  :</span>
+      </div>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.original_language}</span>
+    </div>
+    `
+    document.querySelector('#sm-desc').textContent=list.overview
     getHeaderGenres(list.genres)
     getActors(list.credits.cast)
     getCrows(list.credits.crew)
@@ -185,19 +241,20 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
   })
 })
  function getCrows(crow){
-  let list = crow.length<15 ?crow.length : crow.slice(0,15)
+  let mainList = crow.length<15 ?crow.length : crow.slice(0,15)
+  const list = [...new Map(mainList.map(item => [item.id, item])).values()];
   list.forEach(act=>{
+    
     if(act.profile_path){
-    console.log(act);
     document.querySelector('#crow-swiper').innerHTML+=`
      <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden">
-              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}">
+              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
-              <span class="text-center text-xs text-gray-500 dark:text-gray-300">${act.known_for_department=="Acting" ? 'بازیگر' : act.known_for_department}</span>
+              <span class="text-center text-xs text-gray-500 dark:text-gray-300">${act.known_for_department}</span>
             </div>
           </div>
         </a>
@@ -220,7 +277,7 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
      <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden">
-              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}">
+              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
@@ -293,11 +350,86 @@ const crowSwiper = new Swiper (".crow-swiper" ,{
       },
     }
 })
+async function getRecommendationsMovie() {
+  let response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}`
+  );
+  let t = await response.json();
+  let list = t.results;
+  const randomFive = list.slice(0, 6);
+  
+  randomFive.forEach((elem) => {
+    console.log(elem);
+    if (elem.poster_path && elem.backdrop_path) {
+      document.querySelector(".Recommendations-wrapper").innerHTML += `
+       <a href="movie.html?id=${elem.id}" class="swiper-slide w-auto rounded-lg overflow-hidden transition-all duration-600 group">
+              <div class="relative ">
+            <div class="w-full relative rounded-lg overflow-hidden">
+              <img loading="lazy" class="object-cover w-full" src="images/header/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX500-210x310.jpg" alt="">
+              <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
+              <p dir="ltr" class="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.original_title}</p>
+              </div>
+            </div>
+            <div class="absolute w-full h-full top-0 left-0 rounded-lg bg-black/60 px-3 py-3.5 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-all duration-600">
+              <span class="absolute top-0 left-0 p-3 text-amber-400 flex gap-1.5 items-start ">${elem.original_language}</span>
+              <span class="absolute top-1/2 left-1/2 -translate-1/2">
+                <svg  width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 12L3 18.9671C3 21.2763 5.53435 22.736 7.59662 21.6145L10.7996 19.8727M3 8L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L14.0026 18.131" stroke="#cfcfcf" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+              </span>
+              <div class=" absolute w-full p-3 bottom-0 left-0 flex justify-between items-center">
+                <div class="flex items-start">
+                  <span class="text-orange-400 text-sm lg:text-lg">100%</span>
+                  <span>
+                     <svg class=" w-5 h-4" version="1.1" id="designs" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 32 32" xml:space="preserve" fill="#ff8904"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .sketchy_een{fill:#ff8904;} </style> <path class="sketchy_een" d="M28.869,20.55c-0.11-0.138-0.231-0.271-0.36-0.395c0.171-0.153,0.296-0.362,0.421-0.551 c0.181-0.277,0.334-0.552,0.445-0.867c0.248-0.706-0.118-1.461-0.577-1.988c-0.067-0.077-0.142-0.149-0.22-0.216 c0.082-0.099,0.161-0.203,0.239-0.303c0.204-0.262,0.428-0.535,0.487-0.873c0.061-0.344,0.021-0.674-0.067-1.01 c-0.176-0.672-0.76-1.192-1.329-1.541c-0.187-0.115-0.384-0.2-0.588-0.279c-0.172-0.065-0.374-0.08-0.554-0.103 c-0.311-0.038-0.628-0.032-0.941-0.038c-0.081-0.001-0.162-0.002-0.243-0.002c-0.85,0-1.696,0.068-2.545,0.105 c-0.832,0.034-1.667,0.04-2.5,0.04c-0.002-0.39-0.001-0.78-0.016-1.17c-0.018-0.492-0.029-0.981,0.019-1.473 c0.033-0.191,0.076-0.38,0.109-0.57c0.057-0.336,0.122-0.668,0.166-1.008c0.082-0.615,0.153-1.243,0.074-1.862 c-0.046-0.372-0.105-0.741-0.187-1.105c-0.082-0.357-0.187-0.733-0.384-1.045c-0.113-0.18-0.254-0.342-0.384-0.508 c-0.109-0.137-0.223-0.273-0.349-0.395c-0.208-0.206-0.451-0.382-0.682-0.563c-0.208-0.162-0.416-0.327-0.64-0.468 c-0.242-0.153-0.504-0.26-0.781-0.336C17.415,2.009,17.346,2,17.278,2c-0.348,0-0.675,0.233-0.771,0.581 c-0.02,0.074-0.016,0.149-0.015,0.223c-0.012,0.018-0.033,0.026-0.045,0.045c-0.067,0.116-0.101,0.242-0.101,0.376 c-0.04,0.291-0.068,0.582-0.103,0.872c-0.12,0.864-0.299,1.722-0.464,2.58c-0.133,0.701-0.233,1.41-0.488,2.077 c-0.141,0.316-0.299,0.626-0.452,0.936c-0.197,0.395-0.435,0.771-0.655,1.153c-0.43,0.747-0.871,1.487-1.385,2.178 c-0.195,0.243-0.397,0.478-0.612,0.706c-0.203,0.217-0.421,0.409-0.651,0.594c-0.124,0.094-0.249,0.185-0.384,0.263 c-0.093,0.053-0.189,0.097-0.284,0.143c0-0.049,0.003-0.097,0.003-0.145c-0.004-0.422-0.349-0.773-0.775-0.773 c-0.059,0-0.114,0.022-0.17,0.035c-0.039-0.009-0.076-0.029-0.114-0.029c-0.014,0-0.029,0.001-0.043,0.002 c-0.995,0.099-2.001,0.115-3.002,0.138c-0.506,0.011-1.012,0.025-1.52,0.019c-0.514-0.004-1.033-0.065-1.545-0.015 c-0.047,0.005-0.086,0.019-0.13,0.028c-0.077-0.026-0.156-0.05-0.244-0.05c-0.407,0-0.81,0.357-0.783,0.783 c0.023,0.359,0.05,0.712,0.053,1.071c0.004,0.374,0.004,0.749,0.006,1.121c0.002,0.739-0.017,1.478-0.008,2.217 c0.021,1.459,0.031,2.916,0.031,4.373c0,0.712-0.019,1.421-0.032,2.131c-0.011,0.624-0.004,1.247-0.017,1.869 c-0.004,0.2,0.084,0.38,0.221,0.511c0.138,0.173,0.337,0.294,0.566,0.277c1.085-0.08,2.173-0.156,3.261-0.147 c0.313,0.004,0.628,0.002,0.943,0.002c0.223-0.002,0.449-0.002,0.674-0.002c0.51,0,1.031-0.015,1.537,0.042 c0.185,0.021,0.399-0.092,0.525-0.218c0.069-0.069,0.123-0.153,0.16-0.243c0.339-0.067,0.623-0.36,0.612-0.719 c-0.002-0.06-0.009-0.12-0.013-0.179c0.025,0.018,0.051,0.035,0.075,0.053c0.615,0.499,1.205,1.034,1.865,1.474 c0.315,0.21,0.628,0.433,0.964,0.609c0.382,0.2,0.783,0.37,1.193,0.502c0.749,0.244,1.533,0.324,2.316,0.384 c0.376,0.029,0.754,0.053,1.13,0.092c0.361,0.034,0.72,0.059,1.083,0.061c1.543,0.004,3.082-0.092,4.623-0.128 c0.46-0.011,0.918-0.034,1.373-0.103c0.353-0.053,0.714-0.109,1.058-0.202c0.145-0.04,0.292-0.088,0.432-0.145 c0.12-0.05,0.246-0.094,0.359-0.162c0.109-0.065,0.208-0.147,0.309-0.227c0.225-0.176,0.445-0.353,0.632-0.573 c0.191-0.225,0.304-0.485,0.441-0.743c0.097-0.185,0.187-0.38,0.231-0.584c0.101-0.466,0.076-0.939-0.055-1.396 c-0.074-0.25-0.164-0.495-0.273-0.731c-0.084-0.183-0.233-0.338-0.369-0.485c-0.068-0.073-0.137-0.145-0.206-0.218 c0.03-0.024,0.06-0.048,0.09-0.072c0.197-0.156,0.34-0.334,0.491-0.537c0.162-0.218,0.292-0.452,0.382-0.71 c0.075-0.214,0.105-0.447,0.147-0.668c0.055-0.306,0.055-0.544-0.002-0.85C29.288,21.115,29.087,20.819,28.869,20.55z M8.733,26.719 c-0.164,0-0.327-0.002-0.489-0.002c-0.538,0.004-1.079,0.002-1.617,0.013c-0.544,0.013-1.09,0.042-1.635,0.055 c-0.244,0.008-0.489,0.004-0.733,0C4.173,26.785,4.087,26.789,4,26.788c-0.007-1.095,0.007-2.191,0.007-3.287 c0.002-1.457,0.025-2.916,0.053-4.373c0.015-0.739,0.036-1.478,0.044-2.217c0.004-0.372,0.002-0.747,0.002-1.121 c0.001-0.125-0.001-0.249,0.002-0.374c0.374-0.027,0.748-0.042,1.124-0.053c0.506-0.015,1.012-0.032,1.52-0.048 c0.496-0.013,0.995-0.011,1.491-0.013c0.369,0,0.738-0.006,1.108-0.011c0.022,0.516,0.047,1.032,0.056,1.549 c0.013,0.722,0.029,1.445,0.04,2.167c0.01,0.747,0.032,1.491,0.055,2.236c0.021,0.737,0.032,1.472,0.04,2.209 c0.008,0.628-0.013,1.256,0.01,1.885c0.013,0.304,0.031,0.607,0.036,0.909c0.002,0.154,0,0.306-0.002,0.459 C9.303,26.718,9.018,26.723,8.733,26.719z M27.847,24.618c0.003-0.002,0.005-0.004,0.008-0.006c0.005-0.004,0.01-0.008,0.016-0.012 C27.863,24.606,27.855,24.612,27.847,24.618z M27.918,18.272c-0.01,0.04-0.021,0.079-0.035,0.118 c-0.102,0.212-0.227,0.42-0.362,0.612c-0.028,0.032-0.056,0.063-0.086,0.092c-0.171,0.107-0.359,0.187-0.533,0.29 c-0.258,0.155-0.439,0.409-0.439,0.718c0,0.336,0.218,0.58,0.495,0.741c0.123,0.071,0.25,0.137,0.371,0.215 c0.136,0.119,0.261,0.25,0.377,0.389c0.05,0.074,0.094,0.15,0.134,0.23c0.014,0.045,0.026,0.09,0.036,0.136 c0.001,0.043,0,0.085-0.002,0.129c-0.031,0.203-0.066,0.41-0.13,0.603c-0.057,0.108-0.121,0.211-0.191,0.31 c-0.096,0.115-0.204,0.217-0.32,0.312c-0.121,0.089-0.246,0.172-0.37,0.254c-0.218,0.145-0.378,0.302-0.462,0.556 c-0.107,0.317,0.034,0.626,0.244,0.857c0.232,0.256,0.473,0.504,0.69,0.772c0.043,0.06,0.081,0.122,0.116,0.187 c0.067,0.183,0.125,0.367,0.161,0.558c0.009,0.105,0.01,0.211,0.004,0.316c-0.012,0.062-0.027,0.124-0.046,0.184 c-0.037,0.074-0.076,0.148-0.112,0.223c-0.053,0.109-0.103,0.218-0.166,0.32c-0.13,0.141-0.269,0.268-0.417,0.389 c-0.081,0.058-0.165,0.111-0.255,0.156c-0.391,0.142-0.799,0.228-1.211,0.292c-0.755,0.078-1.519,0.052-2.276,0.08 c-0.741,0.025-1.482,0.031-2.223,0.044c-0.768,0.013-1.531,0.048-2.299,0.004c-0.694-0.04-1.391-0.055-2.084-0.138 c-0.519-0.087-1.017-0.228-1.505-0.421c-0.457-0.218-0.881-0.489-1.3-0.772c-0.417-0.281-0.823-0.578-1.225-0.881 c-0.222-0.173-0.442-0.346-0.669-0.509c-0.185-0.131-0.382-0.242-0.568-0.371c-0.007-0.006-0.013-0.012-0.02-0.019 c-0.082-0.073-0.176-0.122-0.274-0.156c0-0.012-0.001-0.024-0.002-0.036c-0.021-0.728-0.032-1.457-0.046-2.186 c-0.015-0.739-0.04-1.478-0.052-2.217c-0.013-0.754-0.015-1.506-0.015-2.261c0.002-0.611-0.002-1.222-0.004-1.833 c0-0.09,0.001-0.18,0.001-0.27c0.003-0.002,0.005-0.004,0.008-0.005c0.261-0.18,0.574-0.294,0.859-0.43 c0.378-0.183,0.728-0.456,1.044-0.726c0.275-0.233,0.519-0.497,0.76-0.762c0.267-0.292,0.516-0.603,0.747-0.924 c0.428-0.598,0.781-1.243,1.157-1.871c0.183-0.304,0.374-0.602,0.55-0.909c0.176-0.302,0.332-0.615,0.485-0.93 c0.176-0.355,0.321-0.726,0.433-1.105c0.052-0.174,0.103-0.349,0.128-0.531c0.023-0.17,0.044-0.341,0.065-0.512 c0.175-1.246,0.443-2.477,0.651-3.719c0.153,0.105,0.303,0.217,0.451,0.332c0.111,0.088,0.221,0.178,0.321,0.278 c0.148,0.146,0.285,0.304,0.416,0.467c0.055,0.077,0.105,0.155,0.15,0.237c0.166,0.458,0.26,0.935,0.332,1.416 c0.063,0.585,0.007,1.178-0.066,1.761c-0.053,0.37-0.111,0.743-0.185,1.11c-0.082,0.397-0.09,0.802-0.105,1.205 c-0.029,0.831,0.071,1.659,0.023,2.49c-0.016,0.256,0.14,0.475,0.349,0.607c0.137,0.154,0.33,0.257,0.548,0.256 c0.609-0.004,1.216-0.052,1.825-0.08c0.563-0.029,1.127-0.036,1.69-0.055c0.548-0.019,1.094-0.027,1.642-0.031 c0.474-0.002,0.944,0.008,1.413,0.064c0.142,0.025,0.276,0.061,0.411,0.109c0.139,0.072,0.273,0.153,0.401,0.245 c0.093,0.079,0.182,0.164,0.264,0.255c0.04,0.062,0.077,0.126,0.112,0.192c0.019,0.06,0.034,0.121,0.047,0.183 c0.002,0.031,0.004,0.061,0.004,0.092c-0.06,0.106-0.131,0.205-0.205,0.302c-0.092,0.118-0.188,0.231-0.298,0.331 c-0.104,0.069-0.215,0.125-0.329,0.182c-0.34,0.166-0.559,0.596-0.435,0.964c0.074,0.22,0.214,0.409,0.428,0.506 c0.057,0.025,0.114,0.049,0.172,0.072c0.104,0.05,0.201,0.11,0.295,0.175c0.124,0.106,0.238,0.222,0.344,0.345 c0.049,0.074,0.094,0.149,0.133,0.228c0.013,0.039,0.025,0.077,0.035,0.117C27.919,18.236,27.918,18.254,27.918,18.272z M27.523,22.892c-0.004,0.005-0.007,0.01-0.011,0.015c-0.011,0.015-0.023,0.03-0.034,0.045 C27.492,22.932,27.507,22.912,27.523,22.892z"></path> </g></svg>
+                    </span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="text-xs text-white">10/</span>
+                  <span class="text-base lg:text-2xl text-amber-400 font-bold">${elem.vote_average.toFixed(1)}</span>
+                </div>
+                
+                <!-- <span class="text-base text-amber-400 font-bold">6.8</span></span>
+                <span class=" flex items-center gap-0.5 text-gray-300"><span class="text-xs">10/</span></span> -->
+              </div>
+             </div>
+              </div>
+            </a>
+      `
+       }
+  });
+
+
+  const RecommendationsSwiper = new Swiper (".recommendations-swiper" ,{
+    direction: "horizontal",
+    slidesPerView: 3,
+    loop: false,
+    centeredSlides: false,
+    initialSlide: 0,
+    speed: 500,
+    spaceBetween: 15,
+    pagination: {
+      el: ".Recommendations-pagination",
+      // dynamicBullets: true,
+    },
+    breakpoints:{
+      640:{
+        slidesPerView: 4,
+      },
+      768:{
+        slidesPerView: 5,
+      },
+      1400:{
+        spaceBetween: 20,
+        slidesPerView: 7,
+      },
+    }
+  })
+}
+
 
 function getHeaderGenres(list){
   let genresContainer = document.querySelector('#genres')
-  list.forEach(gen=>{
-    genresContainer.innerHTML+= `<a  href="#" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
+  list.forEach(gen=>{    
+    genresContainer.innerHTML+= `<a   href="search.html?id=${gen.id}" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
   })
 
 }
