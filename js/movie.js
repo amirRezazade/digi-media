@@ -11,7 +11,7 @@ console.log(movieId);
 document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
         <h1>اطلاعات بیشتری از این فیلم وجود ندارد</h1>
       </div>`
-  } 
+    } 
   else{
     document.querySelector('header').innerHTML=
        `
@@ -106,7 +106,7 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
                       </a>
                      </div>
                   </div>  
-                   <div class="hidden sm:flex md:flex-wrap rounded-xl divide-x md:divide-x-0 bg-gray-900/30 md:justify-between md:py-5 md:bg-transparent divide-black md:grid md:grid-cols-2 md:gap-3  md:w-4/10 xl:w-3/10">
+                   <div class="hidden sm:flex md:flex-wrap overflow-hidden rounded-lg divide-x md:divide-x-0 bg-gray-900/30 md:justify-between md:py-5 md:bg-transparent divide-black md:grid md:grid-cols-2 md:gap-3  md:w-4/10 xl:w-3/10">
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
                         <svg width="15px" height="15px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cc [#ffad49]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -4039.000000)" fill="#ffad49"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M100,3892 L100,3892 C100,3892.552 99.552,3893 99,3893 L97,3893 C95.895,3893 95,3892.105 95,3891 L95,3887 C95,3885.895 95.895,3885 97,3885 L99,3885 C99.552,3885 100,3885.448 100,3886 C100,3886.552 99.552,3887 99,3887 L98,3887 C97.448,3887 97,3887.448 97,3888 L97,3890 C97,3890.552 97.448,3891 98,3891 L99,3891 C99.552,3891 100,3891.448 100,3892 M93,3892 L93,3892 C93,3892.552 92.552,3893 92,3893 L90,3893 C88.895,3893 88,3892.105 88,3891 L88,3887 C88,3885.895 88.895,3885 90,3885 L92,3885 C92.552,3885 93,3885.448 93,3886 C93,3886.552 92.552,3887 92,3887 L91,3887 C90.448,3887 90,3887.448 90,3888 L90,3890 C90,3890.552 90.448,3891 91,3891 L92,3891 C92.552,3891 93,3891.448 93,3892 M101,3897 L87,3897 C86.448,3897 86,3896.552 86,3896 L86,3882 C86,3881.448 86.448,3881 87,3881 L101,3881 C101.552,3881 102,3881.448 102,3882 L102,3896 C102,3896.552 101.552,3897 101,3897 M84,3881 L84,3897 C84,3898.105 84.895,3899 86,3899 L102,3899 C103.105,3899 104,3898.105 104,3897 L104,3881 C104,3879.895 103.105,3879 102,3879 L86,3879 C84.895,3879 84,3879.895 84,3881" id="cc-[#ffad49]"> </path> </g> </g> </g> </g></svg>
@@ -164,8 +164,11 @@ document.querySelector('header').innerHTML=`<div class="flex justify-center item
               </div>
           </div>
         </div>
-    `
+    `    
     getHeaderGenres(list.genres)
+    getActors(list.credits.cast)
+    getCrows(list.credits.crew)
+
   }
 
  })
@@ -181,6 +184,116 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
     
   })
 })
+ function getCrows(crow){
+  let list = crow.length<15 ?crow.length : crow.slice(0,15)
+  list.forEach(act=>{
+    if(act.profile_path){
+    console.log(act);
+    document.querySelector('#crow-swiper').innerHTML+=`
+     <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
+          <div class="flex flex-col items-center  gap-1.5">
+            <div class="aspect-square w-full rounded-full overflow-hidden">
+              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}">
+            </div>
+            <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
+              <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
+              <span class="text-center text-xs text-gray-500 dark:text-gray-300">${act.known_for_department=="Acting" ? 'بازیگر' : act.known_for_department}</span>
+            </div>
+          </div>
+        </a>
+    `
+  }
+    
+  })
+  
+  
+  // cast.forEach(act=>{
+  //   console.log(act);
+    
+  // })
+ }
+ function getActors(cast){
+  let list = cast.length<15 ?cast.length : cast.slice(0,15)
+  list.forEach(act=>{
+    if(act.profile_path){
+    document.querySelector('#act-swiper').innerHTML+=`
+     <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
+          <div class="flex flex-col items-center  gap-1.5">
+            <div class="aspect-square w-full rounded-full overflow-hidden">
+              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}">
+            </div>
+            <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
+              <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
+              <span class="text-center text-xs text-gray-500 dark:text-gray-300">${act.known_for_department=="Acting" ? 'بازیگر' : act.known_for_department}</span>
+            </div>
+          </div>
+        </a>
+    ` 
+  }
+    
+  })
+  
+  
+  // cast.forEach(act=>{
+  //   console.log(act);
+    
+  // })
+ }
+const actSwiper = new Swiper (".actors-swiper" ,{
+    direction: "horizontal",
+    slidesPerView: 4,
+    loop: false,
+    centeredSlides: false,
+    initialSlide: 0,
+    speed: 500,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".act-next",
+      prevEl: ".act-prev",
+    },
+    breakpoints:{
+      640:{
+        slidesPerView: 5,
+      },
+      768:{
+        slidesPerView: 3,
+      },
+      1000:{
+        slidesPerView: 4,
+      },
+      1280:{
+        slidesPerView: 5,
+      },
+    }
+})
+const crowSwiper = new Swiper (".crow-swiper" ,{
+    direction: "horizontal",
+    slidesPerView: 4,
+    loop: false,
+    centeredSlides: false,
+    initialSlide: 0,
+    speed: 500,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".crow-next",
+      prevEl: ".crow-prev",
+    },
+    breakpoints:{
+      640:{
+        slidesPerView: 5,
+      },
+      768:{
+        slidesPerView: 3,
+      },
+      1000:{
+        slidesPerView: 4,
+      },
+      1280:{
+        slidesPerView: 5,
+      },
+    }
+})
+
 function getHeaderGenres(list){
   let genresContainer = document.querySelector('#genres')
   list.forEach(gen=>{
