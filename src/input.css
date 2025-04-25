@@ -27,13 +27,14 @@
 .swiper-pagination-bullet{
   width: 8px !important;
   height: 8px !important;
-border: 1px solid rgb(195, 195, 195);
+  transition: all .3s ease;
+border: 1px solid rgb(207, 207, 207);
 }
 .swiper-pagination-bullet-active {
-  border: 0;
+  border-color: #ff8904;
   width: 25px  !important;
   height: 8px !important;
-  border-radius: 30%;
+  border-radius: 10px;
   background:#ff8904;
 }
 @custom-variant dark (&:where(.dark, .dark *));

@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
   else{
     document.querySelector('header').innerHTML=
        `
-    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image: url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium');" loading="lazy">
+    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image: url('images/default-bg.png') , url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium');" >
           <div class="px-4 py-6 md:py-10 lg:px-13 bg-gradient-to-r from-gray-950/10 to-gray-950 to-80%">
   
             <div class="flex items-center gap-1 text-[11px] text-gray-300">
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                   <div class="relative group z-1">
                     <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-80 scale-x-80 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
                     <div class="absolute w-full -z-1 h-full top-0 left-0 rounded-lg contrast-85 scale-x-90 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
-                    <img class=" w-full h-full object-cover z-50 rounded-lg contrast-110" src="https://image.tmdb.org/t/p/original${list.poster_path}_medium" alt="${list.original_title}" loading="lazy">
+                    <img class=" w-full h-full object-cover z-50 rounded-lg contrast-110" src="https://image.tmdb.org/t/p/original${list.poster_path}_medium" alt="${list.original_title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
                     <a href="#" class="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
                       <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.75 6L7.5 5.25H16.5L17.25 6V19.3162L12 16.2051L6.75 19.3162V6ZM8.25 6.75V16.6838L12 14.4615L15.75 16.6838V6.75H8.25Z" fill="#ffffff"></path> </g></svg>
                     </a>
@@ -243,14 +243,13 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
  function getCrows(crow){
   let mainList = crow.length<15 ?crow.length : crow.slice(0,15)
   const list = [...new Map(mainList.map(item => [item.id, item])).values()];
-  list.forEach(act=>{
-    
+   list.forEach(act=>{    
     if(act.profile_path){
     document.querySelector('#crow-swiper').innerHTML+=`
      <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden">
-              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy">
+              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/person-not-loaded.png';">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
@@ -277,7 +276,7 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
      <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden">
-              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy">
+              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/person-not-loaded.png';">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
@@ -365,7 +364,7 @@ async function getRecommendationsMovie() {
        <a href="movie.html?id=${elem.id}" class="swiper-slide w-auto rounded-lg overflow-hidden transition-all duration-600 group">
               <div class="relative ">
             <div class="w-full relative rounded-lg overflow-hidden">
-              <img loading="lazy" class="object-cover w-full" src="images/header/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX500-210x310.jpg" alt="">
+              <img loading="lazy" class="object-cover w-full" src="https://image.tmdb.org/t/p/original/${elem.poster_path}_medium" alt=""  onerror="this.onerror=null; this.src='images/poster-not-loaded.jpg';">
               <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
               <p dir="ltr" class="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.original_title}</p>
               </div>
@@ -408,6 +407,7 @@ async function getRecommendationsMovie() {
     spaceBetween: 15,
     pagination: {
       el: ".Recommendations-pagination",
+      clickable: true
       // dynamicBullets: true,
     },
     breakpoints:{
