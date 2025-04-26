@@ -2,7 +2,9 @@ import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme,
 
 let headerPlayBtn = document.querySelector('#movie-play-btn');
 headerPlayBtn.addEventListener('click' ,  ()=>{
-  window.location.href = `movie.html?id=${headerPlayBtn.dataset.id}`;  
+  
+ headerPlayBtn.dataset.type =='movie'? window.location.href = `movie.html?id=${headerPlayBtn.dataset.id}`:  window.location.href = `series.html?id=${headerPlayBtn.dataset.id}`
+  
   
 })
 
@@ -54,13 +56,13 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 let res;
-
 async function getHeaderInfos() {
   let response = await fetch(
     `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`
   );
   res = await response.json();
   let list = res.results;
+  
   list.slice(0, 10).forEach((elem, index) => {
     if (elem.poster_path && elem.backdrop_path) {
       let type = elem.media_type=='movie';
@@ -84,6 +86,7 @@ async function getHeaderInfos() {
                               elem.poster_path
                             }_medium"
                             alt="${elem.name ? elem.name : elem.title}" loading="lazy"
+                            onerror="this.onerror=null; this.src='images/default_poster.jpg';"
                             class="w-full rounded-md"
                           />
                           <div
@@ -269,7 +272,7 @@ function changeHeaderInfo() {
   if (window.innerWidth > 768) {
     document.querySelector(
       "#header-bg"
-    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium)`;
+    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.png')`;
     document.querySelector("#header-name").textContent = res.results[
       activeIndex
     ].name
@@ -281,6 +284,9 @@ function changeHeaderInfo() {
       res.results[activeIndex].vote_average.toFixed(1);
     document.querySelector("#movie-play-btn").dataset.id =
       res.results[activeIndex].id;
+    document.querySelector("#movie-play-btn").dataset.type =
+      res.results[activeIndex].media_type;
+      
   } else {
     document.querySelector("#header-bg").style.backgroundImage = "url()";
   }
@@ -434,7 +440,7 @@ async function getActionMovie() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy">
+             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
            </div>
            <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${
              elem.backdrop_path
@@ -510,7 +516,7 @@ async function getTv() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy">
+             }_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
            </div>
            <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${
              elem.backdrop_path
@@ -586,7 +592,7 @@ async function getPersianMovie() {
            <div class="w-full h-full overflow-hidden">
              <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-all duration-600  " src="https://image.tmdb.org/t/p/original${
                elem.poster_path
-             }_medium" alt="${elem.original_title ? elem.original_title : elem.name}"">
+             }_medium" alt="${elem.original_title ? elem.original_title : elem.name}" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
            </div>
            <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${elem.backdrop_path ? elem.backdrop_path : elem.poster_path}_medium);">
              <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">

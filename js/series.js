@@ -27,14 +27,17 @@ window.addEventListener('DOMContentLoaded' , ()=>{
   getRecommendationsMovie();
 })
 
- fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
+ fetch(`https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
  .then(response=> response.json()).then(list=> {
+    console.log(list);
+    
   if(list.status_code ==34){
     document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
-        <h1>اطلاعات بیشتری از این فیلم وجود ندارد</h1>
+        <h1>اطلاعات بیشتری از این سریال وجود ندارد</h1>
       </div>`
     } 
   else{
+    let statusText= list.status==='Ended'? 'پایان یافته': 'در حال پخش'
     document.querySelector('header').innerHTML=
        `
     <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image:url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium') , url('images/default-bg.png');" >
@@ -44,9 +47,9 @@ window.addEventListener('DOMContentLoaded' , ()=>{
           <span><svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 12.5C13.6569 12.5 15 11.1569 15 9.5C15 7.84315 13.6569 6.5 12 6.5C10.3431 6.5 9 7.84315 9 9.5C9 11.1569 10.3431 12.5 12 12.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 22C14 18 20 15.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 15.4183 10 18 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></span>
          <a href="index.html" class="transition-all duration-300 cursor-pointer hover:text-orange-400">خانه</a>
          <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path> </g></svg>
-         <a href="index.html" class="transition-all duration-300 cursor-pointer hover:text-orange-400">فیلم ها</a>
+         <a href="#" class="transition-all duration-300 cursor-pointer hover:text-orange-400">سریال ها</a>
          <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path> </g></svg>
-         <span class="transition-all duration-300 cursor-pointer hover:text-orange-400">${list.original_title}</span>
+         <span class="transition-all duration-300 cursor-pointer hover:text-orange-400">${list.original_name}</span>
       
               </div>
               <div class="flex gap-10 sm:gap-6 items-center lg:items-stretch sm:items-start justify-between my-5 xl:my-8 lg:gap-8">
@@ -81,7 +84,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                 </div>
                 <div class="flex flex-col  gap-6 sm:gap-4 grow w-7/10 sm:mt-8  md:gap-2 ">
                   <div class="flex items-start justify-between  ">
-                    <p class="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">${ list.original_title}</p>
+                    <p class="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">${ list.original_name}</p>
                    <div class="hidden sm:flex flex-col items-center ">
                     <div class="flex items-center w-full text-xs divide-x-1 divide-gray-500 xl:text-sm">
                       <span class="flex items-center px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-all duration-300">
@@ -104,7 +107,8 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                     <div id="genres" class="flex items-center gap-2 md:gap-3.5 text-gray-300 text-[11px] lg:text-sm">
                    
                     </div>
-                    <p class="hidden sm:inline-block text-xs text-gray-300 leading-5 lg:text-sm xl:text-base lg:leading-8">${list.overview ? list.overview : list.original_title}</p>
+                    <p class="text-sm text-white font-extrabold leading-5 lg:text-base xl:text-base  ${list.tagline ? '' : 'hidden'}">${list.tagline}</p>
+                    <p class="hidden text-xs text-gray-300 leading-5 lg:text-sm xl:text-base lg:leading-8 sm:${list.overview ? 'inline' : 'hidden'}">${ list.overview }</p>
                     <div class="flex items-center gap-5">
                       <div class="flex items-center gap-2 text-sm text-gray-300">
                         <span class="w-5 h-5 flex items-center justify-center font-bold bg-black border-2 -rotate-30 border-amber-300 rounded-full text-white">m</span>
@@ -145,10 +149,10 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-                        <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffad49;} </style> <g> <path class="st0" d="M461.04,280.543c-0.016-108.556-84.38-197.136-191.12-204.324V47.096h-27.848v29.124 C135.349,83.416,50.981,172.002,50.965,280.543c0.016,65.74,31.039,124.076,79.137,161.606l-27.388,46.502L137.487,512 l34.033-44.783c25.776,11.696,54.332,18.374,84.484,18.374c29.362,0,57.227-6.284,82.477-17.403L371.757,512l34.823-23.349 l-26.598-45.071C429.161,406.117,461.024,347.138,461.04,280.543z M261.663,419.506h-10.298h-4.836v17.856 c-37.15-2.212-70.621-17.206-96.446-40.786l13.148-13.143l-7.288-7.286l-13.278,13.282c-24.23-25.242-40.07-58.312-43.254-95.2 h19.735v-21.055H99.091c1.768-37.989,16.865-72.245,40.884-98.548l15.253,15.257l7.287-7.288l-15.392-15.388 c25.718-24.682,59.575-40.605,97.301-43.352v21.935h5.921h10.298h4.836v-22.042c38.203,2.278,72.553,18.036,98.658,42.768 l-15.368,15.364l7.288,7.287l15.298-15.298c23.962,25.916,39.215,59.686,41.456,97.198h-19.948v21.055h19.842 c-2.726,37.373-18.39,70.929-42.669,96.557l-13.254-13.258l-7.286,7.279l13.192,13.192c-25.438,23.53-58.428,38.688-95.101,41.362 v-17.749H261.663z"></path> <path class="st0" d="M81.396,11.401c-40.4,23.39-54.184,75.099-30.776,115.506l146.283-84.722 C173.527,1.786,121.811-12.007,81.396,11.401z"></path> <path class="st0" d="M430.593,11.401c-40.395-23.408-92.112-9.615-115.503,30.784l146.295,84.722 C484.793,86.5,470.991,34.791,430.593,11.401z"></path> <polygon class="st0" points="283.943,190.245 251.719,269.859 199.501,250.803 192.214,270.78 259.499,295.323 259.717,294.731 260.791,295.166 300.541,196.964 "></polygon> </g> </g></svg>
-                        <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">زمان :</span>
+                        <svg width="20px" height="20px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fill-rule="evenodd" stroke="#ffad49" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 4)"> <path d="m13.5 12.5v-6c0-1.1045695-.8954305-2-2-2h-9c-1.1045695 0-2 .8954305-2 2v6c0 1.1045695.8954305 2 2 2h9c1.1045695 0 2-.8954305 2-2z"></path> <path d="m15.5 12.5v-6.99481259c0-1.65685425-1.3431458-3-3-3-.0017276 0-.0034553 0-.0051829 0l-8.9948171.01554432"></path> <path d="m17.5 10.5v-5.99308345c0-2.209139-1.790861-4-4-4-.0023035 0-.004607 0-.0069106 0l-7.9930894.01381519"></path> </g> </g></svg>
+                        <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">تعداد فصل :</span>
                       </div>
-                      <span class="text-white opacity-75 text-[11px] lg:text-sm">${list.runtime}دقیقه</span>
+                      <span class="text-white opacity-75 text-[11px] lg:text-sm">${list.number_of_seasons}</span>
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -159,17 +163,17 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.15" d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#ffad49"></path> <path d="M20 8.5V13.5M17.5 11H22.5M8 15H16C18.2091 15 20 16.7909 20 19V21H4V19C4 16.7909 5.79086 15 8 15ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffad49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                        <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">رده سنی:</span>
+                      <svg fill="#ffad49" height="20px" width="20px" version="1.1" id="Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12,0C5.38,0,0,5.38,0,12s5.38,12,12,12s12-5.38,12-12S18.62,0,12,0z M12,22C6.49,22,2,17.51,2,12S6.49,2,12,2 s10,4.49,10,10S17.51,22,12,22z M10.5,10h3v8h-3V10z M10.5,5h3v3h-3V5z"></path> </g></svg>
+                      <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">وضعیت:</span>
                       </div>
-                      <span class="text-white opacity-75 text-[11px] lg:text-sm">ندارد</span>
+                      <span class="text-white opacity-75 text-[11px] lg:text-sm">${statusText }</span>
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
                         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffad49" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> </g></svg>
                         <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">سال تولید :</span>
                       </div>
-                      <span class="text-white opacity-75 text-[11px] lg:text-sm">${list.release_date}</span>
+                      <span class="text-white opacity-75 text-[11px] lg:text-sm"> ${list.first_air_date.slice(0,4)} - ${list.last_air_date.slice(0 , 4)} </span>
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -205,10 +209,10 @@ window.addEventListener('DOMContentLoaded' , ()=>{
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-        <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffad49"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffad49;} </style> <g> <path class="st0" d="M461.04,280.543c-0.016-108.556-84.38-197.136-191.12-204.324V47.096h-27.848v29.124 C135.349,83.416,50.981,172.002,50.965,280.543c0.016,65.74,31.039,124.076,79.137,161.606l-27.388,46.502L137.487,512 l34.033-44.783c25.776,11.696,54.332,18.374,84.484,18.374c29.362,0,57.227-6.284,82.477-17.403L371.757,512l34.823-23.349 l-26.598-45.071C429.161,406.117,461.024,347.138,461.04,280.543z M261.663,419.506h-10.298h-4.836v17.856 c-37.15-2.212-70.621-17.206-96.446-40.786l13.148-13.143l-7.288-7.286l-13.278,13.282c-24.23-25.242-40.07-58.312-43.254-95.2 h19.735v-21.055H99.091c1.768-37.989,16.865-72.245,40.884-98.548l15.253,15.257l7.287-7.288l-15.392-15.388 c25.718-24.682,59.575-40.605,97.301-43.352v21.935h5.921h10.298h4.836v-22.042c38.203,2.278,72.553,18.036,98.658,42.768 l-15.368,15.364l7.288,7.287l15.298-15.298c23.962,25.916,39.215,59.686,41.456,97.198h-19.948v21.055h19.842 c-2.726,37.373-18.39,70.929-42.669,96.557l-13.254-13.258l-7.286,7.279l13.192,13.192c-25.438,23.53-58.428,38.688-95.101,41.362 v-17.749H261.663z"></path> <path class="st0" d="M81.396,11.401c-40.4,23.39-54.184,75.099-30.776,115.506l146.283-84.722 C173.527,1.786,121.811-12.007,81.396,11.401z"></path> <path class="st0" d="M430.593,11.401c-40.395-23.408-92.112-9.615-115.503,30.784l146.295,84.722 C484.793,86.5,470.991,34.791,430.593,11.401z"></path> <polygon class="st0" points="283.943,190.245 251.719,269.859 199.501,250.803 192.214,270.78 259.499,295.323 259.717,294.731 260.791,295.166 300.541,196.964 "></polygon> </g> </g></svg>
-        <span class="text-black dark:text-white text-[10px]">زمان :</span>
+                        <svg width="20px" height="20px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fill-rule="evenodd" stroke="#ffad49" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 4)"> <path d="m13.5 12.5v-6c0-1.1045695-.8954305-2-2-2h-9c-1.1045695 0-2 .8954305-2 2v6c0 1.1045695.8954305 2 2 2h9c1.1045695 0 2-.8954305 2-2z"></path> <path d="m15.5 12.5v-6.99481259c0-1.65685425-1.3431458-3-3-3-.0017276 0-.0034553 0-.0051829 0l-8.9948171.01554432"></path> <path d="m17.5 10.5v-5.99308345c0-2.209139-1.790861-4-4-4-.0023035 0-.004607 0-.0069106 0l-7.9930894.01381519"></path> </g> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">تعداد فصل :</span>
       </div>
-      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.runtime}دقیقه</span>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.number_of_seasons}</span>
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -219,17 +223,17 @@ window.addEventListener('DOMContentLoaded' , ()=>{
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.15" d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#ffad49"></path> <path d="M20 8.5V13.5M17.5 11H22.5M8 15H16C18.2091 15 20 16.7909 20 19V21H4V19C4 16.7909 5.79086 15 8 15ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffad49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        <span class="text-black dark:text-white text-[10px]">رده سنی:</span>
+                      <svg fill="#ffad49" height="20px" width="20px" version="1.1" id="Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12,0C5.38,0,0,5.38,0,12s5.38,12,12,12s12-5.38,12-12S18.62,0,12,0z M12,22C6.49,22,2,17.51,2,12S6.49,2,12,2 s10,4.49,10,10S17.51,22,12,22z M10.5,10h3v8h-3V10z M10.5,5h3v3h-3V5z"></path> </g></svg>
+        <span class="text-black dark:text-white text-[10px]">وضعیت:</span>
       </div>
-      <span class="text-black dark:text-white opacity-75 text-[10px]">ندارد</span>
+      <span class="text-black dark:text-white opacity-75 text-[10px]">${statusText}</span>
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffad49" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> </g></svg>
         <span class="text-black dark:text-white text-[10px]">سال تولید :</span>
       </div>
-      <span class="text-black dark:text-white opacity-75 text-[10px]">${list.release_date}</span>
+      <span class="text-black dark:text-white opacity-75 text-[10px]"> ${list.first_air_date.slice(0,4)} - ${list.last_air_date.slice(0 , 4)}</span>
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -239,7 +243,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
       <span class="text-black dark:text-white opacity-75 text-[10px]">${list.original_language}</span>
     </div>
     `
-    document.querySelector('#sm-desc').textContent=list.overview
+    document.querySelector('#sm-desc').textContent = list.overview ? list.overview : '' 
     getHeaderGenres(list.genres)
     getActors(list.credits.cast)
     getCrows(list.credits.crew)
@@ -282,6 +286,7 @@ document.querySelectorAll('#toggle-menu').forEach(elem=>{
   let mainList = cast.length<15 ?cast : cast.slice(0,15)
   
   const list = [...new Map(mainList.map(item => [item.id, item])).values()];
+
   list.forEach(act=>{
     if(true){
     document.querySelector('#act-swiper').innerHTML+=`
@@ -357,25 +362,28 @@ const crowSwiper = new Swiper (".crow-swiper" ,{
 })
 async function getRecommendationsMovie() {
   let response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}`
+    `https://api.themoviedb.org/3/tv/${movieId}/recommendations?api_key=${apiKey}`
   );
   let t = await response.json();
   let list = t.results;
+  
   const randomFive = list.slice(0, 6);
+  console.log(randomFive);
   
   randomFive.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
+        let elemMediaType= elem.media_type==='tv' ? 'سریال': 'فیلم'
       document.querySelector(".Recommendations-wrapper").innerHTML += `
-       <a href="movie.html?id=${elem.id}" class="swiper-slide w-auto rounded-lg overflow-hidden transition-all duration-600 group">
+       <a href="series.html?id=${elem.id}" class="swiper-slide w-auto rounded-lg overflow-hidden transition-all duration-600 group">
               <div class="relative ">
             <div class="w-full relative rounded-lg overflow-hidden">
               <img loading="lazy" class="object-cover w-full" src="https://image.tmdb.org/t/p/original/${elem.poster_path}_medium" alt=""  onerror="this.onerror=null; this.src='images/default_poster.jpg';">
               <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
-              <p dir="ltr" class="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.original_title}</p>
+              <p dir="ltr" class="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.name ? elem.name : elem.original_name}</p>
               </div>
             </div>
             <div class="absolute w-full h-full top-0 left-0 rounded-lg bg-black/60 px-3 py-3.5 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-all duration-600">
-              <span class="absolute top-0 left-0 p-3 text-amber-400 flex gap-1.5 items-start ">${elem.original_language}</span>
+              <span class="absolute top-0 left-0 p-3 text-amber-400 flex gap-1.5 items-start ">${elemMediaType}</span>
               <span class="absolute top-1/2 left-1/2 -translate-1/2">
                 <svg  width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 12L3 18.9671C3 21.2763 5.53435 22.736 7.59662 21.6145L10.7996 19.8727M3 8L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L14.0026 18.131" stroke="#cfcfcf" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
               </span>
@@ -400,8 +408,6 @@ async function getRecommendationsMovie() {
       `
        }
   });
-
-
   const RecommendationsSwiper = new Swiper (".recommendations-swiper" ,{
     direction: "horizontal",
     slidesPerView: 3,
@@ -413,7 +419,6 @@ async function getRecommendationsMovie() {
     pagination: {
       el: ".Recommendations-pagination",
       clickable: true
-      // dynamicBullets: true,
     },
     breakpoints:{
       640:{
