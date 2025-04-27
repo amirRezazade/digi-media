@@ -956,14 +956,17 @@
       <div class="hidden lg:flex justify-between items-center text-sm p-3 text-gray-500 rounded-2xl  dark:text-gray-200 bg-white dark:bg-gray-800 ">
         <div id="selection"class="theme text-sm p-2 rounded-full flex items-center gap-1">
           <span
+          data-type="all"
             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300 bg-orange-400 text-white"
             >همه</span
           >
           <span
+          data-type="movie"
             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
             >فیلم</span
           >
           <span
+          data-type="tv"
             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
             >سریال</span
           >
@@ -972,20 +975,30 @@
           <span>ژانر</span>
           <div class="theme rounded-full px-2 overflow-hidden">
             <select
-              id="genre"
-              class="theme border-0 outline-0 cursor-pointer p-2"
-            >
-              <option selected value="همه">همه</option>
-              <option value="اکشن">اکشن</option>
-              <option value="بیوگرافی">بیوگرافی</option>
-              <option value="تاریخی">تاریخی</option>
-              <option value="جنایی">جنایی</option>
-              <option value="درام">درام</option>
-              <option value="علمی تخیلی">علمی تخیلی</option>
-              <option value="فانتزی">فانتزی</option>
-              <option value="ماجراجویی">ماجراجویی</option>
-              <option value="هیجان انگیز">هیجان انگیز</option>
-            </select>
+            id="genre"
+            class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
+          >
+          <option selected value="">همه</option>
+          <!-- ژانرهای اصلی -->
+          <option value="28">اکشن</option>
+          <option value="99">بیوگرافی</option>
+          <option value="36">تاریخی</option>
+          <option value="80">جنایی</option>
+          <option value="18">درام</option>
+          <option value="878">علمی تخیلی</option>
+          <option value="14">فانتزی</option>
+          <option value="12">ماجراجویی</option>
+          <option value="53">هیجان انگیز</option>
+          <option value="35">کمدی</option>
+          <option value="27">ترسناک</option>
+          <option value="10749">عاشقانه</option>
+          <option value="16">انیمیشن</option>
+          <option value="10402">موزیکال</option>
+          <option value="9648">معمایی</option>
+          <option value="10751">خانوادگی</option>
+          <option value="10752">جنگی</option>
+          <option value="37">وسترن</option>
+          </select>
           </div>
         </div>
           <div class="flex items-center gap-2 xl:gap-4">
@@ -1027,65 +1040,49 @@
           <span>کشور</span>
           <div class="theme rounded-full px-2 overflow-hidden">
             <select
-              id="genre"
-              class="theme border-0 outline-0 cursor-pointer p-2"
-            >
-              <option selected value="همه">همه</option>
-              <option value="آلمان">آلمان</option>
-              <option value="آمریکا">آمریکا</option>
-              <option value="اسپانیا">اسپانیا</option>
-              <option value="استرالیا">استرالیا</option>
-              <option value="انگلستان">انگلستان</option>
-              <option value="ایرلند">ایرلند</option>
-              <option value="چین">چین</option>
-              <option value="فرانسه">فرانسه</option>
-              <option value="کانادا">کانادا</option>
-              <option value="کره جنوبی">کره جنوبی</option>
-              <option value="ایران">ایران</option>
-              <option value="مراکش">مراکش</option>
-            </select>
+            id="country"
+            class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2 "
+          >
+          <option selected value="">همه</option>
+          <option value="US">آمریکا</option>
+          <option value="IR">ایران</option>
+          <option value="TR">ترکیه</option>
+          <option value="KR">کره جنوبی</option>
+          <option value="GB">بریتانیا</option>
+          <option value="FR">فرانسه</option>
+          <option value="DE">آلمان</option>
+          <option value="IN">هند</option>
+          <option value="CN">چین</option>
+          <option value="JP">ژاپن</option>
+          </select>
           </div>
         </div>
         <div class="flex items-center gap-2">
           <span>رده سنی</span>
           <div class="theme rounded-full px-2 overflow-hidden">
             <select
-              id="genre"
-              class="theme border-0 outline-0 cursor-pointer p-2"
-            >
-              <option selected value="همه">همه</option>
-              <option value="R">R</option>
-              <option value="Not Rated">Not Rated</option>
-              <option value="PG-13">PG-13</option>
-              <option value="PG">PG</option>
-              <option value="TV-MA">TV-MA</option>
-              <option value="TV-14">TV-14</option>
-              <option value="TV-PG">TV-PG</option>
-              <option value="G">G</option>
-              <option value="Unrated">Unrated</option>
-              <option value="Passed">Passed</option>
-              <option value="Approved">Approved</option>
-              <option value="TV-G">TV-G</option>
-              <option value="TV-Y7">TV-Y7</option>
-              <option value="TV-Y">TV-Y</option>
-              <option value="GP">GP</option>
-              <option value="X">X</option>
-              <option value="M">M</option>
-              <option value="MA-13">MA-13</option>
-              <option value="AO">AO</option>
-            </select>
+            id="age"
+            class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
+          >
+            <option selected value="">همه</option>
+            <option data-value="G" value="TV-G">خانوادگی</option>
+            <option data-value="PG" value="TV-PG">نظارت والدین</option>
+            <option data-value="PG-13" value="TV-14">نوجوان 14+</option>
+            <option data-value="R" value="TV-MA">محدود 17+</option>
+            <option data-value="NC-17" value="TV-MA">فقط بزرگسالان</option>
+          </select>
           </div>
         </div>
         <div class="flex items-center gap-2 xl:gap-5   overflow-hidden  ">
-          <input type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0 " placeholder="از سال " oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+          <input id="fromYear" type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0 " placeholder="از سال " maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
           <span>تا</span>
-          <input type="text" class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0" placeholder="تا سال " oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+           <input id="toYear" type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0" placeholder="تا سال " maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
         </div>
         <div class="flex items-center gap-2 xl:gap-5 overflow-hidden ">
-          <input type="text" max="12" class="theme text-xs h-10 xl:text-sm w-22 xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0 " placeholder="از امتیاز" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+          <input id="fromPoint" type="text" class="theme text-xs h-10 xl:text-sm w-22 xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0 " placeholder="از امتیاز" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
           <span>تا</span>
-          <input type="text" class="theme w-22 text-xs h-10 xl:text-sm xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0" placeholder="تا امتیاز" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-        </div>
+          <input id="toPoint" type="text" class="theme w-22 text-xs h-10 xl:text-sm xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0" placeholder="تا امتیاز" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+       </div>
       </div>
     </section>
     <!-- finish search section  -->

@@ -881,150 +881,147 @@
  </section>
       <!-- finish Recommendations section  -->
            <!-- start search section  -->
-    <section id="more-filters"
-    class="w-[90vw] lg:my-5  mx-auto flex flex-col  gap-2  rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-gray-300 dark:shadow-transparent" style="height:72px;"
-  >
-    <a
-      href="#"
-      class="text-center text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl leading-18 transition-all duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden"
-      >جستجوی پیشرفته</a
-    >
-    <div class="hidden lg:flex justify-between items-center text-sm p-3 text-gray-500 rounded-2xl  dark:text-gray-200 bg-white dark:bg-gray-800 ">
-      <div id="selection"class="theme text-sm p-2 rounded-full flex items-center gap-1">
-        <span
-          class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300 bg-orange-400 text-white"
-          >همه</span
-        >
-        <span
-          class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
-          >فیلم</span
-        >
-        <span
-          class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
-          >سریال</span
-        >
-      </div>
-      <div class="flex items-center gap-1 xl:gap-2">
-        <span>ژانر</span>
-        <div class="theme rounded-full px-2 overflow-hidden">
-          <select
-            id="genre"
-            class="theme border-0 outline-0 cursor-pointer p-2"
-          >
-            <option selected value="همه">همه</option>
-            <option value="اکشن">اکشن</option>
-            <option value="بیوگرافی">بیوگرافی</option>
-            <option value="تاریخی">تاریخی</option>
-            <option value="جنایی">جنایی</option>
-            <option value="درام">درام</option>
-            <option value="علمی تخیلی">علمی تخیلی</option>
-            <option value="فانتزی">فانتزی</option>
-            <option value="ماجراجویی">ماجراجویی</option>
-            <option value="هیجان انگیز">هیجان انگیز</option>
-          </select>
+           <section id="more-filters"
+           class="w-[90vw] lg:my-5  mx-auto flex flex-col  gap-2  rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-gray-300 dark:shadow-transparent" style="height:72px;"
+         >
+         <a
+         href="search.html"
+         class="text-center text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl leading-18 transition-all duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden"
+         >جستجوی پیشرفته</a
+       >
+       <div class="hidden lg:flex justify-between items-center text-sm p-3 text-gray-500 rounded-2xl  dark:text-gray-200 bg-white dark:bg-gray-800 ">
+         <div id="selection"class="theme text-sm p-2 rounded-full flex items-center gap-1">
+           <span
+           data-type="all"
+             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300 bg-orange-400 text-white"
+             >همه</span
+           >
+           <span
+           data-type="movie"
+             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
+             >فیلم</span
+           >
+           <span
+           data-type="tv"
+             class="py-1.5 px-2 xl:px-4 rounded-xl cursor-pointer transition-all duration-300"
+             >سریال</span
+           >
+         </div>
+         <div class="flex items-center gap-1 xl:gap-2">
+           <span>ژانر</span>
+           <div class="theme rounded-full px-2 overflow-hidden">
+             <select
+             id="genre"
+             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
+           >
+           <option selected value="">همه</option>
+           <!-- ژانرهای اصلی -->
+           <option value="28">اکشن</option>
+           <option value="99">بیوگرافی</option>
+           <option value="36">تاریخی</option>
+           <option value="80">جنایی</option>
+           <option value="18">درام</option>
+           <option value="878">علمی تخیلی</option>
+           <option value="14">فانتزی</option>
+           <option value="12">ماجراجویی</option>
+           <option value="53">هیجان انگیز</option>
+           <option value="35">کمدی</option>
+           <option value="27">ترسناک</option>
+           <option value="10749">عاشقانه</option>
+           <option value="16">انیمیشن</option>
+           <option value="10402">موزیکال</option>
+           <option value="9648">معمایی</option>
+           <option value="10751">خانوادگی</option>
+           <option value="10752">جنگی</option>
+           <option value="37">وسترن</option>
+           </select>
+           </div>
+         </div>
+           <div class="flex items-center gap-2 xl:gap-4">
+             <div>
+               <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
+                 <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
+                 <input type="checkbox" value="" class="sr-only peer"  />
+                 <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
+               </div>
+               </label>
+             </div>
+             <div>
+               <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
+                 <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
+                 <input type="checkbox" value="" class="sr-only peer"  />
+                 <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
+               </div>
+               </label>
+             </div>
+             <div>
+               <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
+                 <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">پخش آنلاین</span>
+                 <input type="checkbox" value="" class="sr-only peer"  />
+                 <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
+               </div>
+               </label>
+             </div>
+           </div>
+           <div id="more-filters-toggle" class="flex items-center gap-2 theme self-stretch px-3 xl:px-5 text-xs xl:text-sm cursor-pointer rounded-full" >
+             <span>فیلتر های بیشتر</span>
+             <span class="flex justify-center items-center rounded-full w-8 h-8 bg-white dark:bg-gray-800">
+               <svg class="stroke-[#6a7282] dark:stroke-[#e5e7eb]" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7H20"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7 12L17 12"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 17H13"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+             </span>
+           </div>
+           <button  class="bg-orange-400 text-white self-stretch px-5 xl:px-8 text-xs xl:text-sm cursor-pointer rounded-full ">جستجو</button>
+       </div>
+       <div  class="hidden lg:flex justify-between xl:justify-around items-center text-sm p-3 rounded-2xl bg-white dark:bg-gray-800 shadow-lg shadow-gray-300 dark:shadow-transparent text-gray-500 dark:text-gray-200  top-40 w-1/1 h-1/1" >
+         <div class="flex items-center gap-2">
+           <span>کشور</span>
+           <div class="theme rounded-full px-2 overflow-hidden">
+             <select
+             id="country"
+             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2 "
+           >
+           <option selected value="">همه</option>
+           <option value="US">آمریکا</option>
+           <option value="IR">ایران</option>
+           <option value="TR">ترکیه</option>
+           <option value="KR">کره جنوبی</option>
+           <option value="GB">بریتانیا</option>
+           <option value="FR">فرانسه</option>
+           <option value="DE">آلمان</option>
+           <option value="IN">هند</option>
+           <option value="CN">چین</option>
+           <option value="JP">ژاپن</option>
+           </select>
+           </div>
+         </div>
+         <div class="flex items-center gap-2">
+           <span>رده سنی</span>
+           <div class="theme rounded-full px-2 overflow-hidden">
+             <select
+             id="age"
+             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
+           >
+             <option selected value="">همه</option>
+             <option data-value="G" value="TV-G">خانوادگی</option>
+             <option data-value="PG" value="TV-PG">نظارت والدین</option>
+             <option data-value="PG-13" value="TV-14">نوجوان 14+</option>
+             <option data-value="R" value="TV-MA">محدود 17+</option>
+             <option data-value="NC-17" value="TV-MA">فقط بزرگسالان</option>
+           </select>
+           </div>
+         </div>
+         <div class="flex items-center gap-2 xl:gap-5   overflow-hidden  ">
+           <input id="fromYear" type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0 " placeholder="از سال " maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+           <span>تا</span>
+            <input id="toYear" type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0" placeholder="تا سال " maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+         </div>
+         <div class="flex items-center gap-2 xl:gap-5 overflow-hidden ">
+           <input id="fromPoint" type="text" class="theme text-xs h-10 xl:text-sm w-22 xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0 " placeholder="از امتیاز" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+           <span>تا</span>
+           <input id="toPoint" type="text" class="theme w-22 text-xs h-10 xl:text-sm xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0" placeholder="تا امتیاز" maxlength="1" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
         </div>
-      </div>
-        <div class="flex items-center gap-2 xl:gap-4">
-          <div>
-            <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-              <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
-              <input type="checkbox" value="" class="sr-only peer"  />
-              <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
-            </div>
-            </label>
-          </div>
-          <div>
-            <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-              <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
-              <input type="checkbox" value="" class="sr-only peer"  />
-              <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
-            </div>
-            </label>
-          </div>
-          <div>
-            <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-              <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">پخش آنلاین</span>
-              <input type="checkbox" value="" class="sr-only peer"  />
-              <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
-            </div>
-            </label>
-          </div>
-        </div>
-        <div id="more-filters-toggle" class="flex items-center gap-2 theme self-stretch px-3 xl:px-5 text-xs xl:text-sm cursor-pointer rounded-full" >
-          <span>فیلتر های بیشتر</span>
-          <span class="flex justify-center items-center rounded-full w-8 h-8 bg-white dark:bg-gray-800">
-            <svg class="stroke-[#6a7282] dark:stroke-[#e5e7eb]" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7H20"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7 12L17 12"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 17H13"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-          </span>
-        </div>
-        <button  class="bg-orange-400 text-white self-stretch px-5 xl:px-8 text-xs xl:text-sm cursor-pointer rounded-full ">جستجو</button>
-    </div>
-    <div  class="hidden lg:flex justify-between xl:justify-around items-center text-sm p-3 rounded-2xl bg-white dark:bg-gray-800 shadow-lg shadow-gray-300 dark:shadow-transparent text-gray-500 dark:text-gray-200  top-40 w-1/1 h-1/1" >
-      <div class="flex items-center gap-2">
-        <span>کشور</span>
-        <div class="theme rounded-full px-2 overflow-hidden">
-          <select
-            id="genre"
-            class="theme border-0 outline-0 cursor-pointer p-2"
-          >
-            <option selected value="همه">همه</option>
-            <option value="آلمان">آلمان</option>
-            <option value="آمریکا">آمریکا</option>
-            <option value="اسپانیا">اسپانیا</option>
-            <option value="استرالیا">استرالیا</option>
-            <option value="انگلستان">انگلستان</option>
-            <option value="ایرلند">ایرلند</option>
-            <option value="چین">چین</option>
-            <option value="فرانسه">فرانسه</option>
-            <option value="کانادا">کانادا</option>
-            <option value="کره جنوبی">کره جنوبی</option>
-            <option value="ایران">ایران</option>
-            <option value="مراکش">مراکش</option>
-          </select>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <span>رده سنی</span>
-        <div class="theme rounded-full px-2 overflow-hidden">
-          <select
-            id="genre"
-            class="theme border-0 outline-0 cursor-pointer p-2"
-          >
-            <option selected value="همه">همه</option>
-            <option value="R">R</option>
-            <option value="Not Rated">Not Rated</option>
-            <option value="PG-13">PG-13</option>
-            <option value="PG">PG</option>
-            <option value="TV-MA">TV-MA</option>
-            <option value="TV-14">TV-14</option>
-            <option value="TV-PG">TV-PG</option>
-            <option value="G">G</option>
-            <option value="Unrated">Unrated</option>
-            <option value="Passed">Passed</option>
-            <option value="Approved">Approved</option>
-            <option value="TV-G">TV-G</option>
-            <option value="TV-Y7">TV-Y7</option>
-            <option value="TV-Y">TV-Y</option>
-            <option value="GP">GP</option>
-            <option value="X">X</option>
-            <option value="M">M</option>
-            <option value="MA-13">MA-13</option>
-            <option value="AO">AO</option>
-          </select>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 xl:gap-5   overflow-hidden  ">
-        <input type="text"  class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0 " placeholder="از سال " oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-        <span>تا</span>
-        <input type="text" class="theme text-xs h-10 xl:text-sm w-25 rounded-full placeholder-gray-500 dark:placeholder-gray-200 px-5 self-stretch border-0 outline-0" placeholder="تا سال " oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-      </div>
-      <div class="flex items-center gap-2 xl:gap-5 overflow-hidden ">
-        <input type="text" max="12" class="theme text-xs h-10 xl:text-sm w-22 xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0 " placeholder="از امتیاز" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-        <span>تا</span>
-        <input type="text" class="theme w-22 text-xs h-10 xl:text-sm xl:w-30 rounded-full px-4 placeholder-gray-500 dark:placeholder-gray-200 self-stretch border-0 outline-0" placeholder="تا امتیاز" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-      </div>
-    </div>
-  </section>
-  <!-- finish search section  -->
+       </div>
+              </section>
+         <!-- finish search section  -->
 
     <footer class=" mt-5 lg:mt-10 pt-7 pb-17 lg:pb-4 px-3 md:px-6 lg:px-8 xl:px-12 xl:py-8 text-black dark:text-gray-200 bg-[url(../images/footer-bg.png)] bg-cover flex flex-col gap-5 md:flex-row md:justify-between">
         <div class="flex flex-col items-center gap-6 md:gap-4 md:w-auto md:order-2 lg:px-10">

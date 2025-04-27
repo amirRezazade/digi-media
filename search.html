@@ -850,18 +850,16 @@
             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2 "
           >
           <option selected value="">همه</option>
-          <option value="DE">آلمان</option>
           <option value="US">آمریکا</option>
-          <option value="ES">اسپانیا</option>
-          <option value="AU">استرالیا</option>
-          <option value="GB">انگلستان</option>
-          <option value="IE">ایرلند</option>
-          <option value="CN">چین</option>
-          <option value="FR">فرانسه</option>
-          <option value="CA">کانادا</option>
-          <option value="KR">کره جنوبی</option>
           <option value="IR">ایران</option>
-          <option value="MA">مراکش</option>
+          <option value="TR">ترکیه</option>
+          <option value="KR">کره جنوبی</option>
+          <option value="GB">بریتانیا</option>
+          <option value="FR">فرانسه</option>
+          <option value="DE">آلمان</option>
+          <option value="IN">هند</option>
+          <option value="CN">چین</option>
+          <option value="JP">ژاپن</option>
           </select>
         </div>
       </div>
@@ -873,25 +871,11 @@
             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
           >
             <option selected value="">همه</option>
-            <option value="R">R</option>
-            <option value="Not Rated">Not Rated</option>
-            <option value="PG-13">PG-13</option>
-            <option value="PG">PG</option>
-            <option value="TV-MA">TV-MA</option>
-            <option value="TV-14">TV-14</option>
-            <option value="TV-PG">TV-PG</option>
-            <option value="G">G</option>
-            <option value="Unrated">Unrated</option>
-            <option value="Passed">Passed</option>
-            <option value="Approved">Approved</option>
-            <option value="TV-G">TV-G</option>
-            <option value="TV-Y7">TV-Y7</option>
-            <option value="TV-Y">TV-Y</option>
-            <option value="GP">GP</option>
-            <option value="X">X</option>
-            <option value="M">M</option>
-            <option value="MA-13">MA-13</option>
-            <option value="AO">AO</option>
+            <option data-value="G" value="TV-G">خانوادگی</option>
+            <option data-value="PG" value="TV-PG">نظارت والدین</option>
+            <option data-value="PG-13" value="TV-14">نوجوان 14+</option>
+            <option data-value="R" value="TV-MA">محدود 17+</option>
+            <option data-value="NC-17" value="TV-MA">فقط بزرگسالان</option>
           </select>
         </div>
       </div>
@@ -944,9 +928,11 @@
    <!-- finish search section  -->
 
    <!-- start items section  -->
-   <section id="items" class=" my-10 md:my-15 xl:my-18 px-3 md:px-6 lg:px-8 xl:px-12 grid gap-4 lg:gap-5 gap-y-6 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+   <section class=" my-10 md:my-15 xl:my-18 px-3 md:px-6 lg:px-8 xl:px-12 ">
+    <h2 id="not-found-text" class=" hidden text-center text-xl text-black dark:text-white">پاسخی دریافت نشد</h2>
 
-   </section>  
+     <div id="items" class="grid gap-4 lg:gap-5 gap-y-6 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7"></div>
+  </section>  
 
    <!-- finish items section  -->
 
