@@ -2,10 +2,26 @@ import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme,
 
 let headerPlayBtn = document.querySelector('#movie-play-btn');
 headerPlayBtn.addEventListener('click' ,  ()=>{
-  
+
  headerPlayBtn.dataset.type =='movie'? window.location.href = `movie.html?id=${headerPlayBtn.dataset.id}`:  window.location.href = `series.html?id=${headerPlayBtn.dataset.id}`
-  
-  
+})
+
+document.querySelector('#search').addEventListener('click' ,  ()=>{  
+  let mediaType ;
+  searchBoxSelection.forEach(elem=>{
+     if(elem.classList.contains("bg-orange-400"))  mediaType = elem.dataset.type
+ })
+ let country =document.querySelector('#country').value
+ let genre =document.querySelector('#genre').value
+ let fromYear =Number(document.querySelector('#fromYear').value)
+ let toYear =Number(document.querySelector('#toYear').value)
+ let fromPoint =document.querySelector('#fromPoint').value
+ let toPoint =document.querySelector('#toPoint').value
+ let age =document.querySelector('#age').value
+ let  double=document.querySelector('#double').checked
+ let  Subtitle=document.querySelector('#Subtitle').checked
+ let  Online=document.querySelector('#Online').checked
+ window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&Online='+Online}`
 })
 
 document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
@@ -492,9 +508,23 @@ async function getActionMovie() {
         </a>
         `;
       getGenres(elem);
+      test()
     }
   });
   toggleMovieSwiper();
+}
+function test(){
+document.querySelectorAll('#gen').forEach(elem=>{
+  elem.addEventListener('click' , (event)=>{
+    event.stopPropagation()
+    event.stopImmediatePropagation();
+    window.location.href=`search.html?type=all&country=&age=&genre=${elem.dataset.id}&double=false&Subtitle=false&Online=false`
+    console.log(elem.dataset.id);
+    
+  })
+  
+})
+
 }
 async function getTv() {
   let response = await fetch(

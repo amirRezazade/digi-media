@@ -820,7 +820,7 @@
         <div>
           <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
             <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
-            <input type="checkbox" value="" class="sr-only peer"  />
+            <input id="double" type="checkbox" value=""  class="sr-only peer"  />
             <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
           </div>
           </label>
@@ -828,7 +828,7 @@
         <div>
           <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
             <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
-            <input type="checkbox" value="" class="sr-only peer"  />
+            <input id="Subtitle" type="checkbox" value="" class="sr-only peer"  />
             <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
           </div>
           </label>
@@ -836,7 +836,7 @@
         <div>
           <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
             <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">پخش آنلاین</span>
-            <input type="checkbox" value="" class="sr-only peer"  />
+            <input id="Online" type="checkbox" value="" class="sr-only peer"  />
             <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
           </div>
           </label>
@@ -870,12 +870,12 @@
             id="age"
             class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2"
           >
-            <option selected value="">همه</option>
-            <option data-value="G" value="TV-G">خانوادگی</option>
-            <option data-value="PG" value="TV-PG">نظارت والدین</option>
-            <option data-value="PG-13" value="TV-14">نوجوان 14+</option>
-            <option data-value="R" value="TV-MA">محدود 17+</option>
-            <option data-value="NC-17" value="TV-MA">فقط بزرگسالان</option>
+          <option selected value="">همه</option>
+          <option data-value="G" value="TV-Y">کودکان</option>
+          <option data-value="G" value="TV-G">خانوادگی</option>
+          <option data-value="PG" value="TV-PG">نظارت والدین</option>
+          <option data-value="PG-13" value="TV-14">نوجوان 14+</option>
+          <option data-value="R" value="TV-MA">بزرگسالان</option>
           </select>
         </div>
       </div>

@@ -70,10 +70,11 @@ function manageMenu() {
   function getGenres(el) {
     let slide = document.getElementById(el.id);
     el.genre_ids.forEach((e) => {
-      let span = `<span class="px-2.5 py-1 cursor-auto rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-all duration-300">${genres[e]}</span>`;
+      let span = `<span id="gen" data-id="${e}" class=" px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-all duration-300">${genres[e]}</span>`;
       slide.querySelector(".genres").innerHTML += span;
     });
   }
+
   function navControl(){
     if(window.scrollY> 600){
       nav.style.transform='translateY(-50%)'
