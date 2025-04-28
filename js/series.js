@@ -44,9 +44,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
 })
 
  fetch(`https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
- .then(response=> response.json()).then(list=> {
-    console.log(list);
-    
+ .then(response=> response.json()).then(list=> {    
   if(list.status_code ==34){
     document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
         <h1>اطلاعات بیشتری از این سریال وجود ندارد</h1>
@@ -382,10 +380,7 @@ async function getRecommendationsMovie() {
   );
   let t = await response.json();
   let list = t.results;
-  
-  const randomFive = list.slice(0, 6);
-  console.log(randomFive);
-  
+  const randomFive = list.slice(0, 6);  
   randomFive.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
         let elemMediaType= elem.media_type==='tv' ? 'سریال': 'فیلم'
@@ -455,9 +450,8 @@ async function getRecommendationsMovie() {
 function getHeaderGenres(list){
   let genresContainer = document.querySelector('#genres')
   list.forEach(gen=>{    
-    genresContainer.innerHTML+= `<a   href="search.html?id=${gen.id}" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
+    genresContainer.innerHTML+= `<a   href="search.html?type=all&country=&age=&genre=${gen.id}&double=false&Subtitle=false&Online=false" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
   })
 
 }
 
-// https://api.themoviedb.org/3/movie/1045938?api_key=cf30b054d9d7ec861b2a498d97eccdad&query&&language=fa&append_to_response=credits,videos

@@ -450,7 +450,7 @@ async function getRecommendationsMovie() {
 function getHeaderGenres(list){
   let genresContainer = document.querySelector('#genres')
   list.forEach(gen=>{    
-    genresContainer.innerHTML+= `<a   href="search.html?id=${gen.id}" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
+    genresContainer.innerHTML+= `<a   href="search.html?type=all&country=&age=&genre=${gen.id}&double=false&Subtitle=false&Online=false" class="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300" >${genres[gen.id]}</a>`
   })
 
 }

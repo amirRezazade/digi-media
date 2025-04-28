@@ -70,10 +70,22 @@ function manageMenu() {
   function getGenres(el) {
     let slide = document.getElementById(el.id);
     el.genre_ids.forEach((e) => {
-      let span = `<span id="gen" data-id="${e}" class=" px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-all duration-300">${genres[e]}</span>`;
-      slide.querySelector(".genres").innerHTML += span;
+      let btn = `<button id="gen" data-id="${e}" class=" pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-all duration-300">${genres[e]}</button>`;
+      slide.querySelector(".genres").innerHTML += btn;
     });
+    genreHref()
   }
+  function genreHref(){
+    document.querySelectorAll('#gen').forEach(elem=>{
+      elem.addEventListener('click' , (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href=`search.html?type=all&country=&age=&genre=${elem.dataset.id}&double=false&Subtitle=false&Online=false`    
+      })
+      
+    })
+    
+    }
 
   function navControl(){
     if(window.scrollY> 600){
