@@ -1,45 +1,8 @@
 import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
-document.querySelector('#search').addEventListener('click' ,  ()=>{  
-  let mediaType ;
-  searchBoxSelection.forEach(elem=>{
-     if(elem.classList.contains("bg-orange-400"))  mediaType = elem.dataset.type
- })
- let country =document.querySelector('#country').value
- let genre =document.querySelector('#genre').value
- let fromYear =Number(document.querySelector('#fromYear').value)
- let toYear =Number(document.querySelector('#toYear').value)
- let fromPoint =document.querySelector('#fromPoint').value
- let toPoint =document.querySelector('#toPoint').value
- let age =document.querySelector('#age').value
- let  double=document.querySelector('#double').checked
- let  Subtitle=document.querySelector('#Subtitle').checked
- let  Online=document.querySelector('#Online').checked
- window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&Online='+Online}`
-})
-document.querySelector('#more-filters-toggle').addEventListener('click' ,  moreFiltersToggle)
-const searchBoxSelection = document.querySelectorAll("#selection span");
-searchBoxSelection.forEach((elem) => {
-  elem.addEventListener("click", (e) => {
-    searchBoxSelection.forEach((el) => {
-      el.classList.remove("bg-orange-400", "text-white");
-    });
-    e.target.classList.add("bg-orange-400", "text-white");
-  });
-});
-menu.addEventListener("click", (e) => {
-  if (e.target.id == "nav-menu") {
-    manageMenu();
-  }
-});
-window.addEventListener('scroll' ,()=>{
-  navControl()
 
-})
 window.addEventListener('DOMContentLoaded' , ()=>{
-  let theme = window.localStorage.getItem("theme");
-  theme ? switchTheme(theme) : switchTheme("dark");
   getRecommendationsMovie();
 })
 
@@ -266,16 +229,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
 
  })
 
-document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
-document.querySelectorAll('#manage-menu').forEach(elem=>{
-  elem.addEventListener('click' , manageMenu)
-})
-document.querySelectorAll('#toggle-menu').forEach(elem=>{
-  elem.addEventListener('click' ,e=>{
-    toggleMenu(e.target)
-    
-  })
-})
+
  function getCrows(crow){
   let mainList = crow.length<15 ?crow : crow.slice(0,15)  
   const list = [...new Map(mainList.map(item => [item.id, item])).values()];

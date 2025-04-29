@@ -1,44 +1,17 @@
 import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 const urlParams = new URLSearchParams(window.location.search);
-document.querySelector('#search').addEventListener('click' ,  search)
+// document.querySelector('#search').addEventListener('click' ,  search)
 const searchBoxSelection = document.querySelectorAll("#selection span");
 let movieTotalPage=0
 let tvTotalPage=0
 let page = 1
 
-searchBoxSelection.forEach((elem) => {
-  elem.addEventListener("click", (e) => {
-    searchBoxSelection.forEach((el) => {
-      el.classList.remove("bg-orange-400", "text-white");
-    });
-    e.target.classList.add("bg-orange-400", "text-white");
-  });
-});
-menu.addEventListener("click", (e) => {
-  if (e.target.id == "nav-menu") {
-    manageMenu();
-  }
-});
-window.addEventListener('scroll' ,()=>{
-  navControl()
-
-})
 window.addEventListener('DOMContentLoaded' , ()=>{
-  let theme = window.localStorage.getItem("theme");
-  theme ? switchTheme(theme) : switchTheme("dark");
   setValues()
   
 })
-document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
-document.querySelectorAll('#manage-menu').forEach(elem=>{
-  elem.addEventListener('click' , manageMenu)
-})
-document.querySelectorAll('#toggle-menu').forEach(elem=>{
-  elem.addEventListener('click' ,e=>{
-    toggleMenu(e.target)
-    
-  })
-})
+
+
 
 function setValues(){
   if(urlParams.get('type')){
@@ -55,30 +28,30 @@ function setValues(){
     let fromPoint =document.querySelector('#fromPoint').value=urlParams.get('fromPoint') 
     let toPoint =document.querySelector('#toPoint').value=urlParams.get('toPoint') 
     let age =document.querySelector('#age').value=urlParams.get('age')
-    page = urlParams.get('page')
+    page = urlParams.get('page') ? urlParams.get('page') : 1 
+    let sort = document.querySelector('#sort').value= urlParams.get('sort') ? urlParams.get('sort') : ''
   document.querySelector('#double').checked = urlParams.get('double')=='false' ? false : true
   document.querySelector('#Subtitle').checked = urlParams.get('Subtitle')=='false' ? false : true
-  document.querySelector('#Online').checked = urlParams.get('Online')=='false' ? false : true
 }
 callFuncs()
 }
-function search(){
-  let mediaType ;
-  searchBoxSelection.forEach(elem=>{
-     if(elem.classList.contains("bg-orange-400"))  mediaType = elem.dataset.type
- })
- let country =document.querySelector('#country').value
- let genre =document.querySelector('#genre').value
- let fromYear =Number(document.querySelector('#fromYear').value)
- let toYear =Number(document.querySelector('#toYear').value)
- let fromPoint =document.querySelector('#fromPoint').value
- let toPoint =document.querySelector('#toPoint').value
- let age =document.querySelector('#age').value
- let  double=document.querySelector('#double').checked
- let  Subtitle=document.querySelector('#Subtitle').checked
- let  Online=document.querySelector('#Online').checked
-    window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&Online='+Online}${'&page=1'}`
-}
+// function search(){
+//   let mediaType ;
+//   searchBoxSelection.forEach(elem=>{
+//      if(elem.classList.contains("bg-orange-400"))  mediaType = elem.dataset.type
+//  })
+//  let country =document.querySelector('#country').value
+//  let genre =document.querySelector('#genre').value
+//  let fromYear =Number(document.querySelector('#fromYear').value)
+//  let toYear =Number(document.querySelector('#toYear').value)
+//  let fromPoint =document.querySelector('#fromPoint').value
+//  let toPoint =document.querySelector('#toPoint').value
+//  let age =document.querySelector('#age').value
+//  let  double=document.querySelector('#double').checked
+//  let  Subtitle=document.querySelector('#Subtitle').checked
+//  let sort = document.querySelector('#sort').value
+//  window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&page=1'}${sort=='' ?'' : '&sort='+ sort}`
+// }
 function callFuncs(){
   document.querySelector('#items').innerHTML=''
   let mediaType ;
@@ -92,36 +65,38 @@ function callFuncs(){
   let fromPoint =document.querySelector('#fromPoint').value
   let toPoint =document.querySelector('#toPoint').value
   let age =document.querySelector('#age') 
+  let sort = document.querySelector('#sort').value
 
-      if(mediaType=='movie') movie(country , genre , fromYear , toYear , fromPoint , toPoint , age )
-      if(mediaType=='tv') tv(country , genre , fromYear , toYear , fromPoint , toPoint , age )
-      if(mediaType=='all') all(country , genre , fromYear , toYear , fromPoint , toPoint , age )
+      if(mediaType=='movie') movie(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort  )
+      if(mediaType=='tv') tv(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort )
+      if(mediaType=='all') all(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort )
       
 }
-async function movie(country , genre , fromYear , toYear , fromPoint , toPoint , age ){
- let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&primary_release_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&primary_release_date.lte='+toYear+'-01-01'}${age.options[age.selectedIndex].value=='' ? '': '&certification_country=US&certification='+age.options[age.selectedIndex].dataset.value }`)
+async function movie(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort ){
+ let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&primary_release_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&primary_release_date.lte='+toYear+'-01-01'}${age.options[age.selectedIndex].value=='' ? '': '&certification_country=US&certification='+age.options[age.selectedIndex].dataset.value }${'&'+ sort}`)
  let res = await response.json();
  movieTotalPage=res.total_pages
+ console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&primary_release_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&primary_release_date.lte='+toYear+'-01-01'}${age.options[age.selectedIndex].value=='' ? '': '&certification_country=US&certification='+age.options[age.selectedIndex].dataset.value }${sort=''? '' :'&'+sort}`);
  let list = res.results;
- 
+
  addItems(list) 
 }
-async function tv(country , genre , fromYear , toYear , fromPoint , toPoint , age ){
+async function tv(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort ){
 
-  let response = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}`)
+  let response = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}${'&'+ sort}`)
   let res = await response.json();
   tvTotalPage=res.total_pages
-  console.log(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}`);
+  console.log(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}${'&'+ sort}`);
 
   let list = res.results;
   addItems(list)
 }
-async function all(country , genre , fromYear , toYear , fromPoint , toPoint , age ){
-  let movieResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&primary_release_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&primary_release_date.lte='+toYear+'-01-01'}${age.options[age.selectedIndex].value=='' ? '': '&certification_country=US&certification='+age.options[age.selectedIndex].dataset.value }`)
+async function all(country , genre , fromYear , toYear , fromPoint , toPoint , age , sort ){
+  let movieResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&primary_release_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&primary_release_date.lte='+toYear+'-01-01'}${age.options[age.selectedIndex].value=='' ? '': '&certification_country=US&certification='+age.options[age.selectedIndex].dataset.value }${'&'+ sort}`)
   let movieRes = await movieResponse.json();
   movieTotalPage=movieRes.total_pages
  let movieList = movieRes.results;
- let tvResponse = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}`)
+ let tvResponse = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${'&page=' + page}${genre == '' ? '' : '&with_genres='+genre}${country== ''? '' : '&with_origin_country='+country}${fromPoint==0 ? '' : '&vote_average.gte='+fromPoint}${toPoint==0 ?'' : '&vote_average.lte='+toPoint}${fromYear==0 ? '' : '&first_air_date.gte='+fromYear+'-01-01'}${toYear==0 ? '' : '&first_air_date.lte='+toYear+'-01-01'}${age.value=='' ? '' : '&certification_country=US&certification='+age.value}${'&'+ sort}`)
  let tvRes = await tvResponse.json();
  tvTotalPage=tvRes.total_pages
  let tvList = tvRes.results;
@@ -169,8 +144,8 @@ function addItems(list){
                 </span>
                    <div class="flex text-gray-300 flex-col items-start gap-3">
                      <div class="w-full flex justify-between items-center mt-2 lg:mt-1">
-                    <span class="text-amber-400 flex gap-1.5 items-start lg:gap-0.5">${elem.vote_count}
-                      <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <span class="text-amber-400 flex gap-0.5 items-start lg:gap-0.5 text-xs xl:text-sm">${elem.popularity.toFixed(3)}
+                      <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -209,19 +184,27 @@ function paginationControl(){
     document.querySelector('#prev').disabled = true
     document.querySelector('#one').style.backgroundColor='#ff8904'
     document.querySelector('#one').style.color='#fff'
+    // document.querySelector('#count').textContent= Math.floor((movieTotalPage + tvTotalPage)/2)
+  }
+  if((movieTotalPage + tvTotalPage)>500){
+    document.querySelector('#end').textContent= 500
+    document.querySelector('#count').textContent= 250
+  }
+  else{
+    document.querySelector('#end').textContent= movieTotalPage + tvTotalPage
     document.querySelector('#count').textContent= Math.floor((movieTotalPage + tvTotalPage)/2)
 
   }
-  if(page!=1 && page!=(movieTotalPage + tvTotalPage)){
+  if(page!=1 && page!= Number(document.querySelector('#end').textContent)){
     document.querySelector('#count').textContent=page
     document.querySelector('#count').style.backgroundColor='#ff8904'
     document.querySelector('#count').style.color='#fff'
   }
-  if(page==(movieTotalPage + tvTotalPage)) {
+  if(Number(document.querySelector('#end').textContent)==page) {
     document.querySelector('#next').disabled  = true
     document.querySelector('#end').style.backgroundColor='#ff8904'
     document.querySelector('#end').style.color='#fff'
-    document.querySelector('#count').textContent= Math.floor((movieTotalPage + tvTotalPage)/2)
+    document.querySelector('#count').textContent= Math.floor(Number(document.querySelector('#end').textContent)/2)
 
   }
 }
@@ -240,8 +223,9 @@ function changePage(page){
  let age =document.querySelector('#age').value
  let  double=document.querySelector('#double').checked
  let  Subtitle=document.querySelector('#Subtitle').checked
- let  Online=document.querySelector('#Online').checked
-  window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&Online='+Online}${'&page='+page}`
+ let sort = document.querySelector('#sort').value
+
+  window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&page='+page}${sort=='' ?'' : '&sort='+ sort}`
 
 }
 document.querySelector('#prev').addEventListener('click' , ()=>{

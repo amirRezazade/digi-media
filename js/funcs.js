@@ -86,13 +86,16 @@ function manageMenu() {
     })
     
     }
-
+  
   function navControl(){
-    if(window.scrollY> 600){
-      nav.style.transform='translateY(-50%)'
-    }
-    else{
-      nav.style.transform=''
+    if(window.innerWidth>1024){
+
+      if(window.scrollY> 600){
+        nav.style.transform='translateY(-50%)'
+      }
+      else{
+        nav.style.transform=''
+      }
     }
   }
   function toggleMenu(el) {

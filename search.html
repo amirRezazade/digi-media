@@ -4,7 +4,6 @@
   <title>digi media</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="node_modules/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="src/output.css" />
 </head>
 <body id="top" class=" font-[iran-sans] overflow-x-hidden theme">
@@ -833,14 +832,7 @@
           </div>
           </label>
         </div>
-        <div>
-          <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-            <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">پخش آنلاین</span>
-            <input id="Online" type="checkbox" value="" class="sr-only peer"  />
-            <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400">
-          </div>
-          </label>
-        </div>
+        
       </div>
       <div class=" flex items-center gap-2">
         <span>کشور</span>
@@ -860,6 +852,21 @@
           <option value="IN">هند</option>
           <option value="CN">چین</option>
           <option value="JP">ژاپن</option>
+          </select>
+        </div>
+      </div>
+      <div class=" flex items-center gap-2">
+        <span>مرتب سازی</span>
+        <div class="theme rounded-full px-1 lg:px-2 overflow-hidden">
+          <select
+            id="sort"
+            class="text-xs sm:text-sm theme border-0 outline-0 cursor-pointer p-1 lg:p-2 "
+          >
+          <option selected value="">همه</option>
+          <option value="sort_by=vote_average.desc">امتیاز</option>
+          <option value="sort_by=popularity.desc">محبوبیت</option>
+          <option value="sort_by=release_date.desc">جدبدترین</option>
+          <option value="sort_by=release_date.asc">قدیمی ترین</option>
           </select>
         </div>
       </div>
@@ -922,7 +929,7 @@
       <button id="search" class="w-1/1 sm:w-1/2 lg:w-auto lg:grow lg:order-10 mx-auto py-3 bg-orange-400 text-white self-stretch px-5 xl:px-8 text-xs xl:text-sm cursor-pointer rounded-full ">جستجو</button>
 
     </div>
-    
+    <span id="more-filters-toggle" class="hidden"></span>
 
   </section>
    <!-- finish search section  -->
@@ -932,9 +939,9 @@
     <h2 id="not-found-text" class=" hidden text-center text-xl text-black dark:text-white">پاسخی دریافت نشد</h2>
 
      <div id="items" class="grid gap-4 lg:gap-5 gap-y-6 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7"></div>
-     <div id="pagination" class="flex justify-center items-center gap-3 mt-20 text-sm">
+     <div id="pagination" class="flex justify-center items-center gap-1.5 md:gap-3 mt-20 text-sm">
       <button id="prev"  class="text-black  disabled:text-gray-500 dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-12 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">قبلی  </button>
-      <div id="pagination-numbers" class="flex items-center gap-3 ">
+      <div id="pagination-numbers" class="flex items-center gap-1.5 md:gap-3 ">
         <button id="one" class="text-black dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-9 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">1</button>
         <button id="count" class="text-black dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-9 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">2</button>
         <button id="end" class="text-black dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-9 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">3</button>
@@ -1009,7 +1016,8 @@
      </footer >
 
 
-     <script src="node_modules/swiper/swiper-bundle.min.js"></script>
+     <script type="module" src="js/eventListeners.js"></script>
      <script type="module" src="js/search.js"></script>
+
 </body>
 </html>
