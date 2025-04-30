@@ -680,17 +680,17 @@
    <!-- finish navbar section  -->
 
  <!-- start main section  -->
-  <main class="min-h-screen px-3 md:px-6 lg:px-8 xl:px-12 my-8 md:my-7">
+  <main class=" px-3 md:px-6 lg:px-8 xl:px-12 my-8 md:my-7">
     <section class="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
-      <div id="card" class="w-4/5 mx-auto h-auto sm:max-w-63 bg-white dark:bg-gray-800  flex flex-col gap-2 rounded-3xl overflow-hidden">
+      <div id="card" class="sm:sticky top-10 lg:static w-4/5 mx-auto h-auto sm:mt-10 sm:max-w-63 bg-white dark:bg-gray-800  flex flex-col gap-2 rounded-3xl overflow-hidden">
     
       </div>
-      <div class="w-full h-auto sm:grow">
+      <div class="w-full h-auto sm:grow ">
         <span class=" text-black dark:text-white border-b-3 border-orange-400 py-2">
           مجموعه آثار
           <span id="credits-count" class="border border-orange-400 rounded-2xl px-2.5 py-0.5 text-xs "></span>
         </span>
-        <div id="items" class=" grid grid-cols-3 items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 my-8">
+        <div id="items" class="  2xl:min-h-[80vh] grid grid-cols-3 2xl:grid-rows-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 mt-8">
            <!-- <a href="movie.html?id=${elem.id}" class=" w-auto rounded-2xl overflow-hidden transition-all duration-600 group">
             <div class="relative ">
           <div class="w-full relative rounded-lg overflow-hidden">
@@ -723,7 +723,7 @@
             </div>
           </a>  -->
         </div>
-        <div id="pagination" class="flex justify-center items-center gap-1.5 md:gap-3 mt-15 text-sm">
+        <di v id="pagination" class="flex justify-center items-center gap-1.5 md:gap-3 mt-12 text-sm p-2">
           <button id="prev"  class="text-black  disabled:text-gray-500 dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-12 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">قبلی  </button>
           <div id="pagination-numbers" class="flex items-center gap-1.5 md:gap-3 ">
             <button id="one" class="text-black dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-9 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">1</button>
@@ -731,7 +731,7 @@
             <button id="end" class="text-black dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-9 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">3</button>
           </div>
           <button id="next" class="text-black disabled:text-gray-500 dark:text-white bg-stone-300 dark:bg-gray-700 cursor-pointer rounded w-12 h-8 hover:bg-orange-400 hover:text-white transition-all duration-300">بعدی </button>
-         </div>
+         </di>
       </div>
     </section>
   </main>
@@ -858,7 +858,7 @@ id="manage-menu"
 
          <!-- start search section  -->
          <section id="more-filters"
-         class="w-[90vw] lg:my-5  mx-auto flex flex-col  gap-2  rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-gray-300 dark:shadow-transparent" style="height:72px;"
+         class="w-[90vw] my-15 mx-auto flex flex-col  gap-2  rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-gray-300 dark:shadow-transparent" style="height:72px;"
        >
        <a
        href="search.html"

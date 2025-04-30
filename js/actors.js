@@ -4,21 +4,18 @@ import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switc
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 let totalCredits;
-let min = 0
 let itemInPage = 12
 let page = 1
 let totalPage;
-let max = 12
+// https://api.themoviedb.org/3/person/1753914/images?api_key=cf30b054d9d7ec861b2a498d97eccdad&query
 getPerson()
 getCredits()
 async function getPerson(){
 
-    let person = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=cf30b054d9d7ec861b2a498d97eccdad&query`)
+    let person = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}`)
     let data = await person.json()    
     let year= new Date().getFullYear()   
     if(data.birthday || data.imdb_id){
-
-   
     document.querySelector('#card').innerHTML=
     `
      <div class="w-full  overflow-hidden">
@@ -50,7 +47,7 @@ async function getPerson(){
           <span class="text-black dark:text-white text-xs">حرفه :</span>
           <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.known_for_department }</span>
         </div>
-        <a href="" data-id="${data.imdb_id}" class="${data.imdb_id ? '' : 'hidden'} bg-orange-400 text-white text-xs rounded-3xl p-2 mt-2 mb-4">مشاهده پروفایل در IMDb</a>
+        <a href="https://www.imdb.com/name/${data.imdb_id}" target="_blank" class="${data.imdb_id ? '' : 'hidden'} bg-orange-400 text-white text-xs rounded-3xl p-2 mt-2 mb-4">مشاهده پروفایل در IMDb</a>
        </div>
     `
 }  
@@ -65,15 +62,12 @@ async function getCredits() {
     let credits= await fetch(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${apiKey}`)
     let list = await credits.json()
     let all= list.cast.concat(list.crew)
-    totalCredits = all.length
+    let validItems = all.filter(item => item.poster_path !== null && item.poster_path !== undefined)
+    totalCredits = validItems.length    
     if(totalCredits<=12) document.querySelector('#pagination').style.display= 'none'
-    if(totalCredits >= 9) document.querySelector('#items').classList.add('min-h-[906px]' , 'sm:min-h-[1450px]' , 'md:min-h-[830px]' , 'lg:min-h-[724px]' , 'xl:min-h-[775px]' , '2xl:min-h-[546px]')
-    document.querySelector('#credits-count').textContent= totalCredits + '   عدد'
-    console.log((page*itemInPage-itemInPage) , (page*itemInPage))
-    
-    all.slice((page*itemInPage-itemInPage) , (page*itemInPage)).forEach(elem => {
-        
-        
+    // if(totalCredits >= 9) document.querySelector('#items').classList.add('min-h-[906px]' , 'sm:min-h-[1450px]' , 'md:min-h-[830px]' , 'lg:min-h-[724px]' , 'xl:min-h-[775px]' , '2xl:min-h-[546px]')
+    document.querySelector('#credits-count').textContent= validItems.length + '   عدد'    
+    validItems.slice((page*itemInPage-itemInPage) ,(page*itemInPage)).forEach(elem => {        
         let date=elem.media_type=='movie' ? elem.release_date : elem.first_air_date
         let department;
         if(!elem.department) department='بازیگر';
@@ -85,7 +79,6 @@ async function getCredits() {
             if(elem.department="Crew") department='خدمه';
             if(elem.department="Creator") department='تولید کننده';
         }
-        if(elem.poster_path) {
       document.querySelector('#items').innerHTML+=
        `
     <a href="${elem.media_type=='tv'? 'series' : 'movie'}.html?id=${elem.id}" class=" w-auto rounded-2xl overflow-hidden transition-all duration-600 group">
@@ -118,7 +111,6 @@ async function getCredits() {
             </div>
           </a>
        `
-     }
 });   
 paginationControl()
 }
