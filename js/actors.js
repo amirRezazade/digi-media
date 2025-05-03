@@ -22,7 +22,7 @@ async function getPerson(){
      <img loading="lazy" class="aspect-square sm:h-[330px] w-full" src="https://image.tmdb.org/t/p/original${data.profile_path}_medium" alt="" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
      </div>
        <div class="flex flex-col gap-2 px-5 items-center">
-        <h1 class="text-black dark:text-white font-bold text-2xl font-sans">${data.name}</h1>
+        <h1 class="text-black dark:text-white font-bold text-2xl font-sans text-center">${data.name}</h1>
         <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">سن:</span>
           <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.deathday? data.deathday.slice(0 , 4) - data.birthday.slice(0 , 4) : year- data.birthday.slice(0 , 4)} سال</span>

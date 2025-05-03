@@ -54,3 +54,16 @@ document.querySelector('#search').addEventListener('click' ,  ()=>{
  let sort= document.querySelector('#sort').value
  window.location.href= `search.html?${'&type='+mediaType}${'&country='+country}${'&genre='+genre}${'&fromYear='+fromYear}${'&toYear='+toYear}${'&fromPoint='+fromPoint}${'&toPoint='+toPoint}${'&age='+age}${'&double='+double}${'&Subtitle='+Subtitle}${'&page=1'}${sort=='' ?'' : '&sort='+ sort}`
 })
+
+let navInput= document.querySelector('#navbar-input')
+let navSearch= document.querySelector('#navbar-search')
+navSearch.addEventListener('click' , ()=>{
+  let value = navInput.value.trim()
+  window.location.href=`search.html?name=${value}`
+})
+navInput.addEventListener('keyup' ,  e=>{  
+  let value = navInput.value.trim()
+  if(e.keyCode==13) {
+   window.location.href=`search.html?name=${value}`
+ }
+})
