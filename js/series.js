@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
          <span class="transition-all duration-300 cursor-pointer hover:text-orange-400">${list.original_name}</span>
       
               </div>
-              <div class="flex gap-10 sm:gap-6 items-center lg:items-stretch sm:items-start justify-between my-5 xl:my-8 lg:gap-8">
+              <div class="flex gap-6 sm:gap-6 items-center lg:items-stretch sm:items-start justify-between my-5 xl:my-8 lg:gap-8">
                 <div class="flex flex-col items-center grow  gap-9 max-w-32 sm:max-w-37 md:max-w-45 lg:max-w-59 ">
                   <div class="flex items-center gap-1">
                   <span class="text-xs text-gray-400 ">10/</span>  
@@ -381,7 +381,7 @@ async function getRecommendationsMovie() {
   });
   const RecommendationsSwiper = new Swiper (".recommendations-swiper" ,{
     direction: "horizontal",
-    slidesPerView: 3,
+    slidesPerView: 2,
     loop: false,
     centeredSlides: false,
     initialSlide: 0,
@@ -392,6 +392,9 @@ async function getRecommendationsMovie() {
       clickable: true
     },
     breakpoints:{
+      500:{
+        slidesPerView: 3,
+      },
       640:{
         slidesPerView: 4,
       },

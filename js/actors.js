@@ -86,7 +86,7 @@ async function getCredits() {
           <div class="w-full h-full relative rounded-lg overflow-hidden">
             <img loading="lazy" class="object-cover w-full h-full" src="https://image.tmdb.org/t/p/original/${elem.poster_path}_medium" alt=""  onerror="this.onerror=null; this.src='images/default_poster.jpg';">
             <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
-            <p dir="ltr" class="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.original_title ? elem.original_title : elem.name}</p>
+            <p dir="ltr" class="py-2.5 sm:py-5 px-1.5 sm:px-3 text-xs  sm:text-sm absolute bottom-0 left-0  font-extrabold text-white">${elem.original_title ? elem.original_title : elem.name}</p>
             </div>
           </div>
           <div class="absolute w-full h-full top-0 left-0 rounded-lg bg-black/60 px-3 py-3.5 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-all duration-600">
