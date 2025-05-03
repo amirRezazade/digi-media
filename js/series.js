@@ -81,7 +81,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                   </div>
                   <div class="flex flex-col  justify-between gap-4 grow sm:gap-8 md:flex-row  ">
                    <div class="flex flex-col gap-6 sm:gap-5 md:w-6/10 xl:w-6/10 md:gap-8 md:py-5 ">
-                    <div id="genres" class="flex items-center gap-2 md:gap-3.5 text-gray-300 text-[11px] lg:text-sm">
+                    <div id="genres" class="flex flex-wrap items-center gap-2 md:gap-3.5 text-gray-300 text-[11px] lg:text-sm">
                    
                     </div>
                     <p class="text-sm text-white font-extrabold leading-5 lg:text-base xl:text-base  ${list.tagline ? '' : 'hidden'}">${list.tagline}</p>
@@ -276,7 +276,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
  }
 const actSwiper = new Swiper (".actors-swiper" ,{
     direction: "horizontal",
-    slidesPerView: 4,
+    slidesPerView: 3,
     loop: false,
     centeredSlides: false,
     initialSlide: 0,
@@ -287,6 +287,9 @@ const actSwiper = new Swiper (".actors-swiper" ,{
       prevEl: ".act-prev",
     },
     breakpoints:{
+      500:{
+        slidesPerView: 4,
+      },
       640:{
         slidesPerView: 5,
       },
@@ -303,7 +306,7 @@ const actSwiper = new Swiper (".actors-swiper" ,{
 })
 const crowSwiper = new Swiper (".crow-swiper" ,{
     direction: "horizontal",
-    slidesPerView: 4,
+    slidesPerView: 3,
     loop: false,
     centeredSlides: false,
     initialSlide: 0,
@@ -314,6 +317,9 @@ const crowSwiper = new Swiper (".crow-swiper" ,{
       prevEl: ".crow-prev",
     },
     breakpoints:{
+      500:{
+        slidesPerView: 4,
+      },
       640:{
         slidesPerView: 5,
       },

@@ -97,6 +97,10 @@ function manageMenu() {
         nav.style.transform=''
       }
     }
+    else{
+      nav.style.transform=''
+
+    }
   }
   function toggleMenu(el) {
     let h = el.parentElement.parentElement.scrollHeight;
