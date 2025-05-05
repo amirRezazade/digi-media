@@ -1,6 +1,11 @@
 
 import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 
+
+window.addEventListener('load' ,()=>{
+  document.querySelector('.loader-wrapper').remove()
+  document.querySelector('.content').classList.remove('hidden')
+})
 menu.addEventListener("click", (e) => {
     if (e.target.id == "nav-menu") {
       manageMenu();
