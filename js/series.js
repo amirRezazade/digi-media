@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
     let statusText= list.status==='Ended'? 'پایان یافته': 'در حال پخش'
     document.querySelector('header').innerHTML=
        `
-    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image:url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium') , url('images/default-bg.png');" >
+    <div  class=" bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left" style="background-image:url('https://image.tmdb.org/t/p/original${list.backdrop_path}_medium') , url('images/default-bg.jpg');" >
           <div class="px-4 py-6 md:py-10 lg:px-13 bg-gradient-to-r from-gray-950/10 to-gray-950 to-80%">
   
             <div class="flex items-center gap-1 text-[11px] text-gray-300">

@@ -131,7 +131,7 @@ border: 1px solid rgb(207, 207, 207);
   display: flex ;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: red;
 }
 .loader {
   position: relative;

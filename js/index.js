@@ -240,7 +240,7 @@ function changeHeaderInfo() {
   if (window.innerWidth > 768) {
     document.querySelector(
       "#header-bg"
-    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.png')`;
+    ).style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.jpg')`;
     document.querySelector("#header-name").textContent = res.results[
       activeIndex
     ].name
