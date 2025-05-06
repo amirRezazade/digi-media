@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="./src/output.css" />
   </head>
   <body id="top" class=" font-[iran-sans] overflow-x-hidden theme">
-    <div class="loader-wrapper">
-      <div class="loader"></div>
+    <div class="loader-wrapper w-screen h-screen top-0 left-0 grid place-content-center ">
+      <div class="loader flex flex-col gap-3 items-center">
+        <div class="loader__filmstrip relative w-15 h-18 bg-orange-400 overflow-hidden before:content-[''] before:absolute before:h-[120%] before:left-1.5 before:border-l-5 before:border-white before:border-dashed after:content-[''] after:absolute after:right-1.5 after:h-[120%] after:border-l-5 after:border-white after:border-dashed">
+        </div>
+        <p class="loader__text text-white tracking-widest font-serif">
+            ...LOADING
+        </p>
+    </div>
 
     </div>
     <div class="content hidden">
