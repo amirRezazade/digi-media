@@ -5,9 +5,7 @@ headerPlayBtn.addEventListener('click' ,  ()=>{
 
  headerPlayBtn.dataset.type =='movie'? window.location.href = `movie.html?id=${headerPlayBtn.dataset.id}`:  window.location.href = `series.html?id=${headerPlayBtn.dataset.id}`
 })
-window.addEventListener('load' ,()=>{
-  
-})
+
 window.addEventListener("resize", () => {
   toggleMovieSwiper();
   toggleTvSwiper();

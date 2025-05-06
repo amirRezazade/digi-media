@@ -2,7 +2,10 @@
 import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
 
 
-
+window.addEventListener('load' ,()=>{
+  document.querySelector('.loader-wrapper').remove()
+  document.querySelector('.content').classList.remove('hidden')
+})
 menu.addEventListener("click", (e) => {
     if (e.target.id == "nav-menu") {
       manageMenu();
@@ -17,8 +20,7 @@ menu.addEventListener("click", (e) => {
   window.addEventListener('DOMContentLoaded' , ()=>{
     let theme = window.localStorage.getItem("theme");
     theme ? switchTheme(theme) : switchTheme("dark");
-    document.querySelector('.loader-wrapper').remove()
-  document.querySelector('.content').classList.remove('hidden')
+
   })
   document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
 document.querySelectorAll('#manage-menu').forEach(elem=>{
