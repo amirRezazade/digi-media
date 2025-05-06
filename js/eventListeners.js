@@ -3,8 +3,7 @@ import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switc
 
 
 window.addEventListener('load' ,()=>{
-  document.querySelector('.loader-wrapper').remove()
-  document.querySelector('.content').classList.remove('hidden')
+  
 })
 menu.addEventListener("click", (e) => {
     if (e.target.id == "nav-menu") {
@@ -18,6 +17,8 @@ menu.addEventListener("click", (e) => {
     navControl()
   })
   window.addEventListener('DOMContentLoaded' , ()=>{
+    document.querySelector('.loader-wrapper').remove()
+  document.querySelector('.content').classList.remove('hidden')
     let theme = window.localStorage.getItem("theme");
     theme ? switchTheme(theme) : switchTheme("dark");
 
