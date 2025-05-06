@@ -17,6 +17,8 @@ menu.addEventListener("click", (e) => {
   window.addEventListener('DOMContentLoaded' , ()=>{
     let theme = window.localStorage.getItem("theme");
     theme ? switchTheme(theme) : switchTheme("dark");
+    document.querySelector('.loader-wrapper').remove()
+  document.querySelector('.content').classList.remove('hidden')
   })
   document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
 document.querySelectorAll('#manage-menu').forEach(elem=>{
