@@ -121,6 +121,10 @@ function manageMenu() {
         elm.firstElementChild.nextElementSibling.offsetHeight + "px";
     }
   }
+  function removeLoader(){
+    document.querySelector('.loader-wrapper').remove()
+    document.querySelector('.content').classList.remove('hidden')
+  }
 
   
-export { apiKey,menu,genres , manageMenu  ,toggleMenu, switchTheme ,moreFiltersToggle, getGenres , navControl ,  }
+export { apiKey,menu,genres , manageMenu  ,toggleMenu, switchTheme ,moreFiltersToggle, getGenres , navControl , removeLoader }

@@ -1,4 +1,4 @@
-import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl, } from './funcs.js'
+import { apiKey , menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl, removeLoader} from './funcs.js'
 
 let headerPlayBtn = document.querySelector('#movie-play-btn');
 headerPlayBtn.addEventListener('click' ,  ()=>{
@@ -16,6 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
   result.catch((error) => {
     console.log(error);
   });
+  removeLoader()
   getActionMovie();
   getTv();
   getPersianMovie();

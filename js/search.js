@@ -1,4 +1,4 @@
-import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
+import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl , removeLoader} from './funcs.js'
 const urlParams = new URLSearchParams(window.location.search);
 // document.querySelector('#search').addEventListener('click' ,  search)
 const searchBoxSelection = document.querySelectorAll("#selection span");
@@ -10,7 +10,7 @@ let page = 1
 
 window.addEventListener('DOMContentLoaded' , ()=>{
   setValues()
-  
+  removeLoader()
 })
 
 

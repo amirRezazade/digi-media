@@ -1,8 +1,9 @@
-import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
+import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl , removeLoader} from './funcs.js'
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 
 window.addEventListener('DOMContentLoaded' , ()=>{
+  removeLoader()
   getRecommendationsMovie();
 })
 

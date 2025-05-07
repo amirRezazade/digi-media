@@ -1,15 +1,18 @@
-import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl} from './funcs.js'
+import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switchTheme, getGenres , navControl , removeLoader} from './funcs.js'
 
+window.addEventListener('DOMContentLoaded' , ()=>{
+  getPerson()
+  getCredits()
+  removeLoader()
 
+})
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 let totalCredits;
 let itemInPage = 12
 let page = 1
 let totalPage;
-// https://api.themoviedb.org/3/person/1753914/images?api_key=cf30b054d9d7ec861b2a498d97eccdad&query
-getPerson()
-getCredits()
+
 async function getPerson(){
 
     let person = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}`)
