@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   getTv();
   getPersianMovie();
 });
-
+window.onload= window.alert('لطفا برای نمایش عکس ها از vpn استفاده کنید')
 let res;
 async function getHeaderInfos() {
   let response = await fetch(
