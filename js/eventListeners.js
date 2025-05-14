@@ -29,6 +29,8 @@ document.querySelectorAll('#manage-menu').forEach(elem=>{
 document.querySelector('#more-filters-toggle').addEventListener('click' ,  moreFiltersToggle)
 document.querySelectorAll('#toggle-menu').forEach(elem=>{
     elem.addEventListener('click' ,e=>{
+      e.stopPropagation()
+      e.preventDefault()
       toggleMenu(e.target)
       
     })
