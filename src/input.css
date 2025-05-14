@@ -37,6 +37,12 @@ border: 1px solid rgb(207, 207, 207);
   border-radius: 10px;
   background:#ff8904;
 }
+.lock-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import "tailwindcss";

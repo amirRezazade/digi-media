@@ -2,11 +2,15 @@ import { apiKey ,genres, menu , manageMenu,moreFiltersToggle ,toggleMenu  ,switc
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 const searchBoxSelection = document.querySelectorAll("#selection span");
-
-
+let main
 window.addEventListener('DOMContentLoaded' , ()=>{
   removeLoader()
   getRecommendationsMovie();
+})
+window.addEventListener('keyup' , e=>{
+  if(document.body.classList.contains('lock-scroll') && e.key=='Escape'){
+   closeTrailer()
+  }
 })
 
  fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
@@ -42,7 +46,7 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                     <div class="absolute w-full bg-cover -z-1 h-full top-0 left-0 rounded-lg contrast-85 scale-x-80 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
                     <div class="absolute w-full bg-cover -z-1 h-full top-0 left-0 rounded-lg contrast-90 scale-x-90 -translate-y-2 group-hover:translate-y-0 group-hover:opacity-0  transition-all duration-300" style="background-image: url('https://image.tmdb.org/t/p/original${list.poster_path}_low');" loading="lazy"></div>
                     <img class=" w-full h-full object-cover z-50 rounded-lg contrast-110" src="https://image.tmdb.org/t/p/original${list.poster_path}_medium" alt="${list.original_title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
-                    <a href="#" class="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
+                    <a href="javascript:void(0)" class="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
                       <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.75 6L7.5 5.25H16.5L17.25 6V19.3162L12 16.2051L6.75 19.3162V6ZM8.25 6.75V16.6838L12 14.4615L15.75 16.6838V6.75H8.25Z" fill="#ffffff"></path> </g></svg>
                     </a>
                   </div>
@@ -52,10 +56,10 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                       <span>100%</span>
                     </span>
                     <span class="bg-gray-500/70 w-1/2 text-xs rounded-lg overflow-hidden divide-x-1 divide-gray-300/50 flex items-end gap-1 text-orange-400 ">
-                      <a href="#" class=" py-2 w-1/2 group">
+                      <a href="javascript:void(0)" class=" py-2 w-1/2 group">
                         <svg class="cursor-pointer mx-auto fill-gray-300 group-hover:fill-orange-400 transition-all duration-300" fill="#" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.2 490.2" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M490.1,234.464c0-37.6-30.6-68.3-68.3-68.3H316.2v-76.1c0-32.2-9.4-55.4-28-69c-29.4-21.6-69.8-9.3-71.5-8.7 c-5.1,1.6-8.6,6.3-8.6,11.7v85.5c0,67.3-78.1,90.2-81.4,91.2c-1,0.3-1.9,0.6-2.7,1.1c-5.8-11.6-17.8-19.6-31.6-19.6H35.2 c-19.4,0-35.2,15.8-35.2,35.2v207.9c0,19.4,15.8,35.2,35.2,35.2h33.1c6.8,0,12.3-5.5,12.3-12.3s-5.6-12.2-12.3-12.2H35.2 c-5.9,0-10.7-4.8-10.7-10.7v-207.9c0-5.9,4.8-10.7,10.7-10.7h57.3c5.9,0,10.7,4.8,10.7,10.7v196.1c0,37.6,30.6,68.3,68.3,68.3 h209.2c46.4,0,75.9-24.3,81.1-66.3l28.2-177c0.1-0.6,0.2-1.3,0.2-1.9v-2.2H490.1z M465.6,235.564l-28.1,176.5 c-3.7,30-22.8,45.3-56.8,45.3h-7.8H171.5c-24.1,0-43.8-19.6-43.8-43.8v-189.1c1.8,0.4,3.7,0.3,5.6-0.2 c4.1-1.1,99.3-28.7,99.3-114.8v-75.6c10.4-1.6,28.2-2.5,41.1,6.9c11.9,8.8,18,25.3,18,49.3v88.4c0,6.8,5.5,12.3,12.3,12.3h117.9 c24.1,0,43.8,19.6,43.8,43.8v1H465.6z"></path> </g> </g></svg>
                       </a>
-                      <a href="#" class="py-2 w-1/2 group ">
+                      <a href="javascript:void(0)" class="py-2 w-1/2 group ">
                         <svg class=" cursor-pointer mx-auto fill-gray-300 group-hover:fill-orange-400 transition-all duration-300"fill="#" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.3 490.3" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M202,469.2c13.6,10,29.5,12.7,42.9,12.7c15.6,0,27.7-3.7,28.6-4c5.1-1.6,8.6-6.3,8.6-11.7v-85.5 c0-67.3,78.1-90.2,81.4-91.2c1-0.3,1.9-0.6,2.7-1.1C372,300,384,308,397.8,308h57.3c19.4,0,35.2-15.8,35.2-35.2V65 c0-19.4-15.8-35.2-35.2-35.2H422c-6.8,0-12.3,5.5-12.3,12.3s5.5,12.1,12.2,12.1H455c5.9,0,10.7,4.8,10.7,10.7v207.9 c0,5.9-4.8,10.7-10.7,10.7h-57.3c-5.9,0-10.7-4.8-10.7-10.7V76.7c0-37.6-30.6-68.3-68.3-68.3H109.5c-46.4,0-75.9,24.3-81.1,66.3 l-28.2,177C0.1,252.3,0,253,0,253.6v2.1C0,293.3,30.6,324,68.3,324h105.6v76.2C174,432.4,183.4,455.6,202,469.2z M68.4,299.6 c-24.1,0-43.8-19.6-43.8-43.8v-1.1L52.7,78.2c3.7-30,22.8-45.3,56.8-45.3h209.2c24.1,0,43.8,19.6,43.8,43.8v189.1 c-1.8-0.4-3.7-0.3-5.6,0.2c-4.1,1.1-99.3,28.7-99.3,114.8v75.6c-10.4,1.7-28.2,2.5-41.1-6.9c-11.9-8.8-18-25.3-18-49.3v-88.4 c0-6.8-5.5-12.3-12.3-12.3H68.4V299.6z"></path> </g> </g></svg>
                       </a>
                     </span>
@@ -100,11 +104,11 @@ window.addEventListener('DOMContentLoaded' , ()=>{
                       </div>
                     </div>
                     <div class="flex items-center gap-2 text-xs text-white sm:w-1/2 md:w-auto ">
-                      <a href="#" class=" bg-orange-400 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0  flex items-center justify-center gap-1">
+                      <a href="javascript:void(0)" id="video-play-btn" class=" bg-orange-400 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0  flex items-center justify-center gap-1">
                         <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z" fill="#ffffff"></path> </g></svg>
-                        پخش آنلاین
+                       پخش تریلر
                       </a>
-                      <a href="#" class=" bg-gray-800 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0 flex items-center justify-center gap-1">
+                      <a href="javascript:void(0)"  class=" bg-gray-800 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0 flex items-center justify-center gap-1">
                          <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.7258 7.34056C12.1397 7.32632 12.4638 6.97919 12.4495 6.56522C12.4353 6.15125 12.0882 5.8272 11.6742 5.84144L11.7258 7.34056ZM7.15843 11.562L6.40879 11.585C6.40906 11.5938 6.40948 11.6026 6.41006 11.6114L7.15843 11.562ZM5.87826 14.979L6.36787 15.5471C6.38128 15.5356 6.39428 15.5236 6.40684 15.5111L5.87826 14.979ZM5.43951 15.342L5.88007 15.949C5.89245 15.94 5.90455 15.9306 5.91636 15.9209L5.43951 15.342ZM9.74998 17.75C10.1642 17.75 10.5 17.4142 10.5 17C10.5 16.5858 10.1642 16.25 9.74998 16.25V17.75ZM11.7258 5.84144C11.3118 5.8272 10.9647 6.15125 10.9504 6.56522C10.9362 6.97919 11.2602 7.32632 11.6742 7.34056L11.7258 5.84144ZM16.2415 11.562L16.9899 11.6113C16.9905 11.6025 16.9909 11.5938 16.9912 11.585L16.2415 11.562ZM17.5217 14.978L16.9931 15.5101C17.0057 15.5225 17.0187 15.5346 17.0321 15.5461L17.5217 14.978ZM17.9605 15.341L17.4836 15.9199C17.4952 15.9294 17.507 15.9386 17.5191 15.9474L17.9605 15.341ZM13.65 16.25C13.2358 16.25 12.9 16.5858 12.9 17C12.9 17.4142 13.2358 17.75 13.65 17.75V16.25ZM10.95 6.591C10.95 7.00521 11.2858 7.341 11.7 7.341C12.1142 7.341 12.45 7.00521 12.45 6.591H10.95ZM12.45 5C12.45 4.58579 12.1142 4.25 11.7 4.25C11.2858 4.25 10.95 4.58579 10.95 5H12.45ZM9.74998 16.25C9.33577 16.25 8.99998 16.5858 8.99998 17C8.99998 17.4142 9.33577 17.75 9.74998 17.75V16.25ZM13.65 17.75C14.0642 17.75 14.4 17.4142 14.4 17C14.4 16.5858 14.0642 16.25 13.65 16.25V17.75ZM10.5 17C10.5 16.5858 10.1642 16.25 9.74998 16.25C9.33577 16.25 8.99998 16.5858 8.99998 17H10.5ZM14.4 17C14.4 16.5858 14.0642 16.25 13.65 16.25C13.2358 16.25 12.9 16.5858 12.9 17H14.4ZM11.6742 5.84144C8.65236 5.94538 6.31509 8.53201 6.40879 11.585L7.90808 11.539C7.83863 9.27613 9.56498 7.41488 11.7258 7.34056L11.6742 5.84144ZM6.41006 11.6114C6.48029 12.6748 6.08967 13.7118 5.34968 14.4469L6.40684 15.5111C7.45921 14.4656 8.00521 13.0026 7.9068 11.5126L6.41006 11.6114ZM5.38865 14.4109C5.23196 14.5459 5.10026 14.6498 4.96265 14.7631L5.91636 15.9209C6.0264 15.8302 6.195 15.6961 6.36787 15.5471L5.38865 14.4109ZM4.99895 14.735C4.77969 14.8942 4.58045 15.1216 4.43193 15.3617C4.28525 15.5987 4.14491 15.9178 4.12693 16.2708C4.10726 16.6569 4.24026 17.0863 4.63537 17.3884C4.98885 17.6588 5.45464 17.75 5.94748 17.75V16.25C5.78415 16.25 5.67611 16.234 5.60983 16.2171C5.54411 16.2004 5.53242 16.1861 5.54658 16.1969C5.56492 16.211 5.59211 16.2408 5.61004 16.2837C5.62632 16.3228 5.62492 16.3484 5.62499 16.3472C5.62513 16.3443 5.62712 16.3233 5.6414 16.2839C5.65535 16.2454 5.67733 16.1997 5.70749 16.151C5.73748 16.1025 5.77159 16.0574 5.80538 16.0198C5.84013 15.981 5.86714 15.9583 5.88007 15.949L4.99895 14.735ZM5.94748 17.75H9.74998V16.25H5.94748V17.75ZM11.6742 7.34056C13.835 7.41488 15.5613 9.27613 15.4919 11.539L16.9912 11.585C17.0849 8.53201 14.7476 5.94538 11.7258 5.84144L11.6742 7.34056ZM15.4932 11.5127C15.3951 13.0024 15.9411 14.4649 16.9931 15.5101L18.0503 14.4459C17.3105 13.711 16.9199 12.6744 16.9899 11.6113L15.4932 11.5127ZM17.0321 15.5461C17.205 15.6951 17.3736 15.8292 17.4836 15.9199L18.4373 14.7621C18.2997 14.6488 18.168 14.5449 18.0113 14.4099L17.0321 15.5461ZM17.5191 15.9474C17.5325 15.9571 17.5599 15.9802 17.5949 16.0193C17.629 16.0573 17.6634 16.1026 17.6937 16.1514C17.7241 16.2004 17.7463 16.2463 17.7604 16.285C17.7748 16.3246 17.7769 16.3457 17.777 16.3485C17.7771 16.3497 17.7756 16.3238 17.792 16.2844C17.81 16.241 17.8375 16.211 17.856 16.1968C17.8702 16.1859 17.8585 16.2002 17.7925 16.217C17.7259 16.234 17.6174 16.25 17.4535 16.25V17.75C17.9468 17.75 18.4132 17.6589 18.7669 17.3885C19.1628 17.0859 19.2954 16.6557 19.2749 16.2693C19.2562 15.9161 19.1151 15.5972 18.9682 15.3604C18.8194 15.1206 18.6202 14.8936 18.4018 14.7346L17.5191 15.9474ZM17.4535 16.25H13.65V17.75H17.4535V16.25ZM12.45 6.591V5H10.95V6.591H12.45ZM9.74998 17.75H13.65V16.25H9.74998V17.75ZM8.99998 17C8.99998 18.5008 10.191 19.75 11.7 19.75V18.25C11.055 18.25 10.5 17.7084 10.5 17H8.99998ZM11.7 19.75C13.2089 19.75 14.4 18.5008 14.4 17H12.9C12.9 17.7084 12.3449 18.25 11.7 18.25V19.75Z" fill="#ffffff"></path> </g></svg>
                         اعلان سریال
                       </a>
@@ -227,9 +231,9 @@ window.addEventListener('DOMContentLoaded' , ()=>{
     getCrows(list.credits.crew)
 
   }
-
+  document.querySelector('#video-play-btn').addEventListener('click' , getTrailer)
  })
-
+document.querySelector('#close-video').addEventListener('click' , closeTrailer)
 document.querySelector('#switch-theme').addEventListener('click' ,  switchTheme)
 document.querySelectorAll('#manage-menu').forEach(elem=>{
   elem.addEventListener('click' , manageMenu)
@@ -350,7 +354,6 @@ async function getRecommendationsMovie() {
   let t = await response.json();
   let list = t.results;
   const randomFive = list.slice(0, 6);
-  console.log(randomFive);
   
   randomFive.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
@@ -421,8 +424,6 @@ async function getRecommendationsMovie() {
     }
   })
 }
-
-
 function getHeaderGenres(list){
   let genresContainer = document.querySelector('#genres')
   list.forEach(gen=>{    
@@ -431,3 +432,29 @@ function getHeaderGenres(list){
 
 }
 
+
+ async function getTrailer(){
+  if(main) showTrailer()
+    else{
+   let response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`)
+   let res = await response.json();
+   let list = res.results;
+   main = list.find(el => el.type=='Trailer' && el.official==true)
+   showTrailer()
+  }
+
+  }   
+function showTrailer(){
+  document.body.classList.add('lock-scroll')
+  document.querySelector('#video').classList.remove('hidden')
+  if(main) document.querySelector('#video iframe').src=`https://www.youtube.com/embed/${main.key}?autoplay=0&controls=1`
+  else {
+  document.querySelector('#video iframe').style.display='none'
+ document.querySelector('#video p').classList.remove('hidden')
+}
+}
+function closeTrailer(){
+   document.body.classList.remove('lock-scroll')
+  document.querySelector('#video').classList.add('hidden')
+  document.querySelector('#video iframe').src=''
+}
