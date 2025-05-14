@@ -491,9 +491,6 @@
   .h-1\/1 {
     height: calc(1/1 * 100%);
   }
-  .h-1\/2 {
-    height: calc(1/2 * 100%);
-  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
@@ -1035,12 +1032,6 @@
       background-color: color-mix(in oklab, var(--color-black) 45%, transparent);
     }
   }
-  .bg-black\/50 {
-    background-color: color-mix(in srgb, #000 50%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
-    }
-  }
   .bg-black\/60 {
     background-color: color-mix(in srgb, #000 60%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1228,9 +1219,6 @@
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
-  }
-  .p-2\.5 {
-    padding: calc(var(--spacing) * 2.5);
   }
   .p-3 {
     padding: calc(var(--spacing) * 3);
