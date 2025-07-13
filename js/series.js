@@ -12,7 +12,7 @@ window.addEventListener('keyup' , e=>{
   }
 })
  fetch(`https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`)
- .then(response=> response.json()).then(list=> {    
+ .then(response=> response.json()).then(list=> {      
   if(list.status_code ==34){
     document.querySelector('header').innerHTML=`<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
         <h1>اطلاعات بیشتری از این سریال وجود ندارد</h1>
@@ -155,7 +155,7 @@ window.addEventListener('keyup' , e=>{
                         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffad49" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> </g></svg>
                         <span class="text-white text-[10px] font-bold lg:font-normal lg:text-sm">سال تولید :</span>
                       </div>
-                      <span class="text-white opacity-75 text-[11px] lg:text-sm"> ${list.first_air_date.slice(0,4)} - ${list.last_air_date.slice(0 , 4)} </span>
+                      <span class="text-white opacity-75 text-[11px] lg:text-sm"> ${list.first_air_date ? list.first_air_date.slice(0,4) : ''} - ${list.last_air_date ? list.last_air_date.slice(0 , 4) : 'نا معلوم'} </span>
                     </div>
                     <div class="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -215,7 +215,7 @@ window.addEventListener('keyup' , e=>{
         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffad49" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffad49"></rect> </g></svg>
         <span class="text-black dark:text-white text-[10px]">سال تولید :</span>
       </div>
-      <span class="text-black dark:text-white opacity-75 text-[10px]"> ${list.first_air_date.slice(0,4)} - ${list.last_air_date.slice(0 , 4)}</span>
+      <span class="text-black dark:text-white opacity-75 text-[10px]"> ${list.first_air_date ? list.first_air_date.slice(0,4) : ''} - ${list.last_air_date ? list.last_air_date.slice(0 , 4) : ''}</span>
     </div>
     <div class="flex flex-col  py-2 gap-y-1 grow items-center ">
       <div class="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">

@@ -67,11 +67,11 @@ let navInput= document.querySelector('#navbar-input')
 let navSearch= document.querySelector('#navbar-search')
 navSearch.addEventListener('click' , ()=>{
   let value = navInput.value.trim()
-  window.location.href=`search.html?name=${value}`
+  value!=='' ? window.location.href=`search.html?name=${value}` : ''
 })
 navInput.addEventListener('keyup' ,  e=>{  
   let value = navInput.value.trim()
   if(e.keyCode==13) {
-   window.location.href=`search.html?name=${value}`
+  value!=='' ? window.location.href=`search.html?name=${value}` : ''
  }
 })

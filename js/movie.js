@@ -230,7 +230,7 @@ window.addEventListener('keyup' , e=>{
     getActors(list.credits.cast)
     getCrows(list.credits.crew)
 
-  }
+  }    
   document.querySelector('#video-play-btn').addEventListener('click' , getTrailer)
  })
 document.querySelector('#close-video').addEventListener('click' , closeTrailer)

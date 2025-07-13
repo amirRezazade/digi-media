@@ -16,7 +16,7 @@ let totalPage;
 async function getPerson(){
 
     let person = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}`)
-    let data = await person.json()    
+    let data = await person.json()  
     let year= new Date().getFullYear()   
     if(data.birthday || data.imdb_id){
     document.querySelector('#card').innerHTML=
@@ -32,11 +32,11 @@ async function getPerson(){
         </div>
         <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">تاریخ تولد :</span>
-          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.birthday}</span>
+          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.birthday ? data.birthday : '----'}</span>
         </div>
          <div class="${data.deathday ? '' : 'hidden'} w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">تاریخ فوت :</span>
-          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.deathday}</span>
+          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.deathday ? data.deathday : '----'}</span>
         </div>
         <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">جنسیت :</span>
@@ -44,11 +44,11 @@ async function getPerson(){
         </div>
         <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">محل تولد :</span>
-          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.place_of_birth}</span>
+          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.place_of_birth ? data.place_of_birth : '----'}</span>
         </div>
         <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
           <span class="text-black dark:text-white text-xs">حرفه :</span>
-          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.known_for_department }</span>
+          <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">${data.known_for_department ? data.known_for_department : '-----'}</span>
         </div>
         <a href="https://www.imdb.com/name/${data.imdb_id}" target="_blank" class="${data.imdb_id ? '' : 'hidden'} bg-orange-400 text-white text-xs rounded-3xl p-2 mt-2 mb-4">مشاهده پروفایل در IMDb</a>
        </div>
@@ -65,10 +65,9 @@ async function getCredits() {
     let credits= await fetch(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${apiKey}`)
     let list = await credits.json()
     let all= list.cast.concat(list.crew)
-    let validItems = all.filter(item => item.poster_path !== null && item.poster_path !== undefined)
+    let validItems = all.filter(item => item.poster_path !== null && item.poster_path !== undefined &&item.adult==false)
     totalCredits = validItems.length    
     if(totalCredits<=12) document.querySelector('#pagination').style.display= 'none'
-    // if(totalCredits >= 9) document.querySelector('#items').classList.add('min-h-[906px]' , 'sm:min-h-[1450px]' , 'md:min-h-[830px]' , 'lg:min-h-[724px]' , 'xl:min-h-[775px]' , '2xl:min-h-[546px]')
     document.querySelector('#credits-count').textContent= validItems.length + '   عدد'    
     validItems.slice((page*itemInPage-itemInPage) ,(page*itemInPage)).forEach(elem => {        
         let date=elem.media_type=='movie' ? elem.release_date : elem.first_air_date
@@ -81,7 +80,7 @@ async function getCredits() {
             if(elem.department="Sound") department='صدا بردار';
             if(elem.department="Crew") department='خدمه';
             if(elem.department="Creator") department='تولید کننده';
-        }
+        }        
       document.querySelector('#items').innerHTML+=
        `
     <a href="${elem.media_type=='tv'? 'series' : 'movie'}.html?id=${elem.id}" class=" w-auto rounded-2xl overflow-hidden transition-all duration-600 group">

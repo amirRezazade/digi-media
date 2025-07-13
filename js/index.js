@@ -21,7 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
   getTv();
   getPersianMovie();
 });
-window.onload= window.alert('لطفا برای نمایش عکس ها از vpn استفاده کنید')
 let res;
 async function getHeaderInfos() {
   let response = await fetch(
@@ -265,7 +264,7 @@ function generateMovieSwiper() {
       direction: "horizontal",
       lang: "ltr",
       slidesPerView: 3,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 4000,
       },
@@ -292,7 +291,7 @@ function generateTvSwiper() {
       direction: "horizontal",
       lang: "ltr",
       slidesPerView: 3,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 4000,
       },
@@ -319,7 +318,7 @@ function generatePersianSwiper() {
       direction: "horizontal",
       lang: "ltr",
       slidesPerView: 3,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 4000,
       },
