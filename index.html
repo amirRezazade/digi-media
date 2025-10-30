@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./src/output.css" />
   </head>
   <body id="top" class=" font-[iran-sans] overflow-x-hidden theme">
+    
     <div class="loader-wrapper w-screen h-screen top-0 left-0 grid place-content-center ">
       <div class="loader flex flex-col gap-3 items-center">
         <div class="loader__filmstrip relative w-15 h-18 bg-orange-400 overflow-hidden before:content-[''] before:absolute before:h-[120%] before:left-1.5 before:border-l-5 before:border-white before:border-dashed after:content-[''] after:absolute after:right-1.5 after:h-[120%] after:border-l-5 after:border-white after:border-dashed">
@@ -22,9 +23,9 @@
     <div class="content hidden">
       <!-- start navbar section  -->
       <nav
-        class="bg-[url(../images/navbar/header-bg.png)] transition-all duration-300 lg:sticky lg:top-0  z-[999] bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3"
+        class="bg-[url(../images/navbar/header-bg.png)] transition-all duration-300 lg:sticky lg:top-0  z-100 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3"
       >
-      <span class="text-white ml-auto mr-1 sm:mr-4 md:mr-8 text-xs sm:text-sm"><span class="hidden md:inline">جهت نمایش عکس ها و تریلر ها</span> vpn خود را روشن کنید</span>
+      <span class="text-white ml-auto mr-1 sm:mr-4 md:mr-8 text-xs sm:text-sm hidden xs:inline-block"><span class="hidden sm:inline">جهت نمایش عکس ها و تریلر ها</span> vpn خود را روشن کنید</span>
         <div
           class="w-9 h-9 rounded-full relative bg-gray-700 flex justify-center items-center cursor-pointer"
         >
@@ -165,14 +166,12 @@
           <div class="theme w-16 h-16 rounded-tl-full hidden sm:inline"></div>
           <a
             href="index.html"
-            class="inline-block px-3 w-25 sm:w-35 h-10 sm:h-13 border-b-5 border-stone-200 dark:border-gray-900"
+            class="hidden xs:inline-block px-3 w-25 sm:w-35 h-10 sm:h-13 border-b-5 border-stone-200 dark:border-gray-900"
           >
             <img class="w-full " src="images/navbar/logo-light.png" alt="" />
             <img class="w-full  hidden" src="images/navbar/logo-dark.png" alt="" />
           </a>
-          <div
-            class="theme px-0 sm:px-4 py-2 pr-6  sm:py-3 w-6/10 h-full rounded-tr-4xl  sm:rounded-tr-full grow sm:pr-15 lg:flex lg:items-center lg:gap-10 xl:justify-between"
-          >
+          <div class="theme px-4 py-2 xs:pr-6 xs:pl-0 sm:py-3 w-6/10 h-full rounded-tr-4xl  sm:rounded-tr-full grow sm:pr-15 lg:flex lg:items-center lg:gap-10 xl:justify-between">
             <!-- start navbar menu section  -->
             <div
               id="nav-menu"
@@ -843,9 +842,7 @@
       </header>
       <!-- finish header section  -->
       <!-- start mobile navigation section  -->
-      <section
-      class="theme text-[#888888] z-[999] dark:text-[#c5c5c5] text-sm fixed py-1 bottom-0 w-screen flex items-center justify-around shadow-2xl shadow-black dark:shadow-white lg:hidden "
-    >
+      <section class="theme text-[#888888] z-99 dark:text-[#c5c5c5] text-xs xs:text-sm fixed py-1 bottom-0 w-screen flex items-center justify-around shadow-2xl shadow-black dark:shadow-white lg:hidden ">
       <a
       id="manage-menu"
       href="javascript:void(0)"
@@ -966,7 +963,7 @@
       >
         <a
           href="search.html"
-          class="text-center text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl leading-18 transition-all duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden"
+          class="text-center text-base sm:text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl py-2.5 transition-all duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden"
           >جستجوی پیشرفته</a
         >
         <div class="hidden lg:flex justify-between items-center text-sm p-3 text-gray-500 rounded-2xl  dark:text-gray-200 bg-white dark:bg-gray-800 ">
@@ -1137,7 +1134,7 @@
         </a>
       </div>
       <div class="swiper movieSwiper my-6 lg:my-10">
-        <div class="swiper-wrapper action-movie custom lg:flex flex-nowrap gap-2 xl:gap-4 lg:justify-center  lg:h-auto select-none">
+        <div class="swiper-wrapper action-movie items-stretch  lg:justify-center lg:h-auto select-none">
       
      
         </div>
@@ -1169,7 +1166,7 @@
         </a>
       </div>
       <div class="swiper twSwiper  my-6 lg:my-10">
-        <div class="swiper-wrapper tv-movie custom lg:flex flex-nowrap gap-2 xl:gap-4 lg:justify-center  lg:h-auto select-none">
+        <div class="swiper-wrapper tv-movie items-stretch  lg:justify-center lg:h-auto select-none">
       
      
         </div>
@@ -1201,7 +1198,7 @@
         </a>
       </div>
       <div class="swiper persianSwiper  my-6 lg:my-10">
-        <div class="swiper-wrapper persian-movie custom lg:flex flex-nowrap gap-2 xl:gap-4 lg:justify-center  lg:h-auto select-none">
+        <div class="swiper-wrapper persian-movie items-stretch  lg:justify-center lg:h-auto select-none" >
       
      
         </div>
@@ -1280,6 +1277,11 @@
   <a href="https://github.com/amirRezazade" class="hover:text-orange-400 transition-all duration-300" target="_blank">لینک گیت هاب طراح</a>
 </div>
     </div>
+    <!-- start vpn modal section  -->
+    <div id="vpn-modal" class="w-screen h-screen fixed top-0 left-0 flex justify-center items-center z-999 bg-black/70 scale-0 transition-transform duration-500 opacity-0 text-amber-400">
+      <p clas="px-5">خطا در دریافت داده ها ! لطفا vpn  خود را روشن کنید.</p>
+    </div>
+    <!-- finish vpn modal section  -->
     <script src="assets/swiper-bundle.min.js"></script>
     <script type="module" src="js/index.js"></script>
     <script type="module" src="js/eventListeners.js"></script>

@@ -6,13 +6,14 @@
 
 @font-face {
   font-family: iran-sans;
-  src: url(../fonts/woff/IRANSansX-Medium.woff) format(woff),
-    url(../fonts/woff/IRANSansX-Medium.woff2) format(woff2);
+  src: url(../fonts/woff/IRANSansX-Medium.woff) format(woff), url(../fonts/woff/IRANSansX-Medium.woff2) format(woff2);
 }
 @font-face {
   font-family: iran-bold;
-  src: url(../fonts/ttf/iranyekanwebbold.ttf) format(ttf),
-    url(../fonts/woff/iranyekanwebbold.woff) format(woff);
+  src: url(../fonts/ttf/iranyekanwebbold.ttf) format(ttf), url(../fonts/woff/iranyekanwebbold.woff) format(woff);
+}
+@theme {
+  --breakpoint-xs: 501px;
 }
 
 /*finish import fonts  */
@@ -24,18 +25,18 @@
 .theme {
   @apply bg-stone-200 dark:bg-gray-900;
 }
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   width: 8px !important;
   height: 8px !important;
-  transition: all .3s ease;
-border: 1px solid rgb(207, 207, 207);
+  transition: all 0.3s ease;
+  border: 1px solid rgb(207, 207, 207);
 }
 .swiper-pagination-bullet-active {
   border-color: #ff8904;
-  width: 25px  !important;
+  width: 25px !important;
   height: 8px !important;
   border-radius: 10px;
-  background:#ff8904;
+  background: #ff8904;
 }
 .lock-scroll {
   overflow: hidden;
@@ -90,7 +91,6 @@ border: 1px solid rgb(207, 207, 207);
   .mySwiper .swiper-slide {
     width: 28%;
   }
-
 }
 @media screen and (min-width: 650px) {
   .mySwiper .swiper-slide {
@@ -106,15 +106,6 @@ border: 1px solid rgb(207, 207, 207);
   .mySwiper .swiper-slide {
     width: 28%;
   }
-  .custom a:last-child{
-    display: none;
-  }
-  .custom a:hover {
-    flex-grow: 2;
-  }
-  .custom:hover   a:not(:hover){
-    flex-grow: 0;
-  }
 }
 @media screen and (min-width: 1280px) {
   .mySwiper .swiper-slide {
@@ -125,22 +116,20 @@ border: 1px solid rgb(207, 207, 207);
   .mySwiper .swiper-slide {
     width: 20%;
   }
-  .custom a:last-child{
-    display: flex;
+}
+
+.loader__filmstrip {
+  &:before,
+  &:after {
+    animation: roll 0.5s infinite;
   }
 }
 
-
-    .loader__filmstrip {
-    
-        &:before, &:after {
-            animation: roll .5s infinite;
-        }
-      
-        
-    }
-
 @keyframes roll {
-    0% {top: 0px;}
-    100% {top: -15px;}
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: -15px;
+  }
 }
