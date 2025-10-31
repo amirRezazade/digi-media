@@ -1,4 +1,4 @@
-import { apiKey, menu, manageMenu, moreFiltersToggle, toggleMenu, switchTheme, genres, getGenres, navControl, removeLoader } from "./funcs.js";
+import { apiKey, menu, manageMenu, moreFiltersToggle, toggleMenu, switchTheme, showVpnModal, genres, getGenres, navControl, removeLoader } from "./funcs.js";
 
 let headerPlayBtn = document.querySelector("#movie-play-btn");
 headerPlayBtn.addEventListener("click", () => {
@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
   getActionMovie();
   getTv();
   getPersianMovie();
-  removeLoader();
 });
 let res;
 async function getHeaderInfos() {
@@ -18,7 +17,7 @@ async function getHeaderInfos() {
     let response = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`);
     res = await response.json();
     let list = res.results;
-
+    removeLoader();
     list.slice(0, 10).forEach((elem, index) => {
       if (elem.poster_path && elem.backdrop_path) {
         let type = elem.media_type == "movie";
@@ -32,13 +31,13 @@ async function getHeaderInfos() {
                           class="w-full flex flex-col  justify-between gap-2 h-full sm:min-h-[235px] md:min-h-[246px] lg:min-h-[235px] xl:min-h-[230px] 2xl:min-h-[258px]"
                         >
                           <div
-                            class="relative  grow  rounded-md transition-all duration-300 active"
+                            class="relative grow rounded-md transition-all duration-300 active"
                           >
                             <img
                               src="https://image.tmdb.org/t/p/original${elem.poster_path}_medium"
                               alt="${elem.name ? elem.name : elem.title}" loading="lazy"
                               onerror="this.onerror=null; this.src='images/default_poster.jpg';"
-                              class="w-full rounded-md"
+                              class="w-full rounded-md "
                             />
                             <div
                               class="absolute top-0 left-0 w-full min-h-full bg-black/60 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-[opacity,visibility,scale] duration-600"
@@ -216,23 +215,18 @@ async function getHeaderInfos() {
       },
     });
   } catch {
-    document.body.classList.add("!max-h-screen", "overflow-hidden");
-    document.querySelector("#vpn-modal").classList.remove("scale-0", "opacity-0");
+    showVpnModal();
   }
 }
 
 function changeHeaderInfo() {
   let activeIndex = document.querySelector(".swiper-slide-active").dataset.index;
-  if (window.innerWidth > 768) {
-    document.querySelector("#header-bg").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.jpg')`;
-    document.querySelector("#header-name").textContent = res.results[activeIndex].name ? res.results[activeIndex].name : res.results[activeIndex].title;
-    document.querySelector("#header-type").textContent = res.results[activeIndex].media_type;
-    document.querySelector("#header-point").textContent = res.results[activeIndex].vote_average.toFixed(1);
-    document.querySelector("#movie-play-btn").dataset.id = res.results[activeIndex].id;
-    document.querySelector("#movie-play-btn").dataset.type = res.results[activeIndex].media_type;
-  } else {
-    document.querySelector("#header-bg").style.backgroundImage = "url()";
-  }
+  document.querySelector("#header-bg").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.jpg')`;
+  document.querySelector("#header-name").textContent = res.results[activeIndex].name ? res.results[activeIndex].name : res.results[activeIndex].title;
+  document.querySelector("#header-type").textContent = res.results[activeIndex].media_type;
+  document.querySelector("#header-point").textContent = res.results[activeIndex].vote_average.toFixed(1);
+  document.querySelector("#movie-play-btn").dataset.id = res.results[activeIndex].id;
+  document.querySelector("#movie-play-btn").dataset.type = res.results[activeIndex].media_type;
 }
 async function getActionMovie() {
   let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`);
@@ -271,7 +265,7 @@ function addCarts(list, wrapper) {
               id="${elem.id}"  class=" swiper-slide  w-full lg:max-w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md lg:hover:grow lg:hover:max-w-[400px] !transition-all  duration-600 group">
              <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
                <div class="w-full h-full overflow-hidden ">
-                 <img loading="lazy" class="w-full h-full object-cover  lg:group-hover:opacity-0 transition-opacity duration-600  " src="https://image.tmdb.org/t/p/original${elem.poster_path}_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
+                 <img loading="lazy" class="w-full h-full object-cover loading-animation lg:group-hover:opacity-0 transition-opacity duration-600  " src="https://image.tmdb.org/t/p/original${elem.poster_path}_medium" alt="${elem.name ? elem.name : elem.title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">
                </div>
                <div class="absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-[opacity,visibility] duration-600" style="background-image: url(https://image.tmdb.org/t/p/original${elem.backdrop_path}_medium);">
                  <div class="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
@@ -310,6 +304,12 @@ function addCarts(list, wrapper) {
             </a>
             `;
     }
+  });
+  let images = wrapper.querySelectorAll("img");
+  images.forEach((img) => {
+    img.addEventListener("load", () => {
+      img.classList.remove("loading-animation");
+    });
   });
 }
 function generateSwiper(wrapper) {
