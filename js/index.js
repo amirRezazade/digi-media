@@ -6,11 +6,24 @@ headerPlayBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  getHeaderInfos();
-  getActionMovie();
-  getTv();
-  getPersianMovie();
+  loadData();
 });
+async function loadData() {
+  try {
+    await Promise.all([getHeaderInfos(), getActionMovie(), getTv(), getPersianMovie()]);
+
+    document.querySelectorAll(".genre-btns").forEach((elem) => {
+      elem.addEventListener("click", (e) => {
+        if (e.target.nodeName == "BUTTON") {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = `search.html?&type=all&country=&genre=${e.target.dataset.id}&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1`;
+        }
+      });
+    });
+  } catch (err) {}
+}
+
 let res;
 async function getHeaderInfos() {
   try {
@@ -218,7 +231,6 @@ async function getHeaderInfos() {
     showVpnModal();
   }
 }
-
 function changeHeaderInfo() {
   let activeIndex = document.querySelector(".swiper-slide-active").dataset.index;
   document.querySelector("#header-bg").style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${res.results[activeIndex].backdrop_path}_medium) , url('images/default-bg.jpg')`;
@@ -241,7 +253,7 @@ async function getTv() {
   let t = await response.json();
   let list = t.results;
   const randomFive = list.filter((item) => item.poster_path && item.backdrop_path).slice(0, 6);
-  addCarts(randomFive, document.querySelector(".tv-movie"));
+  addCarts(randomFive, document.querySelector(".tv-movie"), "series");
 
   generateSwiper(document.querySelector(".twSwiper"));
 }
@@ -256,12 +268,12 @@ async function getPersianMovie() {
   generateSwiper(document.querySelector(".persianSwiper"));
 }
 
-function addCarts(list, wrapper) {
+function addCarts(list, wrapper, type = "movie") {
   list.forEach((elem) => {
     if (elem.poster_path && elem.backdrop_path) {
       wrapper.innerHTML += `
              <a
-             href="movie.html?id=${elem.id}"
+             href="${type}.html?id=${elem.id}"
               id="${elem.id}"  class=" swiper-slide  w-full lg:max-w-[200px] lg:grow-0 overflow-hidden lg:h-auto grow-1 rounded-md lg:hover:grow lg:hover:max-w-[400px] !transition-all  duration-600 group">
              <div class="w-full h-9/10 relative rounded-md overflow-hidden lg:h-[255px] xl:h-[290px]">
                <div class="w-full h-full overflow-hidden ">
@@ -276,7 +288,7 @@ function addCarts(list, wrapper) {
                          <span class="text-amber-400 flex gap-1.5 items-start lg:gap-0.5">${elem.original_language}</span>
                      </div>
                      <div class=" flex text-gray-300 flex-col items-start gap-3">
-                       <div class="flex flex-col items-start gap-1">
+                       <div class="flex flex-col items-start gap-1 pointer-events-none">
                          <span class=" flex flex-row-reverse items-center text-xs gap-1">زیر نویس
                            <svg width="18px" height="18px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#fff">
                              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -293,8 +305,8 @@ function addCarts(list, wrapper) {
                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z" fill="#fff"></path>
                              </g></svg></span>
                        </div>
-                       <div class=" hidden pointer-events-none lg:flex gap-2 flex-wrap items-center ">
-                          ${elem.genre_ids ? elem.genre_ids.map((id) => `<button id="gen" data-id="${id}" class=" pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-colors duration-300">${genres[id]}</button>`).join("") : ""}
+                       <div class=" hidden pointer-events-none lg:flex gap-2 flex-wrap items-center genre-btns">
+                          ${elem.genre_ids ? elem.genre_ids.map((id) => `<button data-id="${id}" class="genre-btn pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-colors duration-300">${genres[id]}</button>`).join("") : ""}
                        </div>
                      </div>
                  </div>
