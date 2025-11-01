@@ -1,4 +1,4 @@
-import { apiKey, genres, menu, manageMenu, moreFiltersToggle, toggleMenu, switchTheme, getGenres, navControl, removeLoader } from "./funcs.js";
+import { apiKey, genres, menu, manageMenu, showVpnModal, moreFiltersToggle, toggleMenu, switchTheme, getGenres, navControl, removeLoader } from "./funcs.js";
 const urlParams = new URLSearchParams(window.location.search);
 const searchBoxSelection = document.querySelectorAll("#selection span");
 let movieTotalPage = 0;
@@ -7,7 +7,6 @@ let page = 1;
 
 window.addEventListener("DOMContentLoaded", () => {
   setValues();
-  removeLoader();
 });
 
 function setValues() {
@@ -56,49 +55,65 @@ function callFuncs() {
   if (mediaType == "all") all(country, genre, fromYear, toYear, fromPoint, toPoint, age, sort);
 }
 async function movie(country, genre, fromYear, toYear, fromPoint, toPoint, age, sort) {
-  let response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "&vote_average.gte=2" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&primary_release_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&primary_release_date.lte=" + toYear + "-01-01"}${
-      age.options[age.selectedIndex].value == "" ? "" : "&certification_country=US&certification=" + age.options[age.selectedIndex].dataset.value
-    }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
-  );
-
-  let res = await response.json();
-  movieTotalPage = res.total_pages;
-  let list = res.results;
-
-  addItems(list);
+  try {
+    let response = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "&vote_average.gte=2" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&primary_release_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&primary_release_date.lte=" + toYear + "-01-01"}${
+        age.options[age.selectedIndex].value == "" ? "" : "&certification_country=US&certification=" + age.options[age.selectedIndex].dataset.value
+      }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
+    );
+    let res = await response.json();
+    movieTotalPage = res.total_pages;
+    let list = res.results;
+    addItems(list);
+  } catch {
+    showVpnModal();
+  } finally {
+    removeLoader();
+  }
 }
 async function tv(country, genre, fromYear, toYear, fromPoint, toPoint, age, sort) {
-  let response = await fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&first_air_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&first_air_date.lte=" + toYear + "-01-01"}${
-      age.value == "" ? "" : "&certification_country=US&certification=" + age.value
-    }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
-  );
-  let res = await response.json();
-  tvTotalPage = res.total_pages;
+  try {
+    let response = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&first_air_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&first_air_date.lte=" + toYear + "-01-01"}${
+        age.value == "" ? "" : "&certification_country=US&certification=" + age.value
+      }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
+    );
+    let res = await response.json();
+    tvTotalPage = res.total_pages;
 
-  let list = res.results;
-  addItems(list);
+    let list = res.results;
+    addItems(list);
+  } catch {
+    showVpnModal();
+  } finally {
+    removeLoader();
+  }
 }
 async function all(country, genre, fromYear, toYear, fromPoint, toPoint, age, sort) {
-  let movieResponse = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&primary_release_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&primary_release_date.lte=" + toYear + "-01-01"}${
-      age.options[age.selectedIndex].value == "" ? "" : "&certification_country=US&certification=" + age.options[age.selectedIndex].dataset.value
-    }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
-  );
-  let movieRes = await movieResponse.json();
-  movieTotalPage = movieRes.total_pages;
-  let movieList = movieRes.results;
-  let tvResponse = await fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&first_air_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&first_air_date.lte=" + toYear + "-01-01"}${
-      age.value == "" ? "" : "&certification_country=US&certification=" + age.value
-    }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
-  );
-  let tvRes = await tvResponse.json();
-  tvTotalPage = tvRes.total_pages;
-  let tvList = tvRes.results;
-  const mixed = movieList.concat(tvList).sort(() => Math.random() - 0.5);
-  addItems(mixed.slice(0, 20));
+  try {
+    let movieResponse = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&primary_release_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&primary_release_date.lte=" + toYear + "-01-01"}${
+        age.options[age.selectedIndex].value == "" ? "" : "&certification_country=US&certification=" + age.options[age.selectedIndex].dataset.value
+      }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
+    );
+    let movieRes = await movieResponse.json();
+    movieTotalPage = movieRes.total_pages;
+    let movieList = movieRes.results;
+    let tvResponse = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}${"&page=" + page}${genre == "" ? "" : "&with_genres=" + genre}${country == "" ? "" : "&with_origin_country=" + country}${fromPoint == 0 ? "" : "&vote_average.gte=" + fromPoint}${toPoint == 0 ? "" : "&vote_average.lte=" + toPoint}${fromYear == 0 ? "" : "&first_air_date.gte=" + fromYear + "-01-01"}${toYear == 0 ? "" : "&first_air_date.lte=" + toYear + "-01-01"}${
+        age.value == "" ? "" : "&certification_country=US&certification=" + age.value
+      }${"&" + sort}&vote_count.gte=200&popularity.gte=10`
+    );
+    let tvRes = await tvResponse.json();
+    tvTotalPage = tvRes.total_pages;
+    let tvList = tvRes.results;
+    const mixed = movieList.concat(tvList).sort(() => Math.random() - 0.5);
+    addItems(mixed.slice(0, 20));
+  } catch {
+    showVpnModal();
+  } finally {
+    removeLoader();
+  }
 }
 function addItems(list) {
   if (list.length == 0) {
@@ -117,7 +132,7 @@ function addItems(list) {
        <a
       
            href="${mediaType ? mediaType : hrefType}.html?id=${elem.id}"
-            id="${elem.id}"  class=" inline-flex flex-col items-center w-full  gap-1.5 overflow-hidden min-h-[245px] sm:min-h-[240px] md:min-h-[230px] lg:min-h-[240px] xl:min-h-[250px] 2xl:min-h-[300px] rounded-xl transition-all duration-600 group min-h-[]">
+            id="${elem.id}"  class=" inline-flex flex-col items-center max-w-32 xs:max-w-full xs:w-full  gap-1.5 overflow-hidden min-h-[245px] sm:min-h-[240px] md:min-h-[230px] lg:min-h-[240px] xl:min-h-[250px] 2xl:min-h-[300px] rounded-xl transition-all duration-600 group min-h-[]">
            <div class="w-full h-9/10 relative rounded-md overflow-hidden ">
              <div class="w-full h-full overflow-hidden">
                <img loading="lazy" class="w-full h-full loading-animation object-cover " src="https://image.tmdb.org/t/p/original${elem.poster_path ? elem.poster_path : elem.profile_path}_low" alt="${elem.name ? elem.name : elem.title}" loading="lazy" onerror="this.onerror=null; this.src='images/default_poster.jpg';">

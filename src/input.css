@@ -138,11 +138,8 @@
   }
 }
 
-@keyframes roll {
-  0% {
-    top: 0px;
-  }
-  100% {
-    top: -15px;
+@keyframes opacity {
+  50% {
+    opacity: 0;
   }
 }
