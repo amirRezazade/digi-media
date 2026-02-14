@@ -108,6 +108,7 @@ async function all(country, genre, fromYear, toYear, fromPoint, toPoint, age, so
     tvTotalPage = tvRes.total_pages;
     let tvList = tvRes.results;
     const mixed = movieList.concat(tvList).sort(() => Math.random() - 0.5);
+
     addItems(mixed.slice(0, 20));
   } catch {
     showVpnModal();
@@ -116,6 +117,7 @@ async function all(country, genre, fromYear, toYear, fromPoint, toPoint, age, so
   }
 }
 function addItems(list) {
+  removeLoader();
   if (list.length == 0) {
     document.querySelector("#not-found-text").classList.remove("hidden");
   } else {
@@ -245,5 +247,6 @@ document.querySelectorAll("#pagination-numbers button").forEach((elem) => {
 async function searchByWord(key) {
   let test = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=cf30b054d9d7ec861b2a498d97eccdad&query=${key}&include_adult=false`);
   let res = await test.json();
+  console.log(res);
   addItems(res.results);
 }
