@@ -117,7 +117,7 @@ function getCrows(crow) {
      <a href="actors.html?id=${act.id}"  class="swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden loading-animation">
-              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/person-not-loaded.png';">
+              <img class="object-cover" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/default-person.jpg';">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
@@ -139,7 +139,7 @@ function getActors(cast) {
      <a href="actors.html?id=${act.id}"  class=" swiper-slide  group overflow-hidden">
           <div class="flex flex-col items-center  gap-1.5">
             <div class="aspect-square w-full rounded-full overflow-hidden loading-animation">
-              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/person-not-loaded.png';">
+              <img class="" src="https://image.tmdb.org/t/p/w185${act.profile_path}_low" alt="${act.original_name}" loading="lazy" onerror="this.onerror=null; this.src='images/default-person.jpg';">
             </div>
             <div  class="flex flex-col items-left w-full gap-0.5 mt-1 ">
               <p dir="ltr" class="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300"><span>${act.original_name}</span></p>
@@ -260,7 +260,7 @@ async function getRecommendationsMovie() {
     });
     document.querySelectorAll(".Recommendations-wrapper img").forEach((elem) => elem.addEventListener("load", () => elem.classList.remove("loading-animation")));
   } else {
-    document.querySelector(".recommendations-swiper").parentElement.style.display = "none";
+    document.querySelector(".recommendations-swiper").closest("section").style.display = "none";
   }
 }
 
