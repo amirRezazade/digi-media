@@ -13,7 +13,7 @@ window.addEventListener("keyup", (e) => {
 });
 async function getSeries() {
   try {
-    let res = await fetch(`https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&query&&language=fa&append_to_response=credits,videos`);
+    let res = await fetch(`https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&language=fa&append_to_response=credits,videos`);
     let list = await res.json();
     if (list.status_code == 34) {
       document.querySelector("header").innerHTML = `<div class="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
